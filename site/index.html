@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who Gets the Loan?</title>
+<meta name="description" content="An independent student audit of the 1990 Boston mortgage-lending data: the econometrics of the racial approval gap, and what a model trained without race does by race.">
+<meta name="theme-color" content="#232d4b">
+<script src="theme.js?v=0b2b781f"></script>
+<style>
+  /* Same design language as willmcnulty.github.io and the UVA Capital Plan Tracker: UVA Blue and UVA Orange, system
+     fonts only. Two chart series at most, Link Blue (white applicants) and UVA Orange (Black or Hispanic
+     applicants); light and dark steps both pass the dataviz validator for every pair (protan dE 24.3 light,
+     26.7 dark) against these exact panel colors. */
+  :root {
+    color-scheme: light;
+    --page: #f6f7fb; --surface: #ffffff; --ink: #141b33; --ink-2: #4d5876; --muted: #667091;
+    --line: #d9deeb; --grid: #e6e9f2; --axis: #c3c9da;
+    --navy: #232d4b; --orange: #e57200; --orange-ink: #141b33; --orange-tint: #fff0df; --blue-tint: #e6ebf6;
+    --band: #232d4b; --band-ink: #ffffff; --band-muted: #c6cfe8; --link: #232d4b;
+    --wash: rgba(35, 45, 75, 0.05); --ring: rgba(20, 27, 51, 0.08); --tip-bg: #ffffff;
+    --s1: #495e9d; --s2: #e57200;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono: "Cascadia Mono", "SF Mono", Consolas, "Liberation Mono", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page: #0d1120; --surface: #161c30; --ink: #eef1fa; --ink-2: #a6b1cf; --muted: #8c97b8;
+      --line: #2b3454; --grid: #232b45; --axis: #34406a;
+      --navy: #aebdf0; --orange: #ff8f2e; --orange-tint: #2a1e12; --blue-tint: #1e2746;
+      --band: #1a2240; --band-muted: #b9c4e4; --link: #b6c4f5;
+      --wash: rgba(174, 189, 240, 0.07); --ring: rgba(174, 189, 240, 0.12); --tip-bg: #1e2640;
+      --s1: #6f86e0; --s2: #d0650a;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d1120; --surface: #161c30; --ink: #eef1fa; --ink-2: #a6b1cf; --muted: #8c97b8;
+    --line: #2b3454; --grid: #232b45; --axis: #34406a;
+    --navy: #aebdf0; --orange: #ff8f2e; --orange-tint: #2a1e12; --blue-tint: #1e2746;
+    --band: #1a2240; --band-muted: #b9c4e4; --link: #b6c4f5;
+    --wash: rgba(174, 189, 240, 0.07); --ring: rgba(174, 189, 240, 0.12); --tip-bg: #1e2640;
+    --s1: #6f86e0; --s2: #d0650a;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--page); color: var(--ink); font: 15px/1.55 var(--sans); }
+  a { color: var(--link); text-underline-offset: 3px; }
+  a:hover { color: var(--orange); }
+  :focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+  .wrap { max-width: 1080px; margin-inline: auto; padding-inline: 20px; }
+
+  .band { background: var(--band); color: var(--band-ink); }
+  .topbar .wrap { display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between; align-items: baseline; padding-block: 16px; }
+  .topbar strong { font: 600 18px var(--serif); letter-spacing: 0.01em; }
+  .topbar nav { display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px; font-weight: 600; align-items: baseline; }
+  .topbar nav a { color: var(--band-muted); text-decoration: none; }
+  .topbar nav a:hover { color: var(--orange); }
+  .theme-btn { font: 600 13px var(--sans); color: var(--band-muted); background: none; border: 1px solid rgba(255, 255, 255, 0.28); border-radius: 999px; padding: 2px 11px; cursor: pointer; }
+  .theme-btn:hover { color: var(--orange); border-color: var(--orange); }
+  .hero { border-bottom: 8px solid var(--orange); }
+  .hero .wrap { padding-block: 52px 46px; }
+  .kicker { font: 700 12px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: #ff8f2e; margin-bottom: 14px; } /* 5.95:1 on the navy band */
+  .hero h1 { font: 600 clamp(32px, 5.4vw, 52px)/1.08 var(--serif); letter-spacing: -0.015em; margin: 0 0 18px; max-width: 19ch; text-wrap: balance; }
+  .hero h1 .hl { color: var(--orange); }
+  .hero p { max-width: 64ch; margin: 0; color: var(--band-muted); font-size: 17px; }
+  .hero .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 310px; gap: 44px; align-items: center; }
+  .glance { margin: 0; padding: 16px 18px; border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 16px; background: rgba(255, 255, 255, 0.06); display: grid; gap: 12px; }
+  .glance dt { font: 800 11px var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: #ff8f2e; }
+  .glance dd { margin: 3px 0 0; font-size: 14px; line-height: 1.45; color: var(--band-ink); }
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; } .glance { max-width: 460px; } }
+  .btn { display: inline-block; padding: 10px 18px; border: 2px solid var(--band-ink); border-radius: 6px; font-weight: 700; font-size: 14px; text-decoration: none; color: var(--band-ink); }
+  .btn:hover { background: var(--band-ink); color: #232d4b; }
+  .btn.primary { background: var(--orange); border-color: var(--orange); color: var(--orange-ink); }
+  .btn.primary:hover { filter: brightness(1.08); background: var(--orange); color: var(--orange-ink); }
+
+  .evidence { background: var(--orange-tint); border-bottom: 1px solid var(--line); }
+  .evidence .wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 18px 26px; padding-block: 26px; }
+  .stat { display: flex; flex-direction: column; }
+  .stat .value { order: -1; font: 700 30px/1.1 var(--mono); color: var(--navy); font-variant-numeric: tabular-nums; }
+  .stat .value::after { content: ""; display: block; width: 28px; height: 4px; background: var(--orange); margin-top: 8px; }
+  .stat .label { margin-top: 8px; font-size: 13.5px; font-weight: 600; color: var(--ink); }
+  .stat .note { font-size: 12.5px; color: var(--ink-2); }
+
+  .tabs { position: sticky; top: 0; z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: 0 1px 0 var(--ring); }
+  .tabs .wrap { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+  .tabs .wrap::-webkit-scrollbar { display: none; }
+  .tabs button {
+    font: 700 13px var(--sans); letter-spacing: 0.06em; text-transform: uppercase; background: none; border: 0;
+    color: var(--ink-2); padding: 15px 14px 12px; cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap;
+  }
+  .tabs button:hover { color: var(--navy); }
+  .tabs button[aria-selected="true"] { color: var(--navy); border-bottom-color: var(--orange); }
+  main { padding-block: 30px 40px; }
+  section[hidden] { display: none; }
+
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; margin-bottom: 20px; }
+  .card h2 { font: 600 22px/1.25 var(--serif); color: var(--navy); margin: 0 0 4px; }
+  .card .sub { margin: 0 0 14px; color: var(--ink-2); font-size: 14px; max-width: 80ch; }
+  .card.first { border-top: 4px solid var(--orange); }
+  .card .stat { background: var(--page); border: 1px solid var(--line); border-top: 4px solid var(--navy); border-radius: 8px; padding: 14px 16px; }
+  .card .stat:nth-child(even) { border-top-color: var(--orange); }
+  .card .stat .value { font-size: 26px; }
+  .card .stat .value::after { display: none; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .limits { margin: 0; padding-left: 20px; display: grid; gap: 8px; max-width: 86ch; }
+  .limits b { color: var(--navy); }
+
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px; }
+  .seg { display: inline-flex; flex-wrap: wrap; border: 2px solid var(--navy); border-radius: 6px; overflow: hidden; }
+  .seg button { font: 700 13px var(--sans); background: var(--surface); color: var(--navy); border: 0; padding: 6px 13px; cursor: pointer; }
+  .seg button + button { border-left: 2px solid var(--navy); }
+  .seg button[aria-pressed="true"] { background: var(--navy); color: var(--surface); }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; color: var(--ink-2); margin: 4px 0 10px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .legend i.dot { border-radius: 50%; }
+  .legend i.line { height: 3px; width: 16px; border-radius: 1px; }
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  svg text { font-family: var(--sans); }
+  .mark { cursor: default; outline: none; }
+  .mark:hover, .mark:focus-visible { filter: brightness(1.1); }
+  .mark:focus-visible { stroke: var(--ink); stroke-width: 1.5; }
+  #tip {
+    position: fixed; pointer-events: none; z-index: 10; background: var(--tip-bg); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 8px 24px rgba(13, 17, 32, 0.18);
+    padding: 9px 11px; font-size: 12.5px; min-width: 170px; max-width: 320px; display: none;
+  }
+  #tip .t { color: var(--ink-2); margin-bottom: 4px; font-weight: 600; }
+  #tip .r { display: flex; align-items: center; gap: 10px; justify-content: space-between; }
+  #tip .r b { font: 700 12.5px var(--mono); font-variant-numeric: tabular-nums; }
+  #tip .k { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-2); }
+  #tip .k i { width: 10px; height: 10px; display: inline-block; border-radius: 50%; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { text-align: left; font: 800 11px var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); padding: 8px 8px 7px; border-bottom: 2px solid var(--line); vertical-align: bottom; }
+  td { text-align: left; padding: 8px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  td.num, th.num { text-align: right; white-space: nowrap; }
+  td.num { font: 13.5px var(--mono); font-variant-numeric: tabular-nums; }
+  tr.hl td { background: var(--blue-tint); }
+  .tablewrap { overflow-x: auto; }
+  details.tableview { margin-top: 12px; }
+  details.tableview summary { cursor: pointer; font-weight: 700; font-size: 13.5px; color: var(--navy); }
+  details.tableview summary:hover { color: var(--orange); }
+  .muted { color: var(--muted); }
+  .note { font-size: 13px; color: var(--ink-2); max-width: 80ch; }
+  .callout { border-left: 3px solid var(--orange); padding: 2px 0 2px 12px; margin: 12px 0; max-width: 80ch; }
+  .two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .two { grid-template-columns: minmax(0, 1fr); } }
+
+  .prose { max-width: 78ch; }
+  .prose h2 { margin-bottom: 10px; }
+  .prose h3 { font: 800 12px var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); margin: 22px 0 4px; }
+  .prose p, .prose li { margin: 0 0 10px; color: var(--ink); }
+  .prose ul { padding-left: 20px; }
+  .refs li { font-size: 14px; }
+  code { font: 13px var(--mono); background: var(--wash); padding: 1px 4px; border-radius: 4px; }
+
+  footer.band { font-size: 14px; color: var(--band-muted); }
+  footer .wrap { padding-block: 26px 40px; display: grid; gap: 8px; }
+  footer a { color: var(--band-ink); }
+  footer a:hover { color: var(--orange); }
+
+  @media (max-width: 560px) {
+    .wrap { padding-inline: 16px; }
+    .hero .wrap { padding-block: 36px 32px; }
+    .hero p { font-size: 16px; }
+    .card { padding: 16px; }
+    .stat .value { font-size: 26px; }
+    .hide-sm { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+  <header class="topbar band">
+    <div class="wrap">
+      <strong>Who Gets the Loan?</strong>
+      <nav aria-label="Links">
+        <a href="https://willmcnulty.github.io/">By William McNulty</a>
+        <a href="https://github.com/WillMcNulty/Who-Gets-the-Loan">Code on GitHub</a>
+        <button type="button" class="theme-btn" data-theme-toggle>◐ Auto</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero band" aria-labelledby="top">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="kicker">Boston mortgage applications · 1990 · fairness audit v1</div>
+        <h1 id="top">Who gets the loan, <span class="hl">and what a model learns from who did.</span></h1>
+        <p>In 1990 the Federal Reserve Bank of Boston gathered the loan files behind mortgage applications to study
+          whether race was associated with denial. This audit reruns the textbook version of that data two ways:
+          the econometrics of the approval gap, and what a model trained <em>without</em> race does by race. Results
+          are associations after controlling for the variables recorded, not proof of discrimination or of its
+          absence.</p>
+        <div class="links">
+          <a class="btn primary" href="#limits">Read the limits first</a>
+          <a class="btn" href="#models">The race-blind models</a>
+          <a class="btn" href="#method">How it was built</a>
+        </div>
+      </div>
+      <dl class="glance" aria-label="At a glance">
+        <div><dt>The data</dt><dd><span data-v="n_all"></span> applications: <span data-v="n_white"></span> white, <span data-v="n_black"></span> Black and <span data-v="n_hispan"></span> Hispanic applicants, one metro area, one year.</dd></div>
+        <div><dt>The question</dt><dd>How much of the approval gap do the recorded finances and credit histories account for, and does leaving race out of a model make it fair?</dd></div>
+        <div><dt>The checks</dt><dd>The course's problem-set models reproduce to every printed digit; every push reruns the build and the tests.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="evidence" aria-label="Headline numbers"><div class="wrap" id="headline"></div></div>
+
+  <nav class="tabs" aria-label="Views">
+    <div class="wrap" role="tablist">
+      <button role="tab" id="tab-overview" aria-controls="view-overview" aria-selected="true">Overview</button>
+      <button role="tab" id="tab-econometrics" aria-controls="view-econometrics" aria-selected="false">Econometrics</button>
+      <button role="tab" id="tab-decomposition" aria-controls="view-decomposition" aria-selected="false">Decomposition</button>
+      <button role="tab" id="tab-models" aria-controls="view-models" aria-selected="false">Race-blind models</button>
+      <button role="tab" id="tab-tradeoffs" aria-controls="view-tradeoffs" aria-selected="false">Proxies &amp; trade-offs</button>
+      <button role="tab" id="tab-method" aria-controls="view-method" aria-selected="false">Method</button>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <!-- ================================================================== overview -->
+    <section id="view-overview" role="tabpanel" aria-labelledby="tab-overview">
+      <div class="card first" id="limits">
+        <h2>Read this first: what this can and can't show</h2>
+        <p class="sub">The limits come before the results because they decide how the results can be read.</p>
+        <ul class="limits">
+          <li><b>Associations, not causes.</b> A gap that remains after the controls is consistent with
+            discrimination. It is also consistent with things the files don't record, or record with error. No
+            number here proves that any lender discriminated, or that none did.</li>
+          <li><b>The controls aren't neutral.</b> Some recorded variables, like the lender's own "meets credit
+            guidelines" judgment, were made by the people being studied. Controlling for them can hide part of a real
+            gap. Leaving out true creditworthiness can make a gap look bigger than it is. The Econometrics tab shows how the answer
+            moves with each choice.</li>
+          <li><b>The outcome is a decision, not a repayment.</b> "Approved" records what a lender decided in 1990, not
+            whether the borrower would have repaid. A model trained on it learns to imitate those lenders.</li>
+          <li><b>Small groups.</b> There are <span data-v="n_nonwhite"></span> Black or Hispanic applicants
+            (<span data-v="n_black"></span> and <span data-v="n_hispan"></span>). Every estimate is shown with its
+            95% interval, and some of the intervals are wide.</li>
+          <li><b>One place, one year.</b> This is a textbook subset of the Boston Fed's study, and the study's data
+            quality was itself debated (see Method). Nothing here describes any lender today. Version 2 of this project
+            will use current public HMDA data for Virginia.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Approval rates by group</h2>
+        <p class="sub">Share of applications approved (the lender's decision as recorded), with 95% intervals</p>
+        <div id="chart-rates"></div>
+        <details class="tableview"><summary>Show as a table</summary><div class="tablewrap" id="table-rates"></div></details>
+      </div>
+      <div class="card">
+        <h2>What the audit found</h2>
+        <div class="prose" id="findings"></div>
+      </div>
+    </section>
+
+    <!-- ================================================================== econometrics -->
+    <section id="view-econometrics" role="tabpanel" aria-labelledby="tab-econometrics" hidden>
+      <div class="card">
+        <h2>The gap as controls are added</h2>
+        <p class="sub">Difference in approval probability, white minus Black-or-Hispanic applicants, in percentage
+          points, from the linear probability model (the table adds probit and logit marginal effects). All four rows
+          use the same <span data-v="ladder_n"></span> applications. Bars are 95% intervals (robust standard errors).</p>
+        <div id="chart-ladder"></div>
+        <details class="tableview"><summary>Show as a table, with Black and Hispanic applicants separately</summary><div class="tablewrap" id="table-ladder"></div></details>
+        <p class="callout note" id="ladder-note"></p>
+      </div>
+      <div class="card">
+        <h2>Do debts count the same for everyone?</h2>
+        <p class="sub">Average predicted approval from a probit with a white × obligations-ratio interaction, setting
+          every applicant's obligations ratio to the value shown and the white indicator to 1 or 0 (other variables as
+          recorded). Shaded bands are 95% intervals.</p>
+        <div class="legend" id="legend-inter"></div>
+        <div id="chart-inter"></div>
+        <details class="tableview"><summary>Show as a table</summary><div class="tablewrap" id="table-inter"></div></details>
+        <p class="callout note" id="inter-note"></p>
+      </div>
+      <div class="card">
+        <h2>Problem set 6, reproduced</h2>
+        <p class="sub">ECON 3720's starting models: approval on <code>white</code>, <code>hrat</code>, <code>obrat</code>,
+          <code>loanprc</code>, <code>unem</code>, <code>male</code>, <code>married</code>, <code>dep</code> and <code>pubrec</code>,
+          on the <span data-v="ps6_n"></span> applications with no missing values. The estimates match the course's Stata output to every printed digit.</p>
+        <div class="tablewrap" id="table-ps6"></div>
+        <p class="note" id="ps6-note"></p>
+      </div>
+    </section>
+
+    <!-- ================================================================== decomposition -->
+    <section id="view-decomposition" role="tabpanel" aria-labelledby="tab-decomposition" hidden>
+      <div class="card">
+        <h2>How much of the gap do the recorded variables account for?</h2>
+        <p class="sub">Oaxaca-Blinder decomposition of the approval gap between white and Black-or-Hispanic
+          applicants. "Explained" is the part predicted by differences in the recorded variables; "unexplained" is the
+          rest, the part the same variables don't account for. It is not a measure of discrimination by itself.</p>
+        <div class="legend" id="legend-oaxaca"></div>
+        <div id="chart-oaxaca"></div>
+        <details class="tableview"><summary>Show as a table, with 95% bootstrap intervals</summary><div class="tablewrap" id="table-oaxaca"></div></details>
+        <p class="callout note" id="oaxaca-note"></p>
+      </div>
+      <div class="card">
+        <h2>Which differences make up the explained part?</h2>
+        <p class="sub">Each variable's contribution to the explained part (pooled reference, credit-history model),
+          in percentage points, with 95% bootstrap intervals. Positive means the variable's group difference predicts
+          a higher approval rate for white applicants.</p>
+        <div id="chart-detail"></div>
+        <details class="tableview"><summary>Show as a table, with group means</summary><div class="tablewrap" id="table-detail"></div></details>
+      </div>
+    </section>
+
+    <!-- ================================================================== models -->
+    <section id="view-models" role="tabpanel" aria-labelledby="tab-models" hidden>
+      <div class="card first" id="models">
+        <h2>A model that never sees race</h2>
+        <p class="sub" id="models-sub"></p>
+        <div class="row"><div class="seg" role="group" aria-label="Model" id="pick-model"></div></div>
+        <p class="note" id="model-note"></p>
+        <div class="tiles" id="model-tiles"></div>
+        <div class="legend" id="legend-rates"></div>
+        <div id="chart-fair"></div>
+        <details class="tableview" open><summary>Show every group, with AUC and accuracy</summary><div class="tablewrap" id="table-fair"></div></details>
+        <p class="callout note">How to read the rates: the "truth" here is the lender's 1990 decision. <b>TPR</b>
+          is the share of applicants the lenders approved whom the model also approves; <b>FPR</b> is the share the
+          lenders denied whom the model approves. Equal TPRs is "equal opportunity"; equal TPRs and FPRs is "equalized
+          odds"; equal approval rates is "demographic parity". Each one is measured against the 1990 decisions, which
+          is the problem the label-bias section takes up.</p>
+      </div>
+      <div class="card">
+        <h2>Calibration: does the same score mean the same thing?</h2>
+        <p class="sub">Observed approval rate against the model's average predicted probability, in fixed score
+          bins, by group. Points on the diagonal are well calibrated. Bars are 95% intervals.</p>
+        <div class="legend" id="legend-cal"></div>
+        <div id="chart-cal"></div>
+        <details class="tableview"><summary>Show as a table</summary><div class="tablewrap" id="table-cal"></div></details>
+        <p class="callout note" id="cal-note"></p>
+      </div>
+    </section>
+
+    <!-- ================================================================== proxies & trade-offs -->
+    <section id="view-tradeoffs" role="tabpanel" aria-labelledby="tab-tradeoffs" hidden>
+      <div class="card">
+        <h2>Proxies: how much race the other inputs carry</h2>
+        <p class="sub">How well each set of variables predicts whether an applicant is Black or Hispanic
+          (out-of-fold AUC; 0.5 is no better than a coin, 1.0 is perfect). Leaving race out of a model doesn't
+          leave it out of the data.</p>
+        <div id="chart-proxy"></div>
+        <details class="tableview"><summary>Show as a table, both model types</summary><div class="tablewrap" id="table-proxy"></div></details>
+        <h2 style="margin-top:22px;font-size:18px">The single strongest signals</h2>
+        <p class="sub">Each variable alone (AUC distance from 0.5), with the group averages</p>
+        <div class="tablewrap" id="table-single"></div>
+      </div>
+      <div class="card">
+        <h2>Mitigation and what it costs</h2>
+        <p class="sub">Ways to narrow the race-blind logistic model's approval gap, each approving the same total
+          share of applicants as the lenders did. "Agreement" is the share of decisions that match the 1990 lenders'.</p>
+        <div class="tablewrap" id="table-mit"></div>
+        <h2 style="margin-top:22px;font-size:18px">The frontier</h2>
+        <p class="sub">Moving each group's approval rate step by step from one cutoff to equal approval rates:
+          agreement with the 1990 decisions against the remaining gap</p>
+        <div id="chart-frontier"></div>
+        <details class="tableview"><summary>Show as a table</summary><div class="tablewrap" id="table-frontier"></div></details>
+        <p class="callout note" id="mit-note"></p>
+      </div>
+      <div class="card">
+        <h2>Label bias: grading a model against the decisions being audited</h2>
+        <p class="sub" id="lb-sub"></p>
+        <div class="tablewrap" id="table-lb"></div>
+        <p class="callout note" id="lb-note"></p>
+      </div>
+    </section>
+
+    <!-- ================================================================== method -->
+    <section id="view-method" role="tabpanel" aria-labelledby="tab-method" hidden>
+      <div class="card prose" id="method"></div>
+    </section>
+  </main>
+
+  <footer class="band">
+    <div class="wrap">
+      <div>An independent student project by <a href="https://willmcnulty.github.io/">William McNulty</a>, built on
+        public textbook data. Not affiliated with or endorsed by the University of Virginia, the Federal Reserve
+        Bank of Boston, or any lender.</div>
+      <div>Data: Wooldridge, <em>Introductory Econometrics</em>, data set LOANAPP, from the 1990 Boston HMDA study
+        (Munnell et al. 1996). Findings are associations after controlling for the variables recorded.</div>
+      <div id="stamp" class="muted"></div>
+    </div>
+  </footer>
+  <div id="tip" role="status" aria-live="polite"></div>
+  <script src="data.js?v=d1fe6a30"></script>
+  <script src="app.js?v=99f08ca4"></script>
+</body>
+</html>

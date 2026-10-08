@@ -1,0 +1,2379 @@
+{
+ "meta": {
+  "source": "Wooldridge LOANAPP (1990 Boston HMDA sample), via the `wooldridge` Python package",
+  "rows": 1989,
+  "variables": 62,
+  "fingerprint": "4245f0aa0df43827e5c6d2f06fddfbc8ae4afbb0af3d976670c9a0f85a9a1867"
+ },
+ "summary": [
+  {
+   "group": "White",
+   "n": 1681,
+   "approved": 1527,
+   "rate": 0.908388
+  },
+  {
+   "group": "Black",
+   "n": 197,
+   "approved": 133,
+   "rate": 0.675127
+  },
+  {
+   "group": "Hispanic",
+   "n": 111,
+   "approved": 85,
+   "rate": 0.765766
+  },
+  {
+   "group": "Black or Hispanic",
+   "n": 308,
+   "approved": 218,
+   "rate": 0.707792
+  },
+  {
+   "group": "All",
+   "n": 1989,
+   "approved": 1745,
+   "rate": 0.877325
+  }
+ ],
+ "ps6": {
+  "n": 1971,
+  "lpm": {
+   "coefs": [
+    {
+     "term": "const",
+     "coef": 1.03448,
+     "se": 0.0522301,
+     "z": 19.8062,
+     "p": 2.63144e-87
+    },
+    {
+     "term": "white",
+     "coef": 0.146096,
+     "se": 0.0263961,
+     "z": 5.53476,
+     "p": 3.11656e-08
+    },
+    {
+     "term": "hrat",
+     "coef": 0.00263323,
+     "se": 0.00147493,
+     "z": 1.78533,
+     "p": 0.074208
+    },
+    {
+     "term": "obrat",
+     "coef": -0.00624732,
+     "se": 0.00131479,
+     "z": -4.75158,
+     "p": 2.01829e-06
+    },
+    {
+     "term": "loanprc",
+     "coef": -0.15242,
+     "se": 0.0380502,
+     "z": -4.00576,
+     "p": 6.18177e-05
+    },
+    {
+     "term": "unem",
+     "coef": -0.00735756,
+     "se": 0.00367365,
+     "z": -2.00279,
+     "p": 0.0451998
+    },
+    {
+     "term": "male",
+     "coef": -0.00412694,
+     "se": 0.0194438,
+     "z": -0.212249,
+     "p": 0.831913
+    },
+    {
+     "term": "married",
+     "coef": 0.0454848,
+     "se": 0.0172178,
+     "z": 2.64173,
+     "p": 0.00824829
+    },
+    {
+     "term": "dep",
+     "coef": -0.0071627,
+     "se": 0.00702571,
+     "z": -1.0195,
+     "p": 0.307966
+    },
+    {
+     "term": "pubrec",
+     "coef": -0.291197,
+     "se": 0.0431627,
+     "z": -6.7465,
+     "p": 1.51456e-11
+    }
+   ],
+   "r2": 0.140833,
+   "f": 20.6376,
+   "phat_min": 0.198984,
+   "phat_max": 1.17238,
+   "phat_mean": 0.876205,
+   "n_out_of_range": 151,
+   "n_above_1": 151
+  },
+  "probit": {
+   "coefs": [
+    {
+     "term": "const",
+     "coef": 2.40554,
+     "se": 0.301443,
+     "z": 7.9801,
+     "p": 1.46211e-15,
+     "se_oim": 0.282052
+    },
+    {
+     "term": "white",
+     "coef": 0.596131,
+     "se": 0.0944149,
+     "z": 6.31395,
+     "p": 2.72002e-10,
+     "se_oim": 0.0938366
+    },
+    {
+     "term": "hrat",
+     "coef": 0.0116885,
+     "se": 0.00695964,
+     "z": 1.67946,
+     "p": 0.0930623,
+     "se_oim": 0.00674578
+    },
+    {
+     "term": "obrat",
+     "coef": -0.0308132,
+     "se": 0.00607812,
+     "z": -5.06953,
+     "p": 3.98808e-07,
+     "se_oim": 0.00588235
+    },
+    {
+     "term": "loanprc",
+     "coef": -1.0035,
+     "se": 0.251002,
+     "z": -3.99798,
+     "p": 6.38841e-05,
+     "se_oim": 0.232207
+    },
+    {
+     "term": "unem",
+     "coef": -0.0363983,
+     "se": 0.0174425,
+     "z": -2.08676,
+     "p": 0.0369095,
+     "se_oim": 0.0169253
+    },
+    {
+     "term": "male",
+     "coef": -0.0536722,
+     "se": 0.107531,
+     "z": -0.499134,
+     "p": 0.617685,
+     "se_oim": 0.108298
+    },
+    {
+     "term": "married",
+     "coef": 0.25455,
+     "se": 0.0927778,
+     "z": 2.74365,
+     "p": 0.00607606,
+     "se_oim": 0.0920883
+    },
+    {
+     "term": "dep",
+     "coef": -0.0463297,
+     "se": 0.0384603,
+     "z": -1.20461,
+     "p": 0.228353,
+     "se_oim": 0.0379639
+    },
+    {
+     "term": "pubrec",
+     "coef": -0.981061,
+     "se": 0.124262,
+     "z": -7.89513,
+     "p": 2.90007e-15,
+     "se_oim": 0.120164
+    }
+   ],
+   "ll": -622.734,
+   "ll0": -737.979,
+   "pseudo_r2": 0.156164,
+   "lr_chi2": 230.491,
+   "ame_derivative": {
+    "white": {
+     "est": 0.102693,
+     "se": 0.0159841
+    },
+    "hrat": {
+     "est": 0.00201351,
+     "se": 0.00116099
+    },
+    "obrat": {
+     "est": -0.00530805,
+     "se": 0.00100989
+    },
+    "loanprc": {
+     "est": -0.172869,
+     "se": 0.0399288
+    },
+    "unem": {
+     "est": -0.00627017,
+     "se": 0.00291257
+    },
+    "male": {
+     "est": -0.00924585,
+     "se": 0.0186548
+    },
+    "married": {
+     "est": 0.0438501,
+     "se": 0.0158487
+    },
+    "dep": {
+     "est": -0.007981,
+     "se": 0.00653841
+    },
+    "pubrec": {
+     "est": -0.169003,
+     "se": 0.020042
+    }
+   },
+   "ame_derivative_robust": {
+    "white": {
+     "est": 0.102693,
+     "se": 0.0160954
+    },
+    "hrat": {
+     "est": 0.00201351,
+     "se": 0.00119987
+    },
+    "obrat": {
+     "est": -0.00530805,
+     "se": 0.00103101
+    },
+    "loanprc": {
+     "est": -0.172869,
+     "se": 0.0432288
+    },
+    "unem": {
+     "est": -0.00627017,
+     "se": 0.00300285
+    },
+    "male": {
+     "est": -0.00924585,
+     "se": 0.0185323
+    },
+    "married": {
+     "est": 0.0438501,
+     "se": 0.0159515
+    },
+    "dep": {
+     "est": -0.007981,
+     "se": 0.00662617
+    },
+    "pubrec": {
+     "est": -0.169003,
+     "se": 0.0208442
+    }
+   },
+   "ame_discrete": {
+    "white": {
+     "est": 0.127494,
+     "se": 0.0240239
+    },
+    "male": {
+     "est": -0.00908442,
+     "se": 0.0178869
+    },
+    "married": {
+     "est": 0.0457166,
+     "se": 0.0172967
+    },
+    "pubrec": {
+     "est": -0.252868,
+     "se": 0.0412481
+    }
+   }
+  },
+  "logit": {
+   "coefs": [
+    {
+     "term": "const",
+     "coef": 4.43858,
+     "se": 0.592938,
+     "z": 7.48573,
+     "p": 7.11481e-14,
+     "se_oim": 0.541756
+    },
+    {
+     "term": "white",
+     "coef": 1.07613,
+     "se": 0.169916,
+     "z": 6.3333,
+     "p": 2.39972e-10,
+     "se_oim": 0.166732
+    },
+    {
+     "term": "hrat",
+     "coef": 0.020362,
+     "se": 0.0129999,
+     "z": 1.56632,
+     "p": 0.117273,
+     "se_oim": 0.0124317
+    },
+    {
+     "term": "obrat",
+     "coef": -0.0586721,
+     "se": 0.0114344,
+     "z": -5.13119,
+     "p": 2.87912e-07,
+     "se_oim": 0.0108315
+    },
+    {
+     "term": "loanprc",
+     "coef": -1.90309,
+     "se": 0.520378,
+     "z": -3.65713,
+     "p": 0.000255057,
+     "se_oim": 0.455644
+    },
+    {
+     "term": "unem",
+     "coef": -0.0662508,
+     "se": 0.0330758,
+     "z": -2.003,
+     "p": 0.0451771,
+     "se_oim": 0.0315186
+    },
+    {
+     "term": "male",
+     "coef": -0.0899747,
+     "se": 0.201902,
+     "z": -0.445636,
+     "p": 0.65586,
+     "se_oim": 0.202364
+    },
+    {
+     "term": "married",
+     "coef": 0.478184,
+     "se": 0.175232,
+     "z": 2.72886,
+     "p": 0.00635546,
+     "se_oim": 0.17301
+    },
+    {
+     "term": "dep",
+     "coef": -0.0851284,
+     "se": 0.0718116,
+     "z": -1.18544,
+     "p": 0.235843,
+     "se_oim": 0.0710478
+    },
+    {
+     "term": "pubrec",
+     "coef": -1.69656,
+     "se": 0.217182,
+     "z": -7.81168,
+     "p": 5.64329e-15,
+     "se_oim": 0.205447
+    }
+   ],
+   "ll": -622.822,
+   "ll0": -737.979,
+   "pseudo_r2": 0.156044,
+   "lr_chi2": 230.315,
+   "ame_derivative": {
+    "white": {
+     "est": 0.0986126,
+     "se": 0.0150883
+    },
+    "hrat": {
+     "est": 0.00186591,
+     "se": 0.00113821
+    },
+    "obrat": {
+     "est": -0.00537651,
+     "se": 0.000984208
+    },
+    "loanprc": {
+     "est": -0.174393,
+     "se": 0.0417071
+    },
+    "unem": {
+     "est": -0.006071,
+     "se": 0.00288524
+    },
+    "male": {
+     "est": -0.00824498,
+     "se": 0.0185455
+    },
+    "married": {
+     "est": 0.0438192,
+     "se": 0.0158404
+    },
+    "dep": {
+     "est": -0.00780088,
+     "se": 0.00651087
+    },
+    "pubrec": {
+     "est": -0.155467,
+     "se": 0.0180235
+    }
+   },
+   "ame_derivative_robust": {
+    "white": {
+     "est": 0.0986126,
+     "se": 0.0154017
+    },
+    "hrat": {
+     "est": 0.00186591,
+     "se": 0.0011912
+    },
+    "obrat": {
+     "est": -0.00537651,
+     "se": 0.00102801
+    },
+    "loanprc": {
+     "est": -0.174393,
+     "se": 0.0477585
+    },
+    "unem": {
+     "est": -0.006071,
+     "se": 0.00303206
+    },
+    "male": {
+     "est": -0.00824498,
+     "se": 0.0185155
+    },
+    "married": {
+     "est": 0.0438192,
+     "se": 0.0160679
+    },
+    "dep": {
+     "est": -0.00780088,
+     "se": 0.00658844
+    },
+    "pubrec": {
+     "est": -0.155467,
+     "se": 0.0192672
+    }
+   },
+   "ame_discrete": {
+    "white": {
+     "est": 0.12424,
+     "se": 0.023686
+    },
+    "male": {
+     "est": -0.00810407,
+     "se": 0.0178849
+    },
+    "married": {
+     "est": 0.0458814,
+     "se": 0.0175607
+    },
+    "pubrec": {
+     "est": -0.242068,
+     "se": 0.041516
+    }
+   }
+  }
+ },
+ "ladder": {
+  "n": 1967,
+  "rows": [
+   {
+    "key": "raw",
+    "label": "No controls",
+    "n": 1967,
+    "k": 0,
+    "lpm": {
+     "est": 0.205684,
+     "se": 0.0271984
+    },
+    "probit": {
+     "est": 0.205684,
+     "se": 0.0271915,
+     "coef": 0.799548
+    },
+    "logit": {
+     "est": 0.205684,
+     "se": 0.0271915,
+     "coef": 1.43583
+    },
+    "black": {
+     "est": -0.24209,
+     "se": 0.0346422
+    },
+    "hispan": {
+     "est": -0.15884,
+     "se": 0.0429687
+    }
+   },
+   {
+    "key": "ps6",
+    "label": "Problem set 6 controls",
+    "n": 1967,
+    "k": 8,
+    "lpm": {
+     "est": 0.147406,
+     "se": 0.0263884
+    },
+    "probit": {
+     "est": 0.128662,
+     "se": 0.0240426,
+     "coef": 0.60314
+    },
+    "logit": {
+     "est": 0.125426,
+     "se": 0.0237121,
+     "coef": 1.09012
+    },
+    "black": {
+     "est": -0.148155,
+     "se": 0.0306321
+    },
+    "hispan": {
+     "est": -0.102941,
+     "se": 0.0364753
+    }
+   },
+   {
+    "key": "credit",
+    "label": "+ credit history (Wooldridge C7.8)",
+    "n": 1967,
+    "k": 14,
+    "lpm": {
+     "est": 0.130614,
+     "se": 0.0258807
+    },
+    "probit": {
+     "est": 0.10564,
+     "se": 0.0226398,
+     "coef": 0.526989
+    },
+    "logit": {
+     "est": 0.102344,
+     "se": 0.0222484,
+     "coef": 0.951205
+    },
+    "black": {
+     "est": -0.113278,
+     "se": 0.0286629
+    },
+    "hispan": {
+     "est": -0.0991166,
+     "se": 0.0346141
+    }
+   },
+   {
+    "key": "file",
+    "label": "+ lender's file (guidelines, consumer credit, self-employed, unverified info)",
+    "n": 1967,
+    "k": 22,
+    "lpm": {
+     "est": 0.0604391,
+     "se": 0.0203246
+    },
+    "probit": {
+     "est": 0.0488465,
+     "se": 0.0172898,
+     "coef": 0.365823
+    },
+    "logit": {
+     "est": 0.0507779,
+     "se": 0.0171221,
+     "coef": 0.747557
+    },
+    "black": {
+     "est": -0.0444066,
+     "se": 0.0202193
+    },
+    "hispan": {
+     "est": -0.0600904,
+     "se": 0.0295328
+    }
+   }
+  ]
+ },
+ "interactions": {
+  "n": 1967,
+  "lpm": [
+   {
+    "term": "white",
+    "coef": -0.173374,
+    "se": 0.159813,
+    "z": -1.08485,
+    "p": 0.277986
+   },
+   {
+    "term": "white:hrat",
+    "coef": 0.00211169,
+    "se": 0.00495414,
+    "z": 0.426248,
+    "p": 0.669927
+   },
+   {
+    "term": "white:obrat",
+    "coef": 0.00686986,
+    "se": 0.00405384,
+    "z": 1.69466,
+    "p": 0.0901405
+   },
+   {
+    "term": "white:loanprc",
+    "coef": 0.0207036,
+    "se": 0.162271,
+    "z": 0.127586,
+    "p": 0.898476
+   }
+  ],
+  "lpm_wald": {
+   "chi2": 6.86953,
+   "df": 3,
+   "p": 0.0761747
+  },
+  "probit_wald": {
+   "chi2": 1.25148,
+   "df": 1,
+   "p": 0.26327
+  },
+  "probit_coef": [
+   {
+    "term": "white",
+    "coef": 0.0437319,
+    "se": 0.445992,
+    "z": 0.0980553,
+    "p": 0.921888,
+    "se_oim": 0.414386
+   },
+   {
+    "term": "obrat",
+    "coef": -0.0386469,
+    "se": 0.0113531,
+    "z": -3.40407,
+    "p": 0.0006639,
+    "se_oim": 0.0109524
+   },
+   {
+    "term": "white:obrat",
+    "coef": 0.0138743,
+    "se": 0.0124022,
+    "z": 1.11869,
+    "p": 0.26327,
+    "se_oim": 0.0115471
+   }
+  ],
+  "curve": [
+   {
+    "x": 15.0,
+    "p0": 0.927377,
+    "se0": 0.0293119,
+    "p1": 0.953067,
+    "se1": 0.0121339,
+    "gap": 0.0256896,
+    "gap_se": 0.0304881
+   },
+   {
+    "x": 20.0,
+    "p0": 0.900946,
+    "se0": 0.0293001,
+    "p1": 0.941565,
+    "se1": 0.0111476,
+    "gap": 0.0406191,
+    "gap_se": 0.030465
+   },
+   {
+    "x": 25.0,
+    "p0": 0.867787,
+    "se0": 0.0270726,
+    "p1": 0.927873,
+    "se1": 0.00949264,
+    "gap": 0.0600866,
+    "gap_se": 0.0283301
+   },
+   {
+    "x": 30.0,
+    "p0": 0.827338,
+    "se0": 0.0235789,
+    "p1": 0.911752,
+    "se1": 0.00770274,
+    "gap": 0.0844137,
+    "gap_se": 0.0250235
+   },
+   {
+    "x": 35.0,
+    "p0": 0.7794,
+    "se0": 0.0230429,
+    "p1": 0.892978,
+    "se1": 0.00786118,
+    "gap": 0.113579,
+    "gap_se": 0.024533
+   },
+   {
+    "x": 40.0,
+    "p0": 0.724241,
+    "se0": 0.0313345,
+    "p1": 0.871364,
+    "se1": 0.0121321,
+    "gap": 0.147123,
+    "gap_se": 0.032517
+   },
+   {
+    "x": 45.0,
+    "p0": 0.662664,
+    "se0": 0.0475891,
+    "p1": 0.846764,
+    "se1": 0.0196873,
+    "gap": 0.184099,
+    "gap_se": 0.048634
+   },
+   {
+    "x": 50.0,
+    "p0": 0.596009,
+    "se0": 0.0678946,
+    "p1": 0.819094,
+    "se1": 0.0296037,
+    "gap": 0.223084,
+    "gap_se": 0.0692599
+   },
+   {
+    "x": 55.0,
+    "p0": 0.526084,
+    "se0": 0.0891845,
+    "p1": 0.788341,
+    "se1": 0.0414942,
+    "gap": 0.262258,
+    "gap_se": 0.0914737
+   },
+   {
+    "x": 60.0,
+    "p0": 0.455023,
+    "se0": 0.1089,
+    "p1": 0.754577,
+    "se1": 0.0550829,
+    "gap": 0.299554,
+    "gap_se": 0.112955
+   }
+  ],
+  "obrat_pctiles": {
+   "5": 18.12,
+   "25": 28.0,
+   "50": 33.0,
+   "75": 37.0,
+   "95": 44.0
+  }
+ },
+ "oaxaca": {
+  "n": 1971,
+  "n_white": 1668,
+  "n_nonwhite": 303,
+  "reps": 500,
+  "variables": [
+   "hrat",
+   "obrat",
+   "loanprc",
+   "unem",
+   "male",
+   "married",
+   "dep",
+   "pubrec",
+   "sch",
+   "cosign",
+   "chist",
+   "mortlat1",
+   "mortlat2",
+   "vr"
+  ],
+  "gap": 0.204704,
+  "gap_se": 0.0267261,
+  "mean_white": 0.907674,
+  "mean_nonwhite": 0.70297,
+  "pooled": {
+   "explained": 0.0758839,
+   "explained_se": 0.0113255,
+   "unexplained": 0.12882,
+   "unexplained_se": 0.025181,
+   "explained_ci": [
+    0.0546918,
+    0.100285
+   ],
+   "unexplained_ci": [
+    0.0800486,
+    0.1784
+   ]
+  },
+  "white_coefs": {
+   "explained": 0.065955,
+   "explained_se": 0.0113914,
+   "unexplained": 0.138749,
+   "unexplained_se": 0.0263643,
+   "explained_ci": [
+    0.0453056,
+    0.0903785
+   ],
+   "unexplained_ci": [
+    0.0883572,
+    0.19141
+   ]
+  },
+  "nonwhite_coefs": {
+   "explained": 0.113083,
+   "explained_se": 0.0242659,
+   "unexplained": 0.0916203,
+   "unexplained_se": 0.0294615,
+   "explained_ci": [
+    0.0699456,
+    0.163198
+   ],
+   "unexplained_ci": [
+    0.0349521,
+    0.144463
+   ]
+  },
+  "detail": [
+   {
+    "var": "hrat",
+    "contrib": -0.00119239,
+    "se": 0.00128801,
+    "mean_white": 24.7001,
+    "mean_nonwhite": 25.3506
+   },
+   {
+    "var": "obrat",
+    "contrib": 0.0128305,
+    "se": 0.00409657,
+    "mean_white": 32.0267,
+    "mean_nonwhite": 34.3888
+   },
+   {
+    "var": "loanprc",
+    "contrib": 0.0131847,
+    "se": 0.00388244,
+    "mean_white": 0.756671,
+    "mean_nonwhite": 0.84618
+   },
+   {
+    "var": "unem",
+    "contrib": -0.000658268,
+    "se": 0.00107162,
+    "mean_white": 3.9024,
+    "mean_nonwhite": 3.81221
+   },
+   {
+    "var": "male",
+    "contrib": -0.000265496,
+    "se": 0.00148112,
+    "mean_white": 0.823141,
+    "mean_nonwhite": 0.759076
+   },
+   {
+    "var": "married",
+    "contrib": 0.000508921,
+    "se": 0.00151051,
+    "mean_white": 0.661271,
+    "mean_nonwhite": 0.650165
+   },
+   {
+    "var": "dep",
+    "contrib": 0.00133603,
+    "se": 0.00147872,
+    "mean_white": 0.741607,
+    "mean_nonwhite": 0.937294
+   },
+   {
+    "var": "pubrec",
+    "contrib": 0.0257066,
+    "se": 0.00739856,
+    "mean_white": 0.0521583,
+    "mean_nonwhite": 0.158416
+   },
+   {
+    "var": "sch",
+    "contrib": 0.00022117,
+    "se": 0.00227783,
+    "mean_white": 0.789568,
+    "mean_nonwhite": 0.663366
+   },
+   {
+    "var": "cosign",
+    "contrib": -0.00016149,
+    "se": 0.000842285,
+    "mean_white": 0.0263789,
+    "mean_nonwhite": 0.0429043
+   },
+   {
+    "var": "chist",
+    "contrib": 0.019454,
+    "se": 0.00513596,
+    "mean_white": 0.859113,
+    "mean_nonwhite": 0.712871
+   },
+   {
+    "var": "mortlat1",
+    "contrib": 0.000481884,
+    "se": 0.00114714,
+    "mean_white": 0.0179856,
+    "mean_nonwhite": 0.0264026
+   },
+   {
+    "var": "mortlat2",
+    "contrib": 0.000342248,
+    "se": 0.0012368,
+    "mean_white": 0.0101918,
+    "mean_nonwhite": 0.0132013
+   },
+   {
+    "var": "vr",
+    "contrib": 0.00409554,
+    "se": 0.00219407,
+    "mean_white": 0.38789,
+    "mean_nonwhite": 0.518152
+   }
+  ],
+  "probit_check": {
+   "gap": 0.204704,
+   "explained": 0.089042,
+   "unexplained": 0.115662,
+   "explained_range": [
+    0.104439,
+    0.0736455
+   ]
+  }
+ },
+ "oaxaca_file": {
+  "n": 1967,
+  "gap": 0.205684,
+  "pooled": {
+   "explained": 0.145244,
+   "explained_se": 0.0190931,
+   "unexplained": 0.0604391,
+   "unexplained_se": 0.0210646,
+   "explained_ci": [
+    0.113192,
+    0.178651
+   ],
+   "unexplained_ci": [
+    0.0205792,
+    0.0980713
+   ]
+  },
+  "white_coefs": {
+   "explained": 0.135469,
+   "explained_se": 0.0192731,
+   "unexplained": 0.0702143,
+   "unexplained_se": 0.023753,
+   "explained_ci": [
+    0.103163,
+    0.171307
+   ],
+   "unexplained_ci": [
+    0.0254487,
+    0.116317
+   ]
+  },
+  "nonwhite_coefs": {
+   "explained": 0.156213,
+   "explained_se": 0.0242254,
+   "unexplained": 0.049471,
+   "unexplained_se": 0.0234379,
+   "explained_ci": [
+    0.108117,
+    0.199661
+   ],
+   "unexplained_ci": [
+    0.00677801,
+    0.0928662
+   ]
+  },
+  "probit_check": {
+   "gap": 0.205684,
+   "explained": 0.147126,
+   "unexplained": 0.0585571,
+   "explained_range": [
+    0.15492,
+    0.139333
+   ]
+  }
+ },
+ "ml": {
+  "n": 1982,
+  "groups": {
+   "White": 1675,
+   "Black": 197,
+   "Hispanic": 110
+  },
+  "features": [
+   "hrat",
+   "obrat",
+   "loanprc",
+   "unem",
+   "dep",
+   "sch",
+   "cosign",
+   "chist",
+   "cons",
+   "pubrec",
+   "mortlat1",
+   "mortlat2",
+   "self",
+   "multi",
+   "log_appinc",
+   "log_loanamt",
+   "netw_signed_log"
+  ],
+  "labels": {
+   "hrat": "Housing expense / income",
+   "obrat": "Total obligations / income",
+   "loanprc": "Loan / price",
+   "unem": "Unemployment rate in the applicant's industry",
+   "dep": "Dependents",
+   "sch": "More than 12 years of school",
+   "cosign": "Cosigner",
+   "chist": "No accounts 60+ days delinquent",
+   "cons": "Consumer credit history (1 best, 6 worst)",
+   "pubrec": "Public record of bad credit",
+   "mortlat1": "1-2 late mortgage payments",
+   "mortlat2": "3+ late mortgage payments",
+   "self": "Self-employed",
+   "multi": "2+ unit property",
+   "log_appinc": "Applicant income (log)",
+   "log_loanamt": "Loan amount (log)",
+   "netw_signed_log": "Net worth (signed log)",
+   "gdlin": "Lender: meets credit guidelines",
+   "unver": "Lender: unverifiable information",
+   "suffolk": "In Suffolk County (Boston)",
+   "vr": "Tract vacancy rate above median",
+   "mi": "Tract income above median",
+   "bd": "Tract boarded-up rate above median",
+   "min30": "Tract minority share above 30%",
+   "min30_missing": "Tract minority share not recorded",
+   "male_or_missing": "Male",
+   "married": "Married",
+   "old": "Age above median"
+  },
+  "lender": [
+   "gdlin",
+   "unver"
+  ],
+  "place": [
+   "suffolk",
+   "vr",
+   "mi",
+   "bd",
+   "min30",
+   "min30_missing"
+  ],
+  "folds": 5,
+  "approval_rate": 0.877901,
+  "models": {
+   "logit": {
+    "groups": {
+     "White": {
+      "n": 1675,
+      "base_rate": 0.909254,
+      "selection": 0.911045,
+      "tpr": 0.93434,
+      "fpr": 0.677632,
+      "fnr": 0.0656599,
+      "tnr": 0.322368,
+      "accuracy": 0.878806,
+      "precision": 0.932503,
+      "auc": 0.739758,
+      "mean_score": 0.894374
+     },
+     "Black or Hispanic": {
+      "n": 307,
+      "base_rate": 0.70684,
+      "selection": 0.697068,
+      "tpr": 0.815668,
+      "fpr": 0.411111,
+      "fnr": 0.184332,
+      "tnr": 0.588889,
+      "accuracy": 0.749186,
+      "precision": 0.827103,
+      "auc": 0.776395,
+      "mean_score": 0.787862
+     },
+     "Black": {
+      "n": 197,
+      "base_rate": 0.675127,
+      "selection": 0.664975,
+      "tpr": 0.781955,
+      "fpr": 0.421875,
+      "fnr": 0.218045,
+      "tnr": 0.578125,
+      "accuracy": 0.715736,
+      "precision": 0.793893,
+      "auc": 0.750822,
+      "mean_score": 0.765606
+     },
+     "Hispanic": {
+      "n": 110,
+      "base_rate": 0.763636,
+      "selection": 0.754545,
+      "tpr": 0.869048,
+      "fpr": 0.384615,
+      "fnr": 0.130952,
+      "tnr": 0.615385,
+      "accuracy": 0.809091,
+      "precision": 0.879518,
+      "auc": 0.816392,
+      "mean_score": 0.827721
+     },
+     "All": {
+      "n": 1982,
+      "base_rate": 0.877901,
+      "selection": 0.877901,
+      "tpr": 0.91954,
+      "fpr": 0.578512,
+      "fnr": 0.0804598,
+      "tnr": 0.421488,
+      "accuracy": 0.858729,
+      "precision": 0.91954,
+      "auc": 0.774385,
+      "mean_score": 0.877876
+     }
+    },
+    "gaps": {
+     "d_selection": -0.213976,
+     "d_tpr": -0.118672,
+     "d_fpr": -0.26652,
+     "d_accuracy": -0.12962,
+     "selection_ratio": 0.765131,
+     "equalized_odds": 0.26652
+    },
+    "ci": {
+     "d_selection": [
+      -0.269633,
+      -0.161784
+     ],
+     "d_tpr": [
+      -0.172272,
+      -0.0675521
+     ],
+     "d_fpr": [
+      -0.387489,
+      -0.133512
+     ],
+     "d_base_rate": [
+      -0.258443,
+      -0.151858
+     ]
+    },
+    "cutoff": 0.74803,
+    "calibration": [
+     {
+      "group": "White",
+      "lo": 0.0,
+      "hi": 0.6,
+      "n": 62,
+      "predicted": 0.411527,
+      "observed": 0.516129,
+      "se": 0.063467
+     },
+     {
+      "group": "White",
+      "lo": 0.6,
+      "hi": 0.75,
+      "n": 88,
+      "predicted": 0.691542,
+      "observed": 0.784091,
+      "se": 0.0438609
+     },
+     {
+      "group": "White",
+      "lo": 0.75,
+      "hi": 0.85,
+      "n": 184,
+      "predicted": 0.810194,
+      "observed": 0.836957,
+      "se": 0.0272329
+     },
+     {
+      "group": "White",
+      "lo": 0.85,
+      "hi": 0.9,
+      "n": 186,
+      "predicted": 0.877934,
+      "observed": 0.913978,
+      "se": 0.0205596
+     },
+     {
+      "group": "White",
+      "lo": 0.9,
+      "hi": 0.95,
+      "n": 515,
+      "predicted": 0.929966,
+      "observed": 0.933981,
+      "se": 0.0109421
+     },
+     {
+      "group": "White",
+      "lo": 0.95,
+      "hi": 1.0,
+      "n": 640,
+      "predicted": 0.969377,
+      "observed": 0.964063,
+      "se": 0.00735761
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.0,
+      "hi": 0.6,
+      "n": 53,
+      "predicted": 0.409099,
+      "observed": 0.301887,
+      "se": 0.063059
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.6,
+      "hi": 0.75,
+      "n": 42,
+      "predicted": 0.68619,
+      "observed": 0.619048,
+      "se": 0.0749329
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.75,
+      "hi": 0.85,
+      "n": 47,
+      "predicted": 0.814186,
+      "observed": 0.702128,
+      "se": 0.0667074
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.85,
+      "hi": 0.9,
+      "n": 45,
+      "predicted": 0.878609,
+      "observed": 0.777778,
+      "se": 0.0619748
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.9,
+      "hi": 0.95,
+      "n": 67,
+      "predicted": 0.931878,
+      "observed": 0.865672,
+      "se": 0.0416604
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.95,
+      "hi": 1.0,
+      "n": 53,
+      "predicted": 0.964745,
+      "observed": 0.924528,
+      "se": 0.0362839
+     }
+    ]
+   },
+   "gbm": {
+    "groups": {
+     "White": {
+      "n": 1675,
+      "base_rate": 0.909254,
+      "selection": 0.908657,
+      "tpr": 0.93434,
+      "fpr": 0.651316,
+      "fnr": 0.0656599,
+      "tnr": 0.348684,
+      "accuracy": 0.881194,
+      "precision": 0.934954,
+      "auc": 0.751896,
+      "mean_score": 0.896395
+     },
+     "Black or Hispanic": {
+      "n": 307,
+      "base_rate": 0.70684,
+      "selection": 0.710098,
+      "tpr": 0.83871,
+      "fpr": 0.4,
+      "fnr": 0.16129,
+      "tnr": 0.6,
+      "accuracy": 0.76873,
+      "precision": 0.834862,
+      "auc": 0.767742,
+      "mean_score": 0.788265
+     },
+     "Black": {
+      "n": 197,
+      "base_rate": 0.675127,
+      "selection": 0.670051,
+      "tpr": 0.804511,
+      "fpr": 0.390625,
+      "fnr": 0.195489,
+      "tnr": 0.609375,
+      "accuracy": 0.741117,
+      "precision": 0.810606,
+      "auc": 0.732378,
+      "mean_score": 0.768858
+     },
+     "Hispanic": {
+      "n": 110,
+      "base_rate": 0.763636,
+      "selection": 0.781818,
+      "tpr": 0.892857,
+      "fpr": 0.423077,
+      "fnr": 0.107143,
+      "tnr": 0.576923,
+      "accuracy": 0.818182,
+      "precision": 0.872093,
+      "auc": 0.827839,
+      "mean_score": 0.82302
+     },
+     "All": {
+      "n": 1982,
+      "base_rate": 0.877901,
+      "selection": 0.877901,
+      "tpr": 0.922414,
+      "fpr": 0.557851,
+      "fnr": 0.0775862,
+      "tnr": 0.442149,
+      "accuracy": 0.863774,
+      "precision": 0.922414,
+      "auc": 0.776305,
+      "mean_score": 0.879646
+     }
+    },
+    "gaps": {
+     "d_selection": -0.198559,
+     "d_tpr": -0.0956304,
+     "d_fpr": -0.251316,
+     "d_accuracy": -0.112464,
+     "selection_ratio": 0.781481,
+     "equalized_odds": 0.251316
+    },
+    "ci": {
+     "d_selection": [
+      -0.253994,
+      -0.146711
+     ],
+     "d_tpr": [
+      -0.147084,
+      -0.0483303
+     ],
+     "d_fpr": [
+      -0.372115,
+      -0.12552
+     ],
+     "d_base_rate": [
+      -0.258443,
+      -0.151858
+     ]
+    },
+    "cutoff": 0.763962,
+    "calibration": [
+     {
+      "group": "White",
+      "lo": 0.0,
+      "hi": 0.6,
+      "n": 68,
+      "predicted": 0.445351,
+      "observed": 0.5,
+      "se": 0.0606339
+     },
+     {
+      "group": "White",
+      "lo": 0.6,
+      "hi": 0.75,
+      "n": 76,
+      "predicted": 0.682488,
+      "observed": 0.776316,
+      "se": 0.0478002
+     },
+     {
+      "group": "White",
+      "lo": 0.75,
+      "hi": 0.85,
+      "n": 133,
+      "predicted": 0.810456,
+      "observed": 0.827068,
+      "se": 0.0327931
+     },
+     {
+      "group": "White",
+      "lo": 0.85,
+      "hi": 0.9,
+      "n": 192,
+      "predicted": 0.879795,
+      "observed": 0.880208,
+      "se": 0.0234345
+     },
+     {
+      "group": "White",
+      "lo": 0.9,
+      "hi": 0.95,
+      "n": 594,
+      "predicted": 0.932139,
+      "observed": 0.947811,
+      "se": 0.00912547
+     },
+     {
+      "group": "White",
+      "lo": 0.95,
+      "hi": 1.0,
+      "n": 612,
+      "predicted": 0.962267,
+      "observed": 0.960784,
+      "se": 0.00784634
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.0,
+      "hi": 0.6,
+      "n": 59,
+      "predicted": 0.379329,
+      "observed": 0.338983,
+      "se": 0.0616268
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.6,
+      "hi": 0.75,
+      "n": 26,
+      "predicted": 0.685773,
+      "observed": 0.538462,
+      "se": 0.0977675
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.75,
+      "hi": 0.85,
+      "n": 38,
+      "predicted": 0.805032,
+      "observed": 0.684211,
+      "se": 0.0754053
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.85,
+      "hi": 0.9,
+      "n": 26,
+      "predicted": 0.877549,
+      "observed": 0.769231,
+      "se": 0.0826286
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.9,
+      "hi": 0.95,
+      "n": 101,
+      "predicted": 0.928262,
+      "observed": 0.851485,
+      "se": 0.0353845
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.95,
+      "hi": 1.0,
+      "n": 57,
+      "predicted": 0.958329,
+      "observed": 0.894737,
+      "se": 0.0406489
+     }
+    ]
+   },
+   "logit_race": {
+    "groups": {
+     "White": {
+      "n": 1675,
+      "base_rate": 0.909254,
+      "selection": 0.93791,
+      "tpr": 0.959947,
+      "fpr": 0.717105,
+      "fnr": 0.0400525,
+      "tnr": 0.282895,
+      "accuracy": 0.898507,
+      "precision": 0.930617,
+      "auc": 0.73644,
+      "mean_score": 0.909492
+     },
+     "Black or Hispanic": {
+      "n": 307,
+      "base_rate": 0.70684,
+      "selection": 0.550489,
+      "tpr": 0.663594,
+      "fpr": 0.277778,
+      "fnr": 0.336406,
+      "tnr": 0.722222,
+      "accuracy": 0.680782,
+      "precision": 0.852071,
+      "auc": 0.774245,
+      "mean_score": 0.702933
+     },
+     "Black": {
+      "n": 197,
+      "base_rate": 0.675127,
+      "selection": 0.507614,
+      "tpr": 0.609023,
+      "fpr": 0.296875,
+      "fnr": 0.390977,
+      "tnr": 0.703125,
+      "accuracy": 0.639594,
+      "precision": 0.81,
+      "auc": 0.742951,
+      "mean_score": 0.677314
+     },
+     "Hispanic": {
+      "n": 110,
+      "base_rate": 0.763636,
+      "selection": 0.627273,
+      "tpr": 0.75,
+      "fpr": 0.230769,
+      "fnr": 0.25,
+      "tnr": 0.769231,
+      "accuracy": 0.754545,
+      "precision": 0.913043,
+      "auc": 0.817308,
+      "mean_score": 0.748815
+     },
+     "All": {
+      "n": 1982,
+      "base_rate": 0.877901,
+      "selection": 0.877901,
+      "tpr": 0.922989,
+      "fpr": 0.553719,
+      "fnr": 0.0770115,
+      "tnr": 0.446281,
+      "accuracy": 0.864783,
+      "precision": 0.922989,
+      "auc": 0.783124,
+      "mean_score": 0.877498
+     }
+    },
+    "gaps": {
+     "d_selection": -0.387422,
+     "d_tpr": -0.296353,
+     "d_fpr": -0.439327,
+     "d_accuracy": -0.217726,
+     "selection_ratio": 0.586931,
+     "equalized_odds": 0.439327
+    },
+    "ci": {
+     "d_selection": [
+      -0.446733,
+      -0.333168
+     ],
+     "d_tpr": [
+      -0.364864,
+      -0.23742
+     ],
+     "d_fpr": [
+      -0.552263,
+      -0.31385
+     ],
+     "d_base_rate": [
+      -0.258443,
+      -0.151858
+     ]
+    },
+    "cutoff": 0.75057,
+    "calibration": [
+     {
+      "group": "White",
+      "lo": 0.0,
+      "hi": 0.6,
+      "n": 46,
+      "predicted": 0.437528,
+      "observed": 0.565217,
+      "se": 0.0730912
+     },
+     {
+      "group": "White",
+      "lo": 0.6,
+      "hi": 0.75,
+      "n": 58,
+      "predicted": 0.693932,
+      "observed": 0.603448,
+      "se": 0.0642327
+     },
+     {
+      "group": "White",
+      "lo": 0.75,
+      "hi": 0.85,
+      "n": 150,
+      "predicted": 0.809029,
+      "observed": 0.86,
+      "se": 0.0283314
+     },
+     {
+      "group": "White",
+      "lo": 0.85,
+      "hi": 0.9,
+      "n": 188,
+      "predicted": 0.877462,
+      "observed": 0.87234,
+      "se": 0.0243383
+     },
+     {
+      "group": "White",
+      "lo": 0.9,
+      "hi": 0.95,
+      "n": 457,
+      "predicted": 0.929915,
+      "observed": 0.925602,
+      "se": 0.0122754
+     },
+     {
+      "group": "White",
+      "lo": 0.95,
+      "hi": 1.0,
+      "n": 776,
+      "predicted": 0.968734,
+      "observed": 0.96134,
+      "se": 0.0069205
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.0,
+      "hi": 0.6,
+      "n": 89,
+      "predicted": 0.400421,
+      "observed": 0.426966,
+      "se": 0.0524315
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.6,
+      "hi": 0.75,
+      "n": 48,
+      "predicted": 0.688781,
+      "observed": 0.729167,
+      "se": 0.0641422
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.75,
+      "hi": 0.85,
+      "n": 62,
+      "predicted": 0.797266,
+      "observed": 0.758065,
+      "se": 0.0543885
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.85,
+      "hi": 0.9,
+      "n": 47,
+      "predicted": 0.877955,
+      "observed": 0.851064,
+      "se": 0.0519317
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.9,
+      "hi": 0.95,
+      "n": 55,
+      "predicted": 0.920512,
+      "observed": 0.927273,
+      "se": 0.0350164
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.95,
+      "hi": 1.0,
+      "n": 6,
+      "predicted": 0.963193,
+      "observed": 1.0,
+      "se": 1.29099e-05
+     }
+    ]
+   },
+   "logit_lender": {
+    "groups": {
+     "White": {
+      "n": 1675,
+      "base_rate": 0.909254,
+      "selection": 0.906269,
+      "tpr": 0.957321,
+      "fpr": 0.394737,
+      "fnr": 0.0426789,
+      "tnr": 0.605263,
+      "accuracy": 0.925373,
+      "precision": 0.960474,
+      "auc": 0.817677,
+      "mean_score": 0.901346
+     },
+     "Black or Hispanic": {
+      "n": 307,
+      "base_rate": 0.70684,
+      "selection": 0.723127,
+      "tpr": 0.930876,
+      "fpr": 0.222222,
+      "fnr": 0.0691244,
+      "tnr": 0.777778,
+      "accuracy": 0.885993,
+      "precision": 0.90991,
+      "auc": 0.897337,
+      "mean_score": 0.753704
+     },
+     "Black": {
+      "n": 197,
+      "base_rate": 0.675127,
+      "selection": 0.680203,
+      "tpr": 0.924812,
+      "fpr": 0.171875,
+      "fnr": 0.075188,
+      "tnr": 0.828125,
+      "accuracy": 0.893401,
+      "precision": 0.91791,
+      "auc": 0.901081,
+      "mean_score": 0.720827
+     },
+     "Hispanic": {
+      "n": 110,
+      "base_rate": 0.763636,
+      "selection": 0.8,
+      "tpr": 0.940476,
+      "fpr": 0.346154,
+      "fnr": 0.0595238,
+      "tnr": 0.653846,
+      "accuracy": 0.872727,
+      "precision": 0.897727,
+      "auc": 0.880037,
+      "mean_score": 0.812585
+     },
+     "All": {
+      "n": 1982,
+      "base_rate": 0.877901,
+      "selection": 0.877901,
+      "tpr": 0.954023,
+      "fpr": 0.330579,
+      "fnr": 0.045977,
+      "tnr": 0.669421,
+      "accuracy": 0.919273,
+      "precision": 0.954023,
+      "auc": 0.855398,
+      "mean_score": 0.878477
+     }
+    },
+    "gaps": {
+     "d_selection": -0.183142,
+     "d_tpr": -0.0264455,
+     "d_fpr": -0.172515,
+     "d_accuracy": -0.0393796,
+     "selection_ratio": 0.797917,
+     "equalized_odds": 0.172515
+    },
+    "ci": {
+     "d_selection": [
+      -0.238024,
+      -0.131209
+     ],
+     "d_tpr": [
+      -0.0626615,
+      0.00474791
+     ],
+     "d_fpr": [
+      -0.29969,
+      -0.0563018
+     ],
+     "d_base_rate": [
+      -0.258443,
+      -0.151858
+     ]
+    },
+    "cutoff": 0.81464,
+    "calibration": [
+     {
+      "group": "White",
+      "lo": 0.0,
+      "hi": 0.6,
+      "n": 119,
+      "predicted": 0.284267,
+      "observed": 0.327731,
+      "se": 0.0430286
+     },
+     {
+      "group": "White",
+      "lo": 0.6,
+      "hi": 0.75,
+      "n": 28,
+      "predicted": 0.672978,
+      "observed": 0.678571,
+      "se": 0.0882594
+     },
+     {
+      "group": "White",
+      "lo": 0.75,
+      "hi": 0.85,
+      "n": 23,
+      "predicted": 0.810239,
+      "observed": 0.869565,
+      "se": 0.0702237
+     },
+     {
+      "group": "White",
+      "lo": 0.85,
+      "hi": 0.9,
+      "n": 72,
+      "predicted": 0.881732,
+      "observed": 0.888889,
+      "se": 0.037037
+     },
+     {
+      "group": "White",
+      "lo": 0.9,
+      "hi": 0.95,
+      "n": 404,
+      "predicted": 0.933434,
+      "observed": 0.95297,
+      "se": 0.0105326
+     },
+     {
+      "group": "White",
+      "lo": 0.95,
+      "hi": 1.0,
+      "n": 1029,
+      "predicted": 0.969733,
+      "observed": 0.96793,
+      "se": 0.00549242
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.0,
+      "hi": 0.6,
+      "n": 73,
+      "predicted": 0.201857,
+      "observed": 0.150685,
+      "se": 0.0418705
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.6,
+      "hi": 0.75,
+      "n": 9,
+      "predicted": 0.673115,
+      "observed": 0.222222,
+      "se": 0.13858
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.75,
+      "hi": 0.85,
+      "n": 10,
+      "predicted": 0.824548,
+      "observed": 0.8,
+      "se": 0.126491
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.85,
+      "hi": 0.9,
+      "n": 33,
+      "predicted": 0.88106,
+      "observed": 0.818182,
+      "se": 0.0671408
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.9,
+      "hi": 0.95,
+      "n": 74,
+      "predicted": 0.932427,
+      "observed": 0.905405,
+      "se": 0.0340204
+     },
+     {
+      "group": "Black or Hispanic",
+      "lo": 0.95,
+      "hi": 1.0,
+      "n": 108,
+      "predicted": 0.965496,
+      "observed": 0.944444,
+      "se": 0.0220414
+     }
+    ]
+   }
+  }
+ },
+ "proxies": {
+  "base_rate": 0.154894,
+  "sets": [
+   {
+    "key": "features",
+    "label": "The model's inputs (finances and credit)",
+    "k": 17,
+    "logit": 0.714425,
+    "gbm": 0.721426
+   },
+   {
+    "key": "features_lender",
+    "label": "+ the lender's judgments",
+    "k": 19,
+    "logit": 0.717573,
+    "gbm": 0.721534
+   },
+   {
+    "key": "place",
+    "label": "Neighborhood only",
+    "k": 6,
+    "logit": 0.708532,
+    "gbm": 0.706706
+   },
+   {
+    "key": "features_place",
+    "label": "Inputs + neighborhood",
+    "k": 23,
+    "logit": 0.761062,
+    "gbm": 0.770761
+   },
+   {
+    "key": "all",
+    "label": "Inputs + lender's judgments + neighborhood + sex, marriage, age",
+    "k": 28,
+    "logit": 0.767059,
+    "gbm": 0.783143
+   }
+  ],
+  "single": [
+   {
+    "feature": "loanprc",
+    "label": "Loan / price",
+    "auc": 0.660263,
+    "strength": 0.160263,
+    "direction": "higher for Black or Hispanic applicants",
+    "mean_white": 0.756532,
+    "mean_nonwhite": 0.843936,
+    "set": "features"
+   },
+   {
+    "feature": "suffolk",
+    "label": "In Suffolk County (Boston)",
+    "auc": 0.647626,
+    "strength": 0.147626,
+    "direction": "higher for Black or Hispanic applicants",
+    "mean_white": 0.108657,
+    "mean_nonwhite": 0.403909,
+    "set": "place"
+   },
+   {
+    "feature": "mi",
+    "label": "Tract income above median",
+    "auc": 0.359381,
+    "strength": 0.140619,
+    "direction": "higher for white applicants",
+    "mean_white": 0.916418,
+    "mean_nonwhite": 0.635179,
+    "set": "place"
+   },
+   {
+    "feature": "netw_signed_log",
+    "label": "Net worth (signed log)",
+    "auc": 0.369034,
+    "strength": 0.130966,
+    "direction": "higher for white applicants",
+    "mean_white": 4.38552,
+    "mean_nonwhite": 3.80723,
+    "set": "features"
+   },
+   {
+    "feature": "min30",
+    "label": "Tract minority share above 30%",
+    "auc": 0.606083,
+    "strength": 0.106083,
+    "direction": "higher for Black or Hispanic applicants",
+    "mean_white": 0.0191045,
+    "mean_nonwhite": 0.23127,
+    "set": "place"
+   },
+   {
+    "feature": "cons",
+    "label": "Consumer credit history (1 best, 6 worst)",
+    "auc": 0.600776,
+    "strength": 0.100776,
+    "direction": "higher for Black or Hispanic applicants",
+    "mean_white": 1.98746,
+    "mean_nonwhite": 2.74267,
+    "set": "features"
+   },
+   {
+    "feature": "obrat",
+    "label": "Total obligations / income",
+    "auc": 0.591447,
+    "strength": 0.0914473,
+    "direction": "higher for Black or Hispanic applicants",
+    "mean_white": 32.0292,
+    "mean_nonwhite": 34.4046,
+    "set": "features"
+   },
+   {
+    "feature": "log_appinc",
+    "label": "Applicant income (log)",
+    "auc": 0.413844,
+    "strength": 0.0861559,
+    "direction": "higher for white applicants",
+    "mean_white": 4.26612,
+    "mean_nonwhite": 4.11186,
+    "set": "features"
+   },
+   {
+    "feature": "gdlin",
+    "label": "Lender: meets credit guidelines",
+    "auc": 0.417473,
+    "strength": 0.0825271,
+    "direction": "higher for white applicants",
+    "mean_white": 0.940299,
+    "mean_nonwhite": 0.775244,
+    "set": "lender"
+   },
+   {
+    "feature": "chist",
+    "label": "No accounts 60+ days delinquent",
+    "auc": 0.427858,
+    "strength": 0.0721416,
+    "direction": "higher for white applicants",
+    "mean_white": 0.860896,
+    "mean_nonwhite": 0.716612,
+    "set": "features"
+   },
+   {
+    "feature": "bd",
+    "label": "Tract boarded-up rate above median",
+    "auc": 0.570955,
+    "strength": 0.0709553,
+    "direction": "higher for Black or Hispanic applicants",
+    "mean_white": 0.398806,
+    "mean_nonwhite": 0.540717,
+    "set": "place"
+   },
+   {
+    "feature": "vr",
+    "label": "Tract vacancy rate above median",
+    "auc": 0.563734,
+    "strength": 0.0637338,
+    "direction": "higher for Black or Hispanic applicants",
+    "mean_white": 0.390448,
+    "mean_nonwhite": 0.517915,
+    "set": "place"
+   },
+   {
+    "feature": "sch",
+    "label": "More than 12 years of school",
+    "auc": 0.438652,
+    "strength": 0.0613477,
+    "direction": "higher for white applicants",
+    "mean_white": 0.790448,
+    "mean_nonwhite": 0.667752,
+    "set": "features"
+   },
+   {
+    "feature": "multi",
+    "label": "2+ unit property",
+    "auc": 0.557175,
+    "strength": 0.0571754,
+    "direction": "higher for Black or Hispanic applicants",
+    "mean_white": 0.0680597,
+    "mean_nonwhite": 0.18241,
+    "set": "features"
+   },
+   {
+    "feature": "dep",
+    "label": "Dependents",
+    "auc": 0.554935,
+    "strength": 0.0549351,
+    "direction": "higher for Black or Hispanic applicants",
+    "mean_white": 0.738507,
+    "mean_nonwhite": 0.934853,
+    "set": "features"
+   },
+   {
+    "feature": "pubrec",
+    "label": "Public record of bad credit",
+    "auc": 0.552206,
+    "strength": 0.0522057,
+    "direction": "higher for Black or Hispanic applicants",
+    "mean_white": 0.0519403,
+    "mean_nonwhite": 0.156352,
+    "set": "features"
+   },
+   {
+    "feature": "min30_missing",
+    "label": "Tract minority share not recorded",
+    "auc": 0.466572,
+    "strength": 0.033428,
+    "direction": "higher for white applicants",
+    "mean_white": 0.102687,
+    "mean_nonwhite": 0.0358306,
+    "set": "place"
+   },
+   {
+    "feature": "log_loanamt",
+    "label": "Loan amount (log)",
+    "auc": 0.471993,
+    "strength": 0.0280072,
+    "direction": "higher for white applicants",
+    "mean_white": 4.8509,
+    "mean_nonwhite": 4.81826,
+    "set": "features"
+   },
+   {
+    "feature": "hrat",
+    "label": "Housing expense / income",
+    "auc": 0.524981,
+    "strength": 0.0249813,
+    "direction": "higher for Black or Hispanic applicants",
+    "mean_white": 24.6901,
+    "mean_nonwhite": 25.3339,
+    "set": "features"
+   },
+   {
+    "feature": "unver",
+    "label": "Lender: unverifiable information",
+    "auc": 0.523105,
+    "strength": 0.0231047,
+    "direction": "higher for Black or Hispanic applicants",
+    "mean_white": 0.0352239,
+    "mean_nonwhite": 0.0814332,
+    "set": "lender"
+   },
+   {
+    "feature": "self",
+    "label": "Self-employed",
+    "auc": 0.48688,
+    "strength": 0.0131197,
+    "direction": "higher for white applicants",
+    "mean_white": 0.133731,
+    "mean_nonwhite": 0.107492,
+    "set": "features"
+   },
+   {
+    "feature": "unem",
+    "label": "Unemployment rate in the applicant's industry",
+    "auc": 0.511545,
+    "strength": 0.0115446,
+    "direction": "higher for Black or Hispanic applicants",
+    "mean_white": 3.89696,
+    "mean_nonwhite": 3.79935,
+    "set": "features"
+   },
+   {
+    "feature": "cosign",
+    "label": "Cosigner",
+    "auc": 0.508038,
+    "strength": 0.00803831,
+    "direction": "higher for Black or Hispanic applicants",
+    "mean_white": 0.0262687,
+    "mean_nonwhite": 0.0423453,
+    "set": "features"
+   },
+   {
+    "feature": "mortlat1",
+    "label": "1-2 late mortgage payments",
+    "auc": 0.504074,
+    "strength": 0.00407409,
+    "direction": "higher for Black or Hispanic applicants",
+    "mean_white": 0.0179104,
+    "mean_nonwhite": 0.0260586,
+    "set": "features"
+   },
+   {
+    "feature": "mortlat2",
+    "label": "3+ late mortgage payments",
+    "auc": 0.501739,
+    "strength": 0.00173854,
+    "direction": "higher for Black or Hispanic applicants",
+    "mean_white": 0.00955224,
+    "mean_nonwhite": 0.0130293,
+    "set": "features"
+   }
+  ]
+ },
+ "mitigation": {
+  "rows": [
+   {
+    "key": "baseline",
+    "label": "Race-blind model, one cutoff",
+    "note": "",
+    "selection_overall": 0.877901,
+    "accuracy": 0.858729,
+    "auc": 0.774385,
+    "d_selection": -0.213976,
+    "selection_ratio": 0.765131,
+    "d_tpr": -0.118672,
+    "d_fpr": -0.26652,
+    "equalized_odds": 0.26652,
+    "sel_white": 0.911045,
+    "sel_other": 0.697068
+   },
+   {
+    "key": "reweigh",
+    "label": "Reweighted training data",
+    "note": "Weights make approval independent of group in the training data (Kamiran and Calders 2012).",
+    "selection_overall": 0.877901,
+    "accuracy": 0.859738,
+    "auc": 0.768101,
+    "d_selection": -0.206268,
+    "selection_ratio": 0.773295,
+    "d_tpr": -0.119329,
+    "d_fpr": -0.224561,
+    "equalized_odds": 0.224561,
+    "sel_white": 0.909851,
+    "sel_other": 0.703583
+   },
+   {
+    "key": "parity",
+    "label": "Separate cutoffs: equal approval rates",
+    "note": "Uses race at decision time: disparate treatment under U.S. fair-lending law.",
+    "selection_overall": 0.877901,
+    "accuracy": 0.840565,
+    "auc": 0.774385,
+    "d_selection": 0.00186689,
+    "selection_ratio": 1.00213,
+    "d_tpr": 0.0458288,
+    "d_fpr": 0.0926901,
+    "equalized_odds": 0.0926901,
+    "sel_white": 0.877612,
+    "sel_other": 0.879479
+   },
+   {
+    "key": "equal_opportunity",
+    "label": "Separate cutoffs: equal true-positive rates",
+    "note": "Uses race at decision time; equalizes agreement with the lenders' approvals.",
+    "selection_overall": 0.878406,
+    "accuracy": 0.856206,
+    "auc": 0.774385,
+    "d_selection": -0.0796714,
+    "selection_ratio": 0.910557,
+    "d_tpr": 0.00373384,
+    "d_fpr": -0.0739766,
+    "equalized_odds": 0.0739766,
+    "sel_white": 0.890746,
+    "sel_other": 0.811075
+   }
+  ],
+  "frontier": [
+   {
+    "lam": 0.0,
+    "d_selection": -0.213976,
+    "accuracy": 0.858729,
+    "d_tpr": -0.118672,
+    "selection_overall": 0.877901
+   },
+   {
+    "lam": 0.1,
+    "d_selection": -0.19085,
+    "accuracy": 0.855701,
+    "d_tpr": -0.100907,
+    "selection_overall": 0.877901
+   },
+   {
+    "lam": 0.2,
+    "d_selection": -0.171579,
+    "accuracy": 0.854692,
+    "d_tpr": -0.0897211,
+    "selection_overall": 0.877901
+   },
+   {
+    "lam": 0.3,
+    "d_selection": -0.148453,
+    "accuracy": 0.855701,
+    "d_tpr": -0.0640532,
+    "selection_overall": 0.877901
+   },
+   {
+    "lam": 0.4,
+    "d_selection": -0.129181,
+    "accuracy": 0.85671,
+    "d_tpr": -0.0436502,
+    "selection_overall": 0.877901
+   },
+   {
+    "lam": 0.5,
+    "d_selection": -0.106055,
+    "accuracy": 0.85671,
+    "d_tpr": -0.0173257,
+    "selection_overall": 0.877901
+   },
+   {
+    "lam": 0.6,
+    "d_selection": -0.086783,
+    "accuracy": 0.855701,
+    "d_tpr": -0.000874456,
+    "selection_overall": 0.877901
+   },
+   {
+    "lam": 0.7,
+    "d_selection": -0.063657,
+    "accuracy": 0.851665,
+    "d_tpr": 0.00701683,
+    "selection_overall": 0.877901
+   },
+   {
+    "lam": 0.8,
+    "d_selection": -0.0443852,
+    "accuracy": 0.848638,
+    "d_tpr": 0.0195164,
+    "selection_overall": 0.877901
+   },
+   {
+    "lam": 0.9,
+    "d_selection": -0.0212592,
+    "accuracy": 0.84561,
+    "d_tpr": 0.0372809,
+    "selection_overall": 0.877901
+   },
+   {
+    "lam": 1.0,
+    "d_selection": 0.00186689,
+    "accuracy": 0.840565,
+    "d_tpr": 0.0458288,
+    "selection_overall": 0.877901
+   }
+  ]
+ },
+ "label_bias": {
+  "draws": 50,
+  "mean_flips": 40.12,
+  "flip_expected": 40.0833,
+  "n_nonwhite_denied": 90,
+  "recorded": {
+   "gaps/d_selection": -0.213976,
+   "gaps/d_tpr": -0.118672,
+   "gaps/d_fpr": -0.26652,
+   "groups/All/accuracy": 0.858729,
+   "groups/Black or Hispanic/base_rate": 0.70684,
+   "groups/White/base_rate": 0.909254,
+   "groups/Black or Hispanic/tpr": 0.815668,
+   "groups/White/tpr": 0.93434,
+   "groups/Black or Hispanic/selection": 0.697068,
+   "groups/White/selection": 0.911045
+  },
+  "retrained": {
+   "gaps/d_selection": -0.201257,
+   "gaps/d_tpr": -0.159373,
+   "gaps/d_fpr": -0.297083,
+   "groups/All/accuracy": 0.859899,
+   "groups/Black or Hispanic/base_rate": 0.837524,
+   "groups/White/base_rate": 0.909254,
+   "groups/Black or Hispanic/tpr": 0.774389,
+   "groups/White/tpr": 0.933762,
+   "groups/Black or Hispanic/selection": 0.707818,
+   "groups/White/selection": 0.909075
+  },
+  "original_vs_relabeled": {
+   "gaps/d_selection": -0.213976,
+   "gaps/d_tpr": -0.16839,
+   "gaps/d_fpr": -0.335819,
+   "groups/All/accuracy": 0.858587,
+   "groups/Black or Hispanic/base_rate": 0.837524,
+   "groups/White/base_rate": 0.909254,
+   "groups/Black or Hispanic/tpr": 0.76595,
+   "groups/White/tpr": 0.93434,
+   "groups/Black or Hispanic/selection": 0.697068,
+   "groups/White/selection": 0.911045
+  }
+ }
+}

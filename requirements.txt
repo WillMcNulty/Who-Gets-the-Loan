@@ -1,0 +1,11 @@
+# Pinned so the committed results rebuild exactly (CI checks them against a fresh build).
+numpy==2.5.3
+pandas==3.0.6
+scipy==1.18.1
+statsmodels==0.15.0
+patsy==1.0.3
+# 1.7.2, not 1.9: on the author's Windows machine an Application Control policy blocks one of 1.9.1's compiled
+# tree modules; 1.7.2 gives the same models.
+scikit-learn==1.7.2
+wooldridge==0.5.0
+pytest==9.1.1
