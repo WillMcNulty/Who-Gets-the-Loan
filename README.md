@@ -96,7 +96,9 @@ loads from the package.
 - **Tests** (`pytest`): the loader and its checks; the models against statsmodels' own marginal effects and Stata's
   robust-SE scaling; the decomposition's identities on synthetic data; every fairness metric against hand-worked
   cases and scikit-learn's AUC; and the committed results against the story the page tells.
-- **GitHub Actions** runs the tests, rebuilds everything and fails if the committed numbers differ from a fresh build,
+- **GitHub Actions** runs the tests, rebuilds everything and fails if the committed numbers differ from a fresh build
+  (to 0.2%; the gradient-boosting results get 1% or 3 applicants, since boosted trees differ slightly between
+  Windows and Linux),
   on every push. Once the repository is public it also deploys `site/` to GitHub Pages.
 
 ## Run it locally

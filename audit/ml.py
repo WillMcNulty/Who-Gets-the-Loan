@@ -83,7 +83,9 @@ def oof(model, X, y, splits, weights=None):
             step = m.steps[-1][0] + "__sample_weight" if hasattr(m, "steps") else "sample_weight"
             m.fit(X[tr], y[tr], **{step: weights[tr]})
         p[te] = m.predict_proba(X[te])[:, 1]
-    return p
+    # Tree models give many applicants the same score; rounding keeps last-bit float differences between platforms
+    # from moving a tied group across a cutoff or a calibration-bin edge.
+    return np.round(p, 8)
 
 
 def group_metrics(d, score, yhat, label="approve", boot=True):
