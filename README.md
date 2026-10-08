@@ -4,9 +4,10 @@ An independent audit of the 1990 Boston mortgage-lending data, done two ways: th
 approval gap, and what a machine-learning model trained **without** race does by race. Not affiliated with or
 endorsed by the University of Virginia, the Federal Reserve Bank of Boston, or any lender.
 
-**Status:** version 1 (the 1990 Boston data). The repository stays private until v1's wording and results have
-been checked; the page then publishes to GitHub Pages. Version 2 will use the CFPB's public HMDA data for Virginia
-over several years.
+**Live report: https://willmcnulty.github.io/Who-Gets-the-Loan/**
+
+**Status:** version 1 (the 1990 Boston data). Version 2 will use the CFPB's public HMDA data for Virginia over
+several years.
 
 ## Read this first
 
@@ -99,7 +100,7 @@ loads from the package.
 - **GitHub Actions** runs the tests, rebuilds everything and fails if the committed numbers differ from a fresh build
   (to 0.2%; the gradient-boosting results get 1% or 3 applicants, since boosted trees differ slightly between
   Windows and Linux),
-  on every push. Once the repository is public it also deploys `site/` to GitHub Pages.
+  on every push, and only then deploys `site/` to GitHub Pages.
 
 ## Run it locally
 

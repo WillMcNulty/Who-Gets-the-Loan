@@ -27,8 +27,7 @@ jobs:
       - name: Page scripts parse
         run: node --check site/app.js && node --check site/theme.js && node --check site/data.js
 
-  # Publishing waits until the repository is public (decided 2026-10-07: private until v1 is checked). Once it is,
-  # this job deploys site/ to GitHub Pages after the tests pass (enable Pages with "GitHub Actions" as the source).
+  # Deploys site/ to GitHub Pages after the tests pass (only while the repository is public).
   deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && !github.event.repository.private
     needs: test
