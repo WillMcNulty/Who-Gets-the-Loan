@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who Gets the Loan in Virginia?</title>
+<meta name="description" content="An independent student audit of Virginia mortgage applications, 2004-2025: denial gaps by race and ethnicity over three eras of HMDA data, harmonized into one dataset.">
+<meta name="theme-color" content="#232d4b">
+<script src="../theme.js?v=0b2b781f"></script>
+<style>
+  /* Shared with ../index.html (v1). Two chart series at most: Link Blue for white applicants and UVA Orange for the
+     comparison group, validated for every pair in both themes. Maps use a one-hue orange ramp for rates and a
+     blue-gray-orange diverging scale for gaps. */
+  :root {
+    color-scheme: light;
+    --page: #f6f7fb; --surface: #ffffff; --ink: #141b33; --ink-2: #4d5876; --muted: #667091;
+    --line: #d9deeb; --grid: #e6e9f2; --axis: #c3c9da;
+    --navy: #232d4b; --orange: #e57200; --orange-ink: #141b33; --orange-tint: #fff0df; --blue-tint: #e6ebf6;
+    --band: #232d4b; --band-ink: #ffffff; --band-muted: #c6cfe8; --link: #232d4b;
+    --wash: rgba(35, 45, 75, 0.05); --ring: rgba(20, 27, 51, 0.08); --tip-bg: #ffffff;
+    --s1: #495e9d; --s2: #e57200;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono: "Cascadia Mono", "SF Mono", Consolas, "Liberation Mono", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page: #0d1120; --surface: #161c30; --ink: #eef1fa; --ink-2: #a6b1cf; --muted: #8c97b8;
+      --line: #2b3454; --grid: #232b45; --axis: #34406a;
+      --navy: #aebdf0; --orange: #ff8f2e; --orange-tint: #2a1e12; --blue-tint: #1e2746;
+      --band: #1a2240; --band-muted: #b9c4e4; --link: #b6c4f5;
+      --wash: rgba(174, 189, 240, 0.07); --ring: rgba(174, 189, 240, 0.12); --tip-bg: #1e2640;
+      --s1: #6f86e0; --s2: #d0650a;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d1120; --surface: #161c30; --ink: #eef1fa; --ink-2: #a6b1cf; --muted: #8c97b8;
+    --line: #2b3454; --grid: #232b45; --axis: #34406a;
+    --navy: #aebdf0; --orange: #ff8f2e; --orange-tint: #2a1e12; --blue-tint: #1e2746;
+    --band: #1a2240; --band-muted: #b9c4e4; --link: #b6c4f5;
+    --wash: rgba(174, 189, 240, 0.07); --ring: rgba(174, 189, 240, 0.12); --tip-bg: #1e2640;
+    --s1: #6f86e0; --s2: #d0650a;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--page); color: var(--ink); font: 15px/1.55 var(--sans); }
+  a { color: var(--link); text-underline-offset: 3px; }
+  a:hover { color: var(--orange); }
+  :focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+  .wrap { max-width: 1080px; margin-inline: auto; padding-inline: 20px; }
+
+  .band { background: var(--band); color: var(--band-ink); }
+  .topbar .wrap { display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between; align-items: baseline; padding-block: 16px; }
+  .topbar strong { font: 600 18px var(--serif); letter-spacing: 0.01em; }
+  .topbar nav { display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px; font-weight: 600; align-items: baseline; }
+  .topbar nav a { color: var(--band-muted); text-decoration: none; }
+  .topbar nav a:hover { color: var(--orange); }
+  .theme-btn { font: 600 13px var(--sans); color: var(--band-muted); background: none; border: 1px solid rgba(255, 255, 255, 0.28); border-radius: 999px; padding: 2px 11px; cursor: pointer; }
+  .theme-btn:hover { color: var(--orange); border-color: var(--orange); }
+  .hero { border-bottom: 8px solid var(--orange); }
+  .hero .wrap { padding-block: 52px 46px; }
+  .kicker { font: 700 12px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: #ff8f2e; margin-bottom: 14px; } /* 5.95:1 on the navy band */
+  .hero h1 { font: 600 clamp(32px, 5.4vw, 52px)/1.08 var(--serif); letter-spacing: -0.015em; margin: 0 0 18px; max-width: 19ch; text-wrap: balance; }
+  .hero h1 .hl { color: var(--orange); }
+  .hero p { max-width: 64ch; margin: 0; color: var(--band-muted); font-size: 17px; }
+  .hero .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 310px; gap: 44px; align-items: center; }
+  .glance { margin: 0; padding: 16px 18px; border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 16px; background: rgba(255, 255, 255, 0.06); display: grid; gap: 12px; }
+  .glance dt { font: 800 11px var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: #ff8f2e; }
+  .glance dd { margin: 3px 0 0; font-size: 14px; line-height: 1.45; color: var(--band-ink); }
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; } .glance { max-width: 460px; } }
+  .btn { display: inline-block; padding: 10px 18px; border: 2px solid var(--band-ink); border-radius: 6px; font-weight: 700; font-size: 14px; text-decoration: none; color: var(--band-ink); }
+  .btn:hover { background: var(--band-ink); color: #232d4b; }
+  .btn.primary { background: var(--orange); border-color: var(--orange); color: var(--orange-ink); }
+  .btn.primary:hover { filter: brightness(1.08); background: var(--orange); color: var(--orange-ink); }
+
+  .evidence { background: var(--orange-tint); border-bottom: 1px solid var(--line); }
+  .evidence .wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 18px 26px; padding-block: 26px; }
+  .stat { display: flex; flex-direction: column; }
+  .stat .value { order: -1; font: 700 30px/1.1 var(--mono); color: var(--navy); font-variant-numeric: tabular-nums; }
+  .stat .value::after { content: ""; display: block; width: 28px; height: 4px; background: var(--orange); margin-top: 8px; }
+  .stat .label { margin-top: 8px; font-size: 13.5px; font-weight: 600; color: var(--ink); }
+  .stat .note { font-size: 12.5px; color: var(--ink-2); }
+
+  .tabs { position: sticky; top: 0; z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: 0 1px 0 var(--ring); }
+  .tabs .wrap { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+  .tabs .wrap::-webkit-scrollbar { display: none; }
+  .tabs button {
+    font: 700 13px var(--sans); letter-spacing: 0.06em; text-transform: uppercase; background: none; border: 0;
+    color: var(--ink-2); padding: 15px 14px 12px; cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap;
+  }
+  .tabs button:hover { color: var(--navy); }
+  .tabs button[aria-selected="true"] { color: var(--navy); border-bottom-color: var(--orange); }
+  main { padding-block: 30px 40px; }
+  section[hidden] { display: none; }
+
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; margin-bottom: 20px; }
+  .card h2 { font: 600 22px/1.25 var(--serif); color: var(--navy); margin: 0 0 4px; }
+  .card .sub { margin: 0 0 14px; color: var(--ink-2); font-size: 14px; max-width: 80ch; }
+  .card.first { border-top: 4px solid var(--orange); }
+  .card .stat { background: var(--page); border: 1px solid var(--line); border-top: 4px solid var(--navy); border-radius: 8px; padding: 14px 16px; }
+  .card .stat:nth-child(even) { border-top-color: var(--orange); }
+  .card .stat .value { font-size: 26px; }
+  .card .stat .value::after { display: none; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .limits { margin: 0; padding-left: 20px; display: grid; gap: 8px; max-width: 86ch; }
+  .limits b { color: var(--navy); }
+
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px; }
+  .seg { display: inline-flex; flex-wrap: wrap; border: 2px solid var(--navy); border-radius: 6px; overflow: hidden; }
+  .seg button { font: 700 13px var(--sans); background: var(--surface); color: var(--navy); border: 0; padding: 6px 13px; cursor: pointer; }
+  .seg button + button { border-left: 2px solid var(--navy); }
+  .seg button[aria-pressed="true"] { background: var(--navy); color: var(--surface); }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; color: var(--ink-2); margin: 4px 0 10px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .legend i.dot { border-radius: 50%; }
+  .legend i.line { height: 3px; width: 16px; border-radius: 1px; }
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  svg text { font-family: var(--sans); }
+  .mark { cursor: default; outline: none; }
+  .mark:hover, .mark:focus-visible { filter: brightness(1.1); }
+  .mark:focus-visible { stroke: var(--ink); stroke-width: 1.5; }
+  #tip {
+    position: fixed; pointer-events: none; z-index: 10; background: var(--tip-bg); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 8px 24px rgba(13, 17, 32, 0.18);
+    padding: 9px 11px; font-size: 12.5px; min-width: 170px; max-width: 320px; display: none;
+  }
+  #tip .t { color: var(--ink-2); margin-bottom: 4px; font-weight: 600; }
+  #tip .r { display: flex; align-items: center; gap: 10px; justify-content: space-between; }
+  #tip .r b { font: 700 12.5px var(--mono); font-variant-numeric: tabular-nums; }
+  #tip .k { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-2); }
+  #tip .k i { width: 10px; height: 10px; display: inline-block; border-radius: 50%; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { text-align: left; font: 800 11px var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); padding: 8px 8px 7px; border-bottom: 2px solid var(--line); vertical-align: bottom; }
+  td { text-align: left; padding: 8px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  td.num, th.num { text-align: right; white-space: nowrap; }
+  td.num { font: 13.5px var(--mono); font-variant-numeric: tabular-nums; }
+  tr.hl td { background: var(--blue-tint); }
+  .tablewrap { overflow-x: auto; }
+  details.tableview { margin-top: 12px; }
+  details.tableview summary { cursor: pointer; font-weight: 700; font-size: 13.5px; color: var(--navy); }
+  details.tableview summary:hover { color: var(--orange); }
+  .muted { color: var(--muted); }
+  .note { font-size: 13px; color: var(--ink-2); max-width: 80ch; }
+  .callout { border-left: 3px solid var(--orange); padding: 2px 0 2px 12px; margin: 12px 0; max-width: 80ch; }
+  .two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .two { grid-template-columns: minmax(0, 1fr); } }
+
+  .prose { max-width: 78ch; }
+  .prose h2 { margin-bottom: 10px; }
+  .prose h3 { font: 800 12px var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); margin: 22px 0 4px; }
+  .prose p, .prose li { margin: 0 0 10px; color: var(--ink); }
+  .prose ul { padding-left: 20px; }
+  .refs li { font-size: 14px; }
+  code { font: 13px var(--mono); background: var(--wash); padding: 1px 4px; border-radius: 4px; }
+
+  footer.band { font-size: 14px; color: var(--band-muted); }
+  footer .wrap { padding-block: 26px 40px; display: grid; gap: 8px; }
+  footer a { color: var(--band-ink); }
+  footer a:hover { color: var(--orange); }
+
+  @media (max-width: 560px) {
+    .wrap { padding-inline: 16px; }
+    .hero .wrap { padding-block: 36px 32px; }
+    .hero p { font-size: 16px; }
+    .card { padding: 16px; }
+    .stat .value { font-size: 26px; }
+    .hide-sm { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  /* Virginia page additions */
+  .smalls { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+  .smalls h3 { font: 700 13px var(--sans); color: var(--ink-2); margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .controls { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-bottom: 12px; }
+  .controls .lab { font-size: 12.5px; font-weight: 700; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.05em; }
+  #map { border: 1px solid var(--line); border-radius: 8px; background: var(--page); overflow: hidden; }
+  #map path { stroke: var(--surface); stroke-width: 0.6; vector-effect: non-scaling-stroke; }
+  #map path.county-line { fill: none; stroke: var(--ink-2); stroke-width: 0.8; pointer-events: none; opacity: 0.55; }
+  #map path:hover, #map path:focus-visible { stroke: var(--ink); stroke-width: 1.6; outline: none; }
+  .ramp { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-2); margin-top: 8px; flex-wrap: wrap; }
+  .ramp .bar { width: 220px; height: 10px; border-radius: 3px; }
+  .ramp .nodata { width: 12px; height: 12px; border-radius: 2px; display: inline-block; background: var(--grid); margin-left: 10px; }
+  ol.breaks { margin: 0; padding-left: 20px; display: grid; gap: 8px; max-width: 86ch; }
+  ol.breaks b { color: var(--navy); font-family: var(--mono); }
+  .pill { font: 600 11px var(--mono); background: var(--blue-tint); color: var(--navy); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+  td.wrap, th.wrap { white-space: normal; min-width: 180px; }
+</style>
+</head>
+<body>
+  <header class="topbar band">
+    <div class="wrap">
+      <strong>Who Gets the Loan?</strong>
+      <nav aria-label="Links">
+        <a href="../">Boston, 1990</a>
+        <a href="./" aria-current="page" style="color:var(--band-ink)">Virginia, 2004-2025</a>
+        <a href="https://github.com/WillMcNulty/Who-Gets-the-Loan">Code</a>
+        <button type="button" class="theme-btn" data-theme-toggle>◐ Auto</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero band" aria-labelledby="top">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="kicker">Virginia mortgage applications · 2004-2025 · fairness audit v2</div>
+        <h1 id="top">Twenty-two years of Virginia mortgage decisions, <span class="hl">in one dataset.</span></h1>
+        <p>Every Virginia mortgage application reported under the Home Mortgage Disclosure Act from 2004 through 2025,
+          from three publishers and three formats, harmonized into one schema and checked against the official counts.
+          Denial gaps by race and ethnicity are shown raw, within the same lender and county, and (from 2018) with the
+          underwriting fields HMDA added. They are associations after controlling for what HMDA records, not proof
+          of discrimination or of its absence.</p>
+        <div class="links">
+          <a class="btn primary" href="#limits">Read the limits first</a>
+          <a class="btn" href="#trends">The gaps over time</a>
+          <a class="btn" href="#data">How the eras were joined</a>
+        </div>
+      </div>
+      <dl class="glance" aria-label="At a glance">
+        <div><dt>The data</dt><dd><span data-v="records"></span> application records; <span data-v="core"></span> decided home-purchase and refinance applications in the comparable core sample.</dd></div>
+        <div><dt>The eras</dt><dd>2004-2011 (boom and crash, 2000 tracts) · 2012-2017 (2010 tracts) · 2018-2025 (the expanded HMDA rule).</dd></div>
+        <div><dt>The checks</dt><dd>Every year from 2007 matches the publisher's record count exactly; one rule assigns every applicant's group in every year.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="evidence" aria-label="Headline numbers"><div class="wrap" id="headline"></div></div>
+
+  <nav class="tabs" aria-label="Views">
+    <div class="wrap" role="tablist">
+      <button role="tab" id="tab-overview" aria-controls="view-overview" aria-selected="true">Overview</button>
+      <button role="tab" id="tab-trends" aria-controls="view-trends" aria-selected="false">Gaps over time</button>
+      <button role="tab" id="tab-eras" aria-controls="view-eras" aria-selected="false">Eras</button>
+      <button role="tab" id="tab-map" aria-controls="view-map" aria-selected="false">Map</button>
+      <button role="tab" id="tab-reasons" aria-controls="view-reasons" aria-selected="false">Denial reasons</button>
+      <button role="tab" id="tab-data" aria-controls="view-data" aria-selected="false">Data &amp; method</button>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="view-overview" role="tabpanel" aria-labelledby="tab-overview">
+      <div class="card first" id="limits">
+        <h2>Read this first: what this can and can't show</h2>
+        <p class="sub">The limits come before the results because they decide how the results can be read.</p>
+        <ul class="limits">
+          <li><b>HMDA records less than a lender sees.</b> There are no credit scores, assets or employment histories
+            in any year. Before 2018 there is no debt-to-income, loan-to-value or property value either. A gap that
+            remains after the controls is consistent with discrimination and also with differences the data don't
+            record. No number here proves that a lender discriminated, or that none did.</li>
+          <li><b>The eras record different things.</b> The 2018 rule added the underwriting fields and changed how
+            several others are reported. Comparisons across eras use only what every year records (the "common" and
+            "lender" controls); the "full" controls exist only from 2018. The Data tab lists every break.</li>
+          <li><b>The market changed.</b> 2004-2007 was a subprime boom, 2008-2011 a crash, 2020-2021 a refinance
+            wave. A gap's size depends on who applied and to whom, not only on how they were treated.</li>
+          <li><b>Who reports changed.</b> Small lenders dropped out when the reporting threshold rose in 2020, and
+            some lenders are exempt from the new fields. The share of applicants who didn't report race also
+            varies by year.</li>
+          <li><b>Applicant, not household.</b> Each application is grouped by the applicant's own reported ethnicity and
+            race, the same rule every year; joint applications follow the first applicant.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Denial rates by year</h2>
+        <p class="sub">Share of decided home-purchase applications denied, core sample (first-lien, owner-occupied,
+          site-built 1-4 family, closed-end). Each panel compares one group with white applicants.</p>
+        <div class="legend" id="legend-rates"></div>
+        <div class="smalls" id="chart-rates"></div>
+        <details class="tableview"><summary>Show as a table, with refinance and every group</summary><div class="tablewrap" id="table-rates"></div></details>
+      </div>
+      <div class="card">
+        <h2>What the audit found</h2>
+        <div class="prose" id="findings"></div>
+      </div>
+    </section>
+
+    <section id="view-trends" role="tabpanel" aria-labelledby="tab-trends" hidden>
+      <div class="card first" id="trends">
+        <h2>The denial gap, year by year</h2>
+        <p class="sub">Difference in denial probability, each group minus white applicants, in percentage points, from
+          linear probability models fit separately for each year. Shaded bands are 95% intervals (standard errors
+          clustered by lender). Era boundaries and reporting breaks are marked.</p>
+        <div class="controls">
+          <span class="lab">Loans</span>
+          <div class="seg" role="group" aria-label="Loan purpose" id="pick-purpose"></div>
+          <span class="lab">Controls</span>
+          <div class="seg" role="group" aria-label="Controls" id="pick-spec"></div>
+        </div>
+        <p class="note" id="spec-note"></p>
+        <div class="smalls" id="chart-gaps"></div>
+        <details class="tableview"><summary>Show as a table</summary><div class="tablewrap" id="table-gaps"></div></details>
+        <p class="callout note" id="gaps-note"></p>
+      </div>
+    </section>
+
+    <section id="view-eras" role="tabpanel" aria-labelledby="tab-eras" hidden>
+      <div class="card">
+        <h2>The three eras, pooled</h2>
+        <p class="sub">Each era's applications pooled, with county-by-year and lender-by-year fixed effects. Points
+          are estimates; bars are 95% intervals.</p>
+        <div class="controls"><span class="lab">Loans</span><div class="seg" role="group" aria-label="Loan purpose" id="pick-purpose-era"></div></div>
+        <div class="smalls" id="chart-eras"></div>
+        <details class="tableview" open><summary>Show as a table</summary><div class="tablewrap" id="table-eras"></div></details>
+      </div>
+      <div class="card">
+        <h2>Robustness, 2018-2025 home purchase</h2>
+        <p class="sub">The pooled gap under other reasonable choices</p>
+        <div class="tablewrap" id="table-robust"></div>
+      </div>
+    </section>
+
+    <section id="view-map" role="tabpanel" aria-labelledby="tab-map" hidden>
+      <div class="card">
+        <h2>Where denials happen</h2>
+        <p class="sub" id="map-sub"></p>
+        <div class="controls">
+          <span class="lab">Era</span><div class="seg" role="group" aria-label="Era" id="pick-era"></div>
+          <span class="lab">Show</span><div class="seg" role="group" aria-label="Measure" id="pick-measure"></div>
+          <span class="lab">Areas</span><div class="seg" role="group" aria-label="Geography" id="pick-geo"></div>
+        </div>
+        <div id="map" role="img" aria-label="Map of Virginia"></div>
+        <div class="ramp" id="map-ramp"></div>
+        <details class="tableview"><summary>Show counties as a table</summary><div class="tablewrap" id="table-map"></div></details>
+        <p class="callout note" id="map-note"></p>
+      </div>
+    </section>
+
+    <section id="view-reasons" role="tabpanel" aria-labelledby="tab-reasons" hidden>
+      <div class="card">
+        <h2>Why applications were denied</h2>
+        <p class="sub" id="reasons-sub"></p>
+        <div class="controls">
+          <span class="lab">Era</span><div class="seg" role="group" aria-label="Era" id="pick-era-r"></div>
+          <span class="lab">Compare</span><div class="seg" role="group" aria-label="Group" id="pick-group-r"></div>
+        </div>
+        <div class="legend" id="legend-reasons"></div>
+        <div id="chart-reasons"></div>
+        <details class="tableview"><summary>Show as a table, every era and group</summary><div class="tablewrap" id="table-reasons"></div></details>
+      </div>
+    </section>
+
+    <section id="view-data" role="tabpanel" aria-labelledby="tab-data" hidden>
+      <div class="card first" id="data">
+        <h2>Joining three eras</h2>
+        <p class="sub">Three publishers, three formats, one schema. Each year's file is hashed when downloaded and its
+          record count checked against the publisher's.</p>
+        <div class="tablewrap" id="table-reconcile"></div>
+      </div>
+      <div class="card">
+        <h2>Where the eras differ</h2>
+        <ol class="breaks" id="breaks"></ol>
+      </div>
+      <div class="card">
+        <h2>The harmonized schema</h2>
+        <p class="sub">Each field, where it comes from in each era, and what to watch for</p>
+        <div class="tablewrap" id="table-schema"></div>
+      </div>
+      <div class="card prose" id="method"></div>
+    </section>
+  </main>
+
+  <footer class="band">
+    <div class="wrap">
+      <div>An independent student project by <a href="https://willmcnulty.github.io/">William McNulty</a>, built on
+        public data. Not affiliated with or endorsed by the University of Virginia, the CFPB, the Federal Reserve, or
+        any lender.</div>
+      <div>Data: HMDA loan/application registers, 2004-2006 from the Federal Reserve via the National Archives,
+        2007-2017 from the CFPB's historic files, 2018-2025 from the CFPB HMDA Data Browser; Census boundary and
+        relationship files. Findings are associations after controlling for the variables recorded.</div>
+      <div id="stamp" class="muted"></div>
+    </div>
+  </footer>
+  <div id="tip" role="status" aria-live="polite"></div>
+  <script src="data.js?v=57ea0d39"></script>
+  <script src="geo.js?v=c905d58e"></script>
+  <script src="app.js?v=afbfdb8f"></script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+{
+ "2004": {
+  "year": 2004,
+  "file": "nara_final_lar_2004.zip",
+  "url": "https://catalog.archives.gov/medialz/electronic-records/rg-082/hmda/FLAR04/f2004lar.public.dat.zip",
+  "publisher": "Federal Reserve Board via the National Archives (NAID 2456161)",
+  "bytes": 359129821,
+  "sha256": "5682f86cf5e2191674d805382dc4d1e88bc5b0fa95f560182d79d05759b59134",
+  "fetched": "2026-10-12"
+ },
+ "2005": {
+  "year": 2005,
+  "file": "nara_final_lar_2005.zip",
+  "url": "https://catalog.archives.gov/medialz/electronic-records/rg-082/hmda/FLAR0506/LARS.FINAL.2005.DAT.zip",
+  "publisher": "Federal Reserve Board via the National Archives (NAID 2456161)",
+  "bytes": 387645011,
+  "sha256": "8421da83901bc0383e9178c4ac41d52952cb0155e61d07a2aedf271d7bb62f50",
+  "fetched": "2026-10-12"
+ },
+ "2006": {
+  "year": 2006,
+  "file": "nara_final_lar_2006.zip",
+  "url": "https://catalog.archives.gov/medialz/electronic-records/rg-082/hmda/FLAR0506/LARS.FINAL.2006.DAT.zip",
+  "publisher": "Federal Reserve Board via the National Archives (NAID 2456161)",
+  "bytes": 364957916,
+  "sha256": "81a9a845a41e245d8ec09832e1325fa39e979de7c51d169c5790918673ebdae0",
+  "fetched": "2026-10-12"
+ },
+ "2007": {
+  "year": 2007,
+  "file": "cfpb_historic_nationwide_2007.zip",
+  "url": "https://files.consumerfinance.gov/hmda-historic-loan-data/hmda_2007_nationwide_all-records_codes.zip",
+  "publisher": "CFPB historic HMDA data",
+  "bytes": 461153015,
+  "sha256": "6d33e3e0a1a21c532d32aeaf89cf447e8ca37828bfbfb5251833789b52a6cc26",
+  "fetched": "2026-10-12"
+ },
+ "2008": {
+  "year": 2008,
+  "file": "cfpb_historic_nationwide_2008.zip",
+  "url": "https://files.consumerfinance.gov/hmda-historic-loan-data/hmda_2008_nationwide_all-records_codes.zip",
+  "publisher": "CFPB historic HMDA data",
+  "bytes": 309218535,
+  "sha256": "01c4e079b39c285d24828791b63aa0c7ba9ebb453dad885514d48e3f4f258cc8",
+  "fetched": "2026-10-12"
+ },
+ "2009": {
+  "year": 2009,
+  "file": "cfpb_historic_nationwide_2009.zip",
+  "url": "https://files.consumerfinance.gov/hmda-historic-loan-data/hmda_2009_nationwide_all-records_codes.zip",
+  "publisher": "CFPB historic HMDA data",
+  "bytes": 331306969,
+  "sha256": "dc0791bcd26814c53771e310e6aec54f6e877bc3fa41ba8b8e355680c6a39da4",
+  "fetched": "2026-10-12"
+ },
+ "2010": {
+  "year": 2010,
+  "file": "cfpb_historic_nationwide_2010.zip",
+  "url": "https://files.consumerfinance.gov/hmda-historic-loan-data/hmda_2010_nationwide_all-records_codes.zip",
+  "publisher": "CFPB historic HMDA data",
+  "bytes": 367783947,
+  "sha256": "b67220c82b8fd3108a95f37fada551480634036af4f313b827b006b31ee8a34b",
+  "fetched": "2026-10-12"
+ },
+ "2011": {
+  "year": 2011,
+  "file": "cfpb_historic_nationwide_2011.zip",
+  "url": "https://files.consumerfinance.gov/hmda-historic-loan-data/hmda_2011_nationwide_all-records_codes.zip",
+  "publisher": "CFPB historic HMDA data",
+  "bytes": 335220558,
+  "sha256": "391cf437ee4e9a3ea666606509f416df92fc89420844588397078af8b0198393",
+  "fetched": "2026-10-12"
+ },
+ "2012": {
+  "year": 2012,
+  "file": "cfpb_historic_nationwide_2012.zip",
+  "url": "https://files.consumerfinance.gov/hmda-historic-loan-data/hmda_2012_nationwide_all-records_codes.zip",
+  "publisher": "CFPB historic HMDA data",
+  "bytes": 434688766,
+  "sha256": "c40000968cedc6708659e4e7bbafd1f1fd968f2b10cefa4c8d2e4e50659586c4",
+  "fetched": "2026-10-12"
+ },
+ "2013": {
+  "year": 2013,
+  "file": "cfpb_historic_nationwide_2013.zip",
+  "url": "https://files.consumerfinance.gov/hmda-historic-loan-data/hmda_2013_nationwide_all-records_codes.zip",
+  "publisher": "CFPB historic HMDA data",
+  "bytes": 400187028,
+  "sha256": "036052fb0b5bf4731b44abeabcc9daf94f63f23629701b95716337695cf695dc",
+  "fetched": "2026-10-12"
+ },
+ "2014": {
+  "year": 2014,
+  "file": "cfpb_historic_nationwide_2014.zip",
+  "url": "https://files.consumerfinance.gov/hmda-historic-loan-data/hmda_2014_nationwide_all-records_codes.zip",
+  "publisher": "CFPB historic HMDA data",
+  "bytes": 537814267,
+  "sha256": "827a095dd80dc86d8122db413541dfad5d63239482ed6cd2b2d8ed629372c3bc",
+  "fetched": "2026-10-12"
+ },
+ "2015": {
+  "year": 2015,
+  "file": "cfpb_historic_nationwide_2015.zip",
+  "url": "https://files.consumerfinance.gov/hmda-historic-loan-data/hmda_2015_nationwide_all-records_codes.zip",
+  "publisher": "CFPB historic HMDA data",
+  "bytes": 337265498,
+  "sha256": "7b428ab05c255e239ae0073cafc9d92b6d48a617b36d38a0e7ec8695a8eefa76",
+  "fetched": "2026-10-12"
+ },
+ "2016": {
+  "year": 2016,
+  "file": "cfpb_historic_nationwide_2016.zip",
+  "url": "https://files.consumerfinance.gov/hmda-historic-loan-data/hmda_2016_nationwide_all-records_codes.zip",
+  "publisher": "CFPB historic HMDA data",
+  "bytes": 384109860,
+  "sha256": "d8d0bb7033715d4b3e16b5a4676f5a7a9d293b4923e3108bc59bf23edcc543cf",
+  "fetched": "2026-10-12"
+ },
+ "2017": {
+  "year": 2017,
+  "file": "cfpb_historic_nationwide_2017.zip",
+  "url": "https://files.consumerfinance.gov/hmda-historic-loan-data/hmda_2017_nationwide_all-records_codes.zip",
+  "publisher": "CFPB historic HMDA data",
+  "bytes": 182021055,
+  "sha256": "cb3fe691b842fe66490825667afd03edb46f557c80eb06e0f418d538a8e22dd2",
+  "fetched": "2026-10-12"
+ },
+ "2018": {
+  "year": 2018,
+  "file": "cfpb_databrowser_va_2018.csv",
+  "url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/csv?states=VA&years=2018",
+  "publisher": "CFPB HMDA Data Browser",
+  "bytes": 162668584,
+  "sha256": "cc6a9ee849e509696c4aa137683c152f2110d277ac416fdfbe174114904669c0",
+  "fetched": "2026-10-12"
+ },
+ "2019": {
+  "year": 2019,
+  "file": "cfpb_databrowser_va_2019.csv",
+  "url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/csv?states=VA&years=2019",
+  "publisher": "CFPB HMDA Data Browser",
+  "bytes": 197404873,
+  "sha256": "eed891a344b20d6099d5a66ef8a458e396b46dfe5f1b5fb91c5350a5ad69d171",
+  "fetched": "2026-10-12"
+ },
+ "2020": {
+  "year": 2020,
+  "file": "cfpb_databrowser_va_2020.csv",
+  "url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/csv?states=VA&years=2020",
+  "publisher": "CFPB HMDA Data Browser",
+  "bytes": 315308299,
+  "sha256": "5ea7bf29f6e2c393b1f5a3ebcdf78fc34c8426e1b787ed14f3dc98238e74e615",
+  "fetched": "2026-10-12"
+ },
+ "2021": {
+  "year": 2021,
+  "file": "cfpb_databrowser_va_2021.csv",
+  "url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/csv?states=VA&years=2021",
+  "publisher": "CFPB HMDA Data Browser",
+  "bytes": 316920748,
+  "sha256": "311824c8f6e4ede8cf64825be37a8d54bcd4e78f4135d11ce45a6ea698e1bf48",
+  "fetched": "2026-10-12"
+ },
+ "2022": {
+  "year": 2022,
+  "file": "cfpb_databrowser_va_2022.csv",
+  "url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/csv?states=VA&years=2022",
+  "publisher": "CFPB HMDA Data Browser",
+  "bytes": 174140973,
+  "sha256": "350c60ae4a3795ad36ba77fe2d666d2952705682d5a996deb35f674620684446",
+  "fetched": "2026-10-12"
+ },
+ "2023": {
+  "year": 2023,
+  "file": "cfpb_databrowser_va_2023.csv",
+  "url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/csv?states=VA&years=2023",
+  "publisher": "CFPB HMDA Data Browser",
+  "bytes": 120084223,
+  "sha256": "f1eb89bda43e56d62101dcf32dca48bc96497734b6c2795b568b512f952abb19",
+  "fetched": "2026-10-12"
+ },
+ "2024": {
+  "year": 2024,
+  "file": "cfpb_databrowser_va_2024.csv",
+  "url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/csv?states=VA&years=2024",
+  "publisher": "CFPB HMDA Data Browser",
+  "bytes": 133549502,
+  "sha256": "1b11a9de1624cc4ff6dd2005b393da6f52844d3b8f94a491932d166b83ceeff8",
+  "fetched": "2026-10-12"
+ },
+ "2025": {
+  "year": 2025,
+  "file": "cfpb_databrowser_va_2025.csv",
+  "url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/csv?states=VA&years=2025",
+  "publisher": "CFPB HMDA Data Browser",
+  "bytes": 150951586,
+  "sha256": "a34eb9308f0bbb256ae3da1335936c9b68bc190f31f4503a2d56ec37d6f73bd6",
+  "fetched": "2026-10-12"
+ }
+}

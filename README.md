@@ -6,8 +6,9 @@ endorsed by the University of Virginia, the Federal Reserve Bank of Boston, or a
 
 **Live report: https://willmcnulty.github.io/Who-Gets-the-Loan/**
 
-**Status:** version 1 (the 1990 Boston data). Version 2 will use the CFPB's public HMDA data for Virginia over
-several years.
+**Two versions.** Version 1 audits the 1990 Boston data (below). Version 2 audits every Virginia mortgage
+application reported from 2004 through 2025 ([`site/virginia/`](site/virginia/), and the
+[version 2 section](#version-2-virginia-2004-2025) at the end of this file).
 
 ## Read this first
 
@@ -124,3 +125,74 @@ study's own conclusions were debated, including over data errors and omitted var
 Inquiry* 1998; Ladd, *Journal of Economic Perspectives* 1998, reviews the exchange). There are no repayment outcomes,
 only decisions. Group-specific cutoffs are shown to size a trade-off, not as a recommendation. Nothing here describes
 any lender today.
+
+---
+
+## Version 2: Virginia, 2004-2025
+
+Every Virginia mortgage application reported under HMDA from 2004 through 2025: 13,052,138 records from three
+publishers and three formats, harmonized into one schema. The core sample, 6,487,865 decided home-purchase and
+refinance applications, is defined the same way in every year. The same limits apply as in version 1. HMDA has no
+credit scores in any year, and before 2018 it has no debt-to-income or loan-to-value either. Every gap is an
+association after controlling for what HMDA records.
+
+### What it found
+
+- **Black applicants were denied more often in every one of the 22 years.** In 2018-2025, the raw Black-white
+  home-purchase denial gap is 7.4 points.
+- **Comparing applicants at the same lender shrinks the gap but doesn't close it.** With the controls every year
+  records, plus lender and county fixed effects, the Black-white purchase gap is 5.5 points in 2004-2011, 6.0 in
+  2012-2017 and 4.9 in 2018-2025.
+- **The 2018 underwriting fields explain more, still not all.** Adding debt-to-income, combined loan-to-value,
+  property value, credit-score model and underwriting system brings the 2018-2025 purchase gap to 3.5 points (95%
+  interval 3.0 to 4.0). For Hispanic applicants it's 1.6 points and for Asian applicants 1.7.
+- **Refinance gaps are larger.** With lender controls, the 2018-2025 Black-white gap is 6.6 points for refinancing
+  and 4.9 for purchase.
+
+### The three eras, joined
+
+| Era | Years | Source | Format | Tracts |
+|---|---|---|---|---|
+| Boom and crash | 2004-2006 | Federal Reserve "Final" LAR, via the National Archives (NAID 2456161) | national fixed-width file, filtered to Virginia | 2000 census |
+| | 2007-2011 | CFPB historic HMDA, nationwide all-records file, filtered to Virginia | CSV with codes | 2000 census |
+| Post-crisis | 2012-2017 | as above | as above | 2010 census |
+| Expanded rule | 2018-2025 | CFPB HMDA Data Browser API, Virginia | CSV (2015-rule fields) | 2010, then 2020 from 2022 |
+
+- **One schema** (`hmda/harmonize.py`). Each era has its own reader, and all three feed one function that derives
+  every analysis field. The applicant's group is Hispanic of any race first, otherwise the set of major races
+  reported, with 2018's subgroups folded in. That function also sets the denial flag, the core sample and the
+  harmonized county. The core sample is decided, first-lien, owner-occupied, site-built 1-4 family, closed-end
+  home-purchase and refinance applications. From 2018, open-end lines, reverse mortgages and business loans are
+  excluded, because earlier years can't identify them. The page's Data tab lists every field's source in each era
+  and every reporting break: 2009 pricing threshold, 2012 tracts, the 2018 rule, the 2020 reporting threshold, 2022
+  tracts.
+- **Checked against the publishers.** Every raw file's SHA-256 goes into [`data/manifest.json`](data/manifest.json).
+  Each year's Virginia record count matches the publisher's exactly: the CFPB historic-data page for 2007-2017 and
+  the Data Browser API for 2018-2025. 2004-2006 have no published state count, so there every record must have a
+  valid action code. `build_va.py` refuses to write if a count stops matching.
+- **Tract context for 2004-2006** comes from the FFIEC values carried in the 2007-2011 records for the same
+  2000-census tracts. Those values are identical across 2007-2011 for every tract, and every 2004-2006 tract finds
+  a match.
+- **One geography** (`hmda/geo.py`). Counties are harmonized directly: Bedford city is folded into Bedford County,
+  which it joined in 2013. Tracts from every year are carried onto 2020 tracts with the Census Bureau's relationship
+  files ([`data/geo/`](data/geo/)): 2000 to 2010 weighted by 2010 housing units, 2010 to 2020 by land area. At least
+  99.96% of each year's tract-coded applications land on the map.
+- **Models** (`hmda/models.py`, `hmda/analysis.py`). Linear probability models of denial with lender and county
+  fixed effects, absorbed by alternating projections, with singletons dropped and standard errors clustered by
+  lender, as reghdfe does. They run by year and pooled by era, under four nested sets of controls. Tests check the
+  estimator against statsmodels' dummy-variable regression.
+
+### Rebuild it
+
+The raw files are about 6.5 GB and aren't committed. The page's data (`site/virginia/data.js`) and the results
+(`results/virginia.json`) are.
+
+```bash
+.venv/Scripts/python -m hmda.fetch        # downloads, resumable, verified, hashed into data/manifest.json
+.venv/Scripts/python -m hmda.harmonize    # one Parquet file per year in data/harmonized/
+.venv/Scripts/python build_va.py --geo    # about 25 minutes
+```
+
+CI can't redownload 6.5 GB on every push. Instead it tests the readers on hand-made records in every era's format,
+the estimator, and the crosswalk. It also checks the committed results against the record counts and the facts the
+page states.

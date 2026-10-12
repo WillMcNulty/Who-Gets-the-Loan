@@ -25,7 +25,7 @@ jobs:
       - name: Committed results match a fresh build
         run: python build.py --check
       - name: Page scripts parse
-        run: node --check site/app.js && node --check site/theme.js && node --check site/data.js
+        run: node --check site/app.js && node --check site/theme.js && node --check site/data.js && node --check site/virginia/app.js && node --check site/virginia/data.js && node --check site/virginia/geo.js
 
   # Deploys site/ to GitHub Pages after the tests pass (only while the repository is public).
   deploy:

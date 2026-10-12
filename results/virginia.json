@@ -1,0 +1,9204 @@
+{
+ "meta": {
+  "built": "2026-10-12",
+  "years": [
+   2004,
+   2005,
+   2006,
+   2007,
+   2008,
+   2009,
+   2010,
+   2011,
+   2012,
+   2013,
+   2014,
+   2015,
+   2016,
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "eras": {
+   "2004-2011": [
+    2004,
+    2011
+   ],
+   "2012-2017": [
+    2012,
+    2017
+   ],
+   "2018-2025": [
+    2018,
+    2025
+   ]
+  },
+  "groups": [
+   "White",
+   "Black",
+   "Hispanic",
+   "Asian",
+   "AIAN",
+   "NHPI",
+   "Multiracial",
+   "Not reported"
+  ],
+  "compare": [
+   "Black",
+   "Hispanic",
+   "Asian"
+  ],
+  "specs": [
+   "raw",
+   "common",
+   "lender",
+   "full"
+  ],
+  "schema": [
+   {
+    "field": "year",
+    "meaning": "Activity year",
+    "src_2004": "Asof Date",
+    "src_2007": "as_of_year",
+    "src_2018": "activity_year",
+    "note": ""
+   },
+   {
+    "field": "lender_id",
+    "meaning": "Reporting institution",
+    "src_2004": "agency + respondent ID",
+    "src_2007": "agency + respondent ID",
+    "src_2018": "LEI",
+    "note": "IDs change form in 2018; lender fixed effects are estimated within a year, so this doesn't matter for them"
+   },
+   {
+    "field": "action",
+    "meaning": "Action taken (1 originated ... 8 preapproval approved)",
+    "src_2004": "action",
+    "src_2007": "action_taken",
+    "src_2018": "action_taken",
+    "note": "Same codes in every era"
+   },
+   {
+    "field": "denied",
+    "meaning": "1 if the application was denied (action 3), 0 if originated or approved (1, 2)",
+    "src_2004": "",
+    "src_2007": "",
+    "src_2018": "",
+    "note": "Defined only for decided applications"
+   },
+   {
+    "field": "purpose",
+    "meaning": "purchase / refinance / improvement / other",
+    "src_2004": "1, 3, 2",
+    "src_2007": "1, 3, 2",
+    "src_2018": "1; 31 and 32; 2; 4 and 5",
+    "note": "Cash-out refinances are reported separately from 2018 (cashout = 1); before 2018 they are inside refinance"
+   },
+   {
+    "field": "loan_type",
+    "meaning": "1 conventional, 2 FHA, 3 VA, 4 FSA/RHS",
+    "src_2004": "type",
+    "src_2007": "loan_type",
+    "src_2018": "loan_type",
+    "note": "Same codes"
+   },
+   {
+    "field": "lien",
+    "meaning": "1 first, 2 subordinate, 3 unsecured, 4 n/a",
+    "src_2004": "lien",
+    "src_2007": "lien_status",
+    "src_2018": "lien_status",
+    "note": "Unsecured loans stop being reported in 2018"
+   },
+   {
+    "field": "occupancy",
+    "meaning": "owner / second / investor / not_owner",
+    "src_2004": "1, 2 (not owner), 3",
+    "src_2007": "same",
+    "src_2018": "1, 2, 3",
+    "note": "Second homes are split out from 2018; before that they are in not_owner"
+   },
+   {
+    "field": "dwelling",
+    "meaning": "site_1_4 / manufactured / multifamily",
+    "src_2004": "property type 1, 2, 3",
+    "src_2007": "same",
+    "src_2018": "construction method + total units",
+    "note": ""
+   },
+   {
+    "field": "closed_end",
+    "meaning": "1 unless the record is an open-end line, reverse mortgage or business-purpose loan",
+    "src_2004": "assumed 1",
+    "src_2007": "assumed 1",
+    "src_2018": "open-end, reverse, business flags",
+    "note": "Before 2018 home-equity lines were optional to report and can't be identified; the core sample is first liens, which keeps most of them out"
+   },
+   {
+    "field": "loan_k",
+    "meaning": "Loan amount, $ thousands",
+    "src_2004": "amount",
+    "src_2007": "loan_amount_000s",
+    "src_2018": "loan_amount / 1000",
+    "note": "From 2018 amounts are the midpoint of a $10,000 band"
+   },
+   {
+    "field": "income_k",
+    "meaning": "Applicant income, $ thousands",
+    "src_2004": "income",
+    "src_2007": "applicant_income_000s",
+    "src_2018": "income",
+    "note": "Missing when not relied on"
+   },
+   {
+    "field": "group",
+    "meaning": "Applicant group: Hispanic (any race), White, Black, Asian, AIAN, NHPI, Multiracial, Not reported",
+    "src_2004": "ethnicity + race 1-5",
+    "src_2007": "same",
+    "src_2018": "ethnicity-1..5 + race-1..5 (subgroups folded in)",
+    "note": "Same rule every year; applicant's own fields"
+   },
+   {
+    "field": "sex",
+    "meaning": "male / female / both / not_reported",
+    "src_2004": "sex",
+    "src_2007": "applicant_sex",
+    "src_2018": "applicant_sex",
+    "note": "'both' exists from 2018"
+   },
+   {
+    "field": "co_applicant",
+    "meaning": "1 if there is a co-applicant",
+    "src_2004": "co-applicant ethnicity/race/sex",
+    "src_2007": "same",
+    "src_2018": "same",
+    "note": ""
+   },
+   {
+    "field": "county",
+    "meaning": "County FIPS, harmonized (Bedford city 51515 folded into Bedford County 51019)",
+    "src_2004": "state + county",
+    "src_2007": "same",
+    "src_2018": "county_code",
+    "note": "Bedford city became part of Bedford County in 2013"
+   },
+   {
+    "field": "tract",
+    "meaning": "11-digit census tract",
+    "src_2004": "state + county + tract",
+    "src_2007": "same",
+    "src_2018": "census_tract",
+    "note": "Boundaries: 2000 census for 2004-2011, 2010 for 2012-2021, 2020 from 2022 (tract_vintage)"
+   },
+   {
+    "field": "tract_minority_pct",
+    "meaning": "Tract minority population, %",
+    "src_2004": "from the 2007-2011 FFIEC values for the same 2000 tract",
+    "src_2007": "minority_population",
+    "src_2018": "tract_minority_population_percent",
+    "note": "FFIEC census values, updated with each census or ACS release"
+   },
+   {
+    "field": "tract_income_pct",
+    "meaning": "Tract median family income as % of its MSA's",
+    "src_2004": "as above",
+    "src_2007": "tract_to_msamd_income",
+    "src_2018": "tract_to_msa_income_percentage",
+    "note": "As above"
+   },
+   {
+    "field": "rate_spread",
+    "meaning": "APR minus the benchmark, for loans reported as higher-priced (all loans from 2018)",
+    "src_2004": "rate spread",
+    "src_2007": "rate_spread",
+    "src_2018": "rate_spread",
+    "note": "Benchmark and threshold change in October 2009 and again in 2018; not comparable across those breaks"
+   },
+   {
+    "field": "reason1..4",
+    "meaning": "Denial reasons (1 DTI ... 9 other)",
+    "src_2004": "reasons 1-3",
+    "src_2007": "denial_reason_1..3",
+    "src_2018": "denial_reason-1..4",
+    "note": "Optional for most lenders before 2018, required from 2018"
+   },
+   {
+    "field": "dti, cltv, property_k, score_type, aus, age",
+    "meaning": "Underwriting fields",
+    "src_2004": "-",
+    "src_2007": "-",
+    "src_2018": "as reported",
+    "note": "Only from 2018"
+   }
+  ],
+  "breaks": [
+   {
+    "year": 2009,
+    "what": "Higher-priced loan threshold changes (October 2009): rate spreads are measured against a new benchmark, so the high-priced share before and after isn't comparable."
+   },
+   {
+    "year": 2012,
+    "what": "Census tracts switch from 2000 to 2010 boundaries; tract demographics switch to the 2010 census and ACS. The maps put every year on 2020 tracts."
+   },
+   {
+    "year": 2018,
+    "what": "The 2015 HMDA rule takes effect: debt-to-income, combined LTV, property value, credit-score model, underwriting system, age, interest rate and loan costs are added; denial reasons become required; cash-out refinances and second homes are reported separately; open-end lines, reverse mortgages and business loans are flagged (and excluded here); race and ethnicity subgroups are added (folded back into the main groups here); loan amounts are rounded to $10,000 bands. Small lenders may be exempt from the new fields."
+   },
+   {
+    "year": 2020,
+    "what": "Reporting threshold for closed-end loans rises from 25 to 100 originations a year, so the smallest lenders drop out of the data."
+   },
+   {
+    "year": 2022,
+    "what": "Census tracts switch to 2020 boundaries."
+   }
+  ],
+  "reasons": {
+   "1": "Debt-to-income ratio",
+   "2": "Employment history",
+   "3": "Credit history",
+   "4": "Collateral",
+   "5": "Insufficient cash",
+   "6": "Unverifiable information",
+   "7": "Application incomplete",
+   "8": "Mortgage insurance denied",
+   "9": "Other"
+  },
+  "context_check": 0.0
+ },
+ "reconcile": [
+  {
+   "year": 2004,
+   "era": "2004-2011",
+   "source": "Federal Reserve Board via the National Archives (NAID 2456161)",
+   "sha256": "5682f86cf5e2",
+   "records": 999683,
+   "official": null,
+   "valid_action": 1.0,
+   "core_purchase": 186908,
+   "core_refinance": 315897,
+   "not_reported": 0.160231
+  },
+  {
+   "year": 2005,
+   "era": "2004-2011",
+   "source": "Federal Reserve Board via the National Archives (NAID 2456161)",
+   "sha256": "8421da83901b",
+   "records": 1077374,
+   "official": null,
+   "valid_action": 1.0,
+   "core_purchase": 187660,
+   "core_refinance": 312475,
+   "not_reported": 0.145453
+  },
+  {
+   "year": 2006,
+   "era": "2004-2011",
+   "source": "Federal Reserve Board via the National Archives (NAID 2456161)",
+   "sha256": "81a9a845a41e",
+   "records": 999150,
+   "official": null,
+   "valid_action": 1.0,
+   "core_purchase": 158875,
+   "core_refinance": 259930,
+   "not_reported": 0.159103
+  },
+  {
+   "year": 2007,
+   "era": "2004-2011",
+   "source": "CFPB historic HMDA data",
+   "sha256": "6d33e3e0a1a2",
+   "records": 784919,
+   "official": 784919,
+   "valid_action": 1.0,
+   "core_purchase": 125579,
+   "core_refinance": 230482,
+   "not_reported": 0.158796
+  },
+  {
+   "year": 2008,
+   "era": "2004-2011",
+   "source": "CFPB historic HMDA data",
+   "sha256": "01c4e079b39c",
+   "records": 539572,
+   "official": 539572,
+   "valid_action": 1.0,
+   "core_purchase": 100508,
+   "core_refinance": 184054,
+   "not_reported": 0.141294
+  },
+  {
+   "year": 2009,
+   "era": "2004-2011",
+   "source": "CFPB historic HMDA data",
+   "sha256": "dc0791bcd268",
+   "records": 637212,
+   "official": 637212,
+   "valid_action": 1.0,
+   "core_purchase": 92747,
+   "core_refinance": 257190,
+   "not_reported": 0.14965
+  },
+  {
+   "year": 2010,
+   "era": "2004-2011",
+   "source": "CFPB historic HMDA data",
+   "sha256": "b67220c82b8f",
+   "records": 517819,
+   "official": 517819,
+   "valid_action": 1.0,
+   "core_purchase": 83525,
+   "core_refinance": 201741,
+   "not_reported": 0.142004
+  },
+  {
+   "year": 2011,
+   "era": "2004-2011",
+   "source": "CFPB historic HMDA data",
+   "sha256": "391cf437ee4e",
+   "records": 482943,
+   "official": 482943,
+   "valid_action": 1.0,
+   "core_purchase": 79652,
+   "core_refinance": 181834,
+   "not_reported": 0.140126
+  },
+  {
+   "year": 2012,
+   "era": "2012-2017",
+   "source": "CFPB historic HMDA data",
+   "sha256": "c40000968ced",
+   "records": 634102,
+   "official": 634102,
+   "valid_action": 1.0,
+   "core_purchase": 87325,
+   "core_refinance": 266534,
+   "not_reported": 0.140655
+  },
+  {
+   "year": 2013,
+   "era": "2012-2017",
+   "source": "CFPB historic HMDA data",
+   "sha256": "036052fb0b5b",
+   "records": 563167,
+   "official": 563167,
+   "valid_action": 1.0,
+   "core_purchase": 99600,
+   "core_refinance": 205548,
+   "not_reported": 0.138631
+  },
+  {
+   "year": 2014,
+   "era": "2012-2017",
+   "source": "CFPB historic HMDA data",
+   "sha256": "827a095dd80d",
+   "records": 365572,
+   "official": 365572,
+   "valid_action": 1.0,
+   "core_purchase": 94460,
+   "core_refinance": 93587,
+   "not_reported": 0.136647
+  },
+  {
+   "year": 2015,
+   "era": "2012-2017",
+   "source": "CFPB historic HMDA data",
+   "sha256": "7b428ab05c25",
+   "records": 445447,
+   "official": 445447,
+   "valid_action": 1.0,
+   "core_purchase": 106995,
+   "core_refinance": 133732,
+   "not_reported": 0.139523
+  },
+  {
+   "year": 2016,
+   "era": "2012-2017",
+   "source": "CFPB historic HMDA data",
+   "sha256": "d8d0bb703371",
+   "records": 494057,
+   "official": 494057,
+   "valid_action": 1.0,
+   "core_purchase": 117223,
+   "core_refinance": 158802,
+   "not_reported": 0.142284
+  },
+  {
+   "year": 2017,
+   "era": "2012-2017",
+   "source": "CFPB historic HMDA data",
+   "sha256": "cb3fe691b842",
+   "records": 411507,
+   "official": 411507,
+   "valid_action": 1.0,
+   "core_purchase": 122938,
+   "core_refinance": 91875,
+   "not_reported": 0.143851
+  },
+  {
+   "year": 2018,
+   "era": "2018-2025",
+   "source": "CFPB HMDA Data Browser",
+   "sha256": "cc6a9ee849e5",
+   "records": 417107,
+   "official": 417107,
+   "valid_action": 1.0,
+   "core_purchase": 121133,
+   "core_refinance": 62452,
+   "not_reported": 0.136411
+  },
+  {
+   "year": 2019,
+   "era": "2018-2025",
+   "source": "CFPB HMDA Data Browser",
+   "sha256": "eed891a344b2",
+   "records": 506758,
+   "official": 506758,
+   "valid_action": 1.0,
+   "core_purchase": 126922,
+   "core_refinance": 114319,
+   "not_reported": 0.154775
+  },
+  {
+   "year": 2020,
+   "era": "2018-2025",
+   "source": "CFPB HMDA Data Browser",
+   "sha256": "5ea7bf29f6e2",
+   "records": 828032,
+   "official": 828032,
+   "valid_action": 1.0,
+   "core_purchase": 141179,
+   "core_refinance": 325916,
+   "not_reported": 0.173427
+  },
+  {
+   "year": 2021,
+   "era": "2018-2025",
+   "source": "CFPB HMDA Data Browser",
+   "sha256": "311824c8f6e4",
+   "records": 828798,
+   "official": 828798,
+   "valid_action": 1.0,
+   "core_purchase": 156450,
+   "core_refinance": 303041,
+   "not_reported": 0.181331
+  },
+  {
+   "year": 2022,
+   "era": "2018-2025",
+   "source": "CFPB HMDA Data Browser",
+   "sha256": "350c60ae4a37",
+   "records": 456043,
+   "official": 456043,
+   "valid_action": 1.0,
+   "core_purchase": 124281,
+   "core_refinance": 72838,
+   "not_reported": 0.165616
+  },
+  {
+   "year": 2023,
+   "era": "2018-2025",
+   "source": "CFPB HMDA Data Browser",
+   "sha256": "f1eb89bda43e",
+   "records": 313853,
+   "official": 313853,
+   "valid_action": 1.0,
+   "core_purchase": 93732,
+   "core_refinance": 24571,
+   "not_reported": 0.157612
+  },
+  {
+   "year": 2024,
+   "era": "2018-2025",
+   "source": "CFPB HMDA Data Browser",
+   "sha256": "1b11a9de1624",
+   "records": 351177,
+   "official": 351177,
+   "valid_action": 1.0,
+   "core_purchase": 94450,
+   "core_refinance": 40013,
+   "not_reported": 0.159427
+  },
+  {
+   "year": 2025,
+   "era": "2018-2025",
+   "source": "CFPB HMDA Data Browser",
+   "sha256": "a34eb9308f0b",
+   "records": 397846,
+   "official": 397846,
+   "valid_action": 1.0,
+   "core_purchase": 95306,
+   "core_refinance": 53586,
+   "not_reported": 0.158363
+  }
+ ],
+ "rates": [
+  {
+   "year": 2004,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 541,
+   "denied": 89.0,
+   "rate": 0.16451
+  },
+  {
+   "year": 2004,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 15645,
+   "denied": 1634.0,
+   "rate": 0.104442
+  },
+  {
+   "year": 2004,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 19339,
+   "denied": 3148.0,
+   "rate": 0.16278
+  },
+  {
+   "year": 2004,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 15268,
+   "denied": 1888.0,
+   "rate": 0.123657
+  },
+  {
+   "year": 2004,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 513,
+   "denied": 52.0,
+   "rate": 0.101365
+  },
+  {
+   "year": 2004,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 593,
+   "denied": 74.0,
+   "rate": 0.124789
+  },
+  {
+   "year": 2004,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 22086,
+   "denied": 3342.0,
+   "rate": 0.151318
+  },
+  {
+   "year": 2004,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 112923,
+   "denied": 7906.0,
+   "rate": 0.0700123
+  },
+  {
+   "year": 2004,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 1276,
+   "denied": 488.0,
+   "rate": 0.382445
+  },
+  {
+   "year": 2004,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 12033,
+   "denied": 2053.0,
+   "rate": 0.170614
+  },
+  {
+   "year": 2004,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 50854,
+   "denied": 18270.0,
+   "rate": 0.359264
+  },
+  {
+   "year": 2004,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 15240,
+   "denied": 3380.0,
+   "rate": 0.221785
+  },
+  {
+   "year": 2004,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 822,
+   "denied": 218.0,
+   "rate": 0.265207
+  },
+  {
+   "year": 2004,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 790,
+   "denied": 173.0,
+   "rate": 0.218987
+  },
+  {
+   "year": 2004,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 58479,
+   "denied": 19589.0,
+   "rate": 0.334975
+  },
+  {
+   "year": 2004,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 176403,
+   "denied": 34721.0,
+   "rate": 0.196828
+  },
+  {
+   "year": 2005,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 437,
+   "denied": 63.0,
+   "rate": 0.144165
+  },
+  {
+   "year": 2005,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 16930,
+   "denied": 2223.0,
+   "rate": 0.131305
+  },
+  {
+   "year": 2005,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 21946,
+   "denied": 3785.0,
+   "rate": 0.172469
+  },
+  {
+   "year": 2005,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 20996,
+   "denied": 3162.0,
+   "rate": 0.1506
+  },
+  {
+   "year": 2005,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 524,
+   "denied": 64.0,
+   "rate": 0.122137
+  },
+  {
+   "year": 2005,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 742,
+   "denied": 75.0,
+   "rate": 0.101078
+  },
+  {
+   "year": 2005,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 20629,
+   "denied": 2758.0,
+   "rate": 0.133695
+  },
+  {
+   "year": 2005,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 105456,
+   "denied": 8392.0,
+   "rate": 0.0795782
+  },
+  {
+   "year": 2005,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 891,
+   "denied": 267.0,
+   "rate": 0.299663
+  },
+  {
+   "year": 2005,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 10978,
+   "denied": 2094.0,
+   "rate": 0.190745
+  },
+  {
+   "year": 2005,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 57444,
+   "denied": 21286.0,
+   "rate": 0.370552
+  },
+  {
+   "year": 2005,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 18607,
+   "denied": 4137.0,
+   "rate": 0.222336
+  },
+  {
+   "year": 2005,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 966,
+   "denied": 262.0,
+   "rate": 0.271222
+  },
+  {
+   "year": 2005,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 1031,
+   "denied": 224.0,
+   "rate": 0.217265
+  },
+  {
+   "year": 2005,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 52117,
+   "denied": 17205.0,
+   "rate": 0.330123
+  },
+  {
+   "year": 2005,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 170441,
+   "denied": 36627.0,
+   "rate": 0.214895
+  },
+  {
+   "year": 2006,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 373,
+   "denied": 60.0,
+   "rate": 0.160858
+  },
+  {
+   "year": 2006,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 9920,
+   "denied": 1339.0,
+   "rate": 0.13498
+  },
+  {
+   "year": 2006,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 21620,
+   "denied": 4290.0,
+   "rate": 0.198427
+  },
+  {
+   "year": 2006,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 18132,
+   "denied": 3210.0,
+   "rate": 0.177035
+  },
+  {
+   "year": 2006,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 461,
+   "denied": 64.0,
+   "rate": 0.138829
+  },
+  {
+   "year": 2006,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 576,
+   "denied": 62.0,
+   "rate": 0.107639
+  },
+  {
+   "year": 2006,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 18854,
+   "denied": 2940.0,
+   "rate": 0.155935
+  },
+  {
+   "year": 2006,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 88939,
+   "denied": 7968.0,
+   "rate": 0.0895895
+  },
+  {
+   "year": 2006,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 733,
+   "denied": 263.0,
+   "rate": 0.358799
+  },
+  {
+   "year": 2006,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 8245,
+   "denied": 2062.0,
+   "rate": 0.250091
+  },
+  {
+   "year": 2006,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 53973,
+   "denied": 21278.0,
+   "rate": 0.394234
+  },
+  {
+   "year": 2006,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 16768,
+   "denied": 4723.0,
+   "rate": 0.281667
+  },
+  {
+   "year": 2006,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 926,
+   "denied": 330.0,
+   "rate": 0.356371
+  },
+  {
+   "year": 2006,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 723,
+   "denied": 250.0,
+   "rate": 0.345781
+  },
+  {
+   "year": 2006,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 47779,
+   "denied": 20071.0,
+   "rate": 0.42008
+  },
+  {
+   "year": 2006,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 130783,
+   "denied": 34216.0,
+   "rate": 0.261624
+  },
+  {
+   "year": 2007,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 250,
+   "denied": 46.0,
+   "rate": 0.184
+  },
+  {
+   "year": 2007,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 7491,
+   "denied": 1075.0,
+   "rate": 0.143506
+  },
+  {
+   "year": 2007,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 16612,
+   "denied": 3736.0,
+   "rate": 0.224898
+  },
+  {
+   "year": 2007,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 8473,
+   "denied": 1981.0,
+   "rate": 0.233801
+  },
+  {
+   "year": 2007,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 458,
+   "denied": 68.0,
+   "rate": 0.148472
+  },
+  {
+   "year": 2007,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 404,
+   "denied": 57.0,
+   "rate": 0.141089
+  },
+  {
+   "year": 2007,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 15679,
+   "denied": 2366.0,
+   "rate": 0.150902
+  },
+  {
+   "year": 2007,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 76212,
+   "denied": 6847.0,
+   "rate": 0.0898415
+  },
+  {
+   "year": 2007,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 600,
+   "denied": 276.0,
+   "rate": 0.46
+  },
+  {
+   "year": 2007,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 7354,
+   "denied": 2390.0,
+   "rate": 0.324993
+  },
+  {
+   "year": 2007,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 47792,
+   "denied": 23424.0,
+   "rate": 0.490124
+  },
+  {
+   "year": 2007,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 12966,
+   "denied": 5515.0,
+   "rate": 0.425343
+  },
+  {
+   "year": 2007,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 856,
+   "denied": 345.0,
+   "rate": 0.403037
+  },
+  {
+   "year": 2007,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 590,
+   "denied": 249.0,
+   "rate": 0.422034
+  },
+  {
+   "year": 2007,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 40862,
+   "denied": 18663.0,
+   "rate": 0.456732
+  },
+  {
+   "year": 2007,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 119462,
+   "denied": 38057.0,
+   "rate": 0.31857
+  },
+  {
+   "year": 2008,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 176,
+   "denied": 26.0,
+   "rate": 0.147727
+  },
+  {
+   "year": 2008,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 6407,
+   "denied": 999.0,
+   "rate": 0.155923
+  },
+  {
+   "year": 2008,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 11518,
+   "denied": 2127.0,
+   "rate": 0.184667
+  },
+  {
+   "year": 2008,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 6142,
+   "denied": 1328.0,
+   "rate": 0.216216
+  },
+  {
+   "year": 2008,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 426,
+   "denied": 68.0,
+   "rate": 0.159624
+  },
+  {
+   "year": 2008,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 288,
+   "denied": 35.0,
+   "rate": 0.121528
+  },
+  {
+   "year": 2008,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 13213,
+   "denied": 1662.0,
+   "rate": 0.125785
+  },
+  {
+   "year": 2008,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 62338,
+   "denied": 5563.0,
+   "rate": 0.0892393
+  },
+  {
+   "year": 2008,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 487,
+   "denied": 232.0,
+   "rate": 0.476386
+  },
+  {
+   "year": 2008,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 5741,
+   "denied": 2035.0,
+   "rate": 0.354468
+  },
+  {
+   "year": 2008,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 33442,
+   "denied": 18384.0,
+   "rate": 0.549728
+  },
+  {
+   "year": 2008,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 6855,
+   "denied": 3194.0,
+   "rate": 0.465937
+  },
+  {
+   "year": 2008,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 796,
+   "denied": 382.0,
+   "rate": 0.479899
+  },
+  {
+   "year": 2008,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 472,
+   "denied": 194.0,
+   "rate": 0.411017
+  },
+  {
+   "year": 2008,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 26994,
+   "denied": 10888.0,
+   "rate": 0.403349
+  },
+  {
+   "year": 2008,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 109267,
+   "denied": 35414.0,
+   "rate": 0.324105
+  },
+  {
+   "year": 2009,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 157,
+   "denied": 29.0,
+   "rate": 0.184713
+  },
+  {
+   "year": 2009,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 6285,
+   "denied": 784.0,
+   "rate": 0.124741
+  },
+  {
+   "year": 2009,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 9591,
+   "denied": 1411.0,
+   "rate": 0.147117
+  },
+  {
+   "year": 2009,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 4805,
+   "denied": 730.0,
+   "rate": 0.151925
+  },
+  {
+   "year": 2009,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 378,
+   "denied": 49.0,
+   "rate": 0.12963
+  },
+  {
+   "year": 2009,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 296,
+   "denied": 26.0,
+   "rate": 0.0878378
+  },
+  {
+   "year": 2009,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 12371,
+   "denied": 1318.0,
+   "rate": 0.106539
+  },
+  {
+   "year": 2009,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 58864,
+   "denied": 4742.0,
+   "rate": 0.0805586
+  },
+  {
+   "year": 2009,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 479,
+   "denied": 164.0,
+   "rate": 0.34238
+  },
+  {
+   "year": 2009,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 10919,
+   "denied": 2458.0,
+   "rate": 0.225112
+  },
+  {
+   "year": 2009,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 25200,
+   "denied": 9073.0,
+   "rate": 0.36004
+  },
+  {
+   "year": 2009,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 6861,
+   "denied": 2013.0,
+   "rate": 0.293397
+  },
+  {
+   "year": 2009,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 923,
+   "denied": 300.0,
+   "rate": 0.325027
+  },
+  {
+   "year": 2009,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 558,
+   "denied": 145.0,
+   "rate": 0.259857
+  },
+  {
+   "year": 2009,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 39997,
+   "denied": 10113.0,
+   "rate": 0.252844
+  },
+  {
+   "year": 2009,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 172253,
+   "denied": 32098.0,
+   "rate": 0.186342
+  },
+  {
+   "year": 2010,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 168,
+   "denied": 49.0,
+   "rate": 0.291667
+  },
+  {
+   "year": 2010,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 6223,
+   "denied": 779.0,
+   "rate": 0.125181
+  },
+  {
+   "year": 2010,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 8710,
+   "denied": 1375.0,
+   "rate": 0.157865
+  },
+  {
+   "year": 2010,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 4265,
+   "denied": 720.0,
+   "rate": 0.168816
+  },
+  {
+   "year": 2010,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 377,
+   "denied": 58.0,
+   "rate": 0.153846
+  },
+  {
+   "year": 2010,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 247,
+   "denied": 18.0,
+   "rate": 0.0728745
+  },
+  {
+   "year": 2010,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 10085,
+   "denied": 1291.0,
+   "rate": 0.128012
+  },
+  {
+   "year": 2010,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 53450,
+   "denied": 4599.0,
+   "rate": 0.086043
+  },
+  {
+   "year": 2010,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 359,
+   "denied": 122.0,
+   "rate": 0.339833
+  },
+  {
+   "year": 2010,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 11473,
+   "denied": 2087.0,
+   "rate": 0.181905
+  },
+  {
+   "year": 2010,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 16047,
+   "denied": 5481.0,
+   "rate": 0.341559
+  },
+  {
+   "year": 2010,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 5260,
+   "denied": 1443.0,
+   "rate": 0.274335
+  },
+  {
+   "year": 2010,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 730,
+   "denied": 201.0,
+   "rate": 0.275342
+  },
+  {
+   "year": 2010,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 485,
+   "denied": 125.0,
+   "rate": 0.257732
+  },
+  {
+   "year": 2010,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 30424,
+   "denied": 7430.0,
+   "rate": 0.244215
+  },
+  {
+   "year": 2010,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 136963,
+   "denied": 23148.0,
+   "rate": 0.169009
+  },
+  {
+   "year": 2011,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 138,
+   "denied": 26.0,
+   "rate": 0.188406
+  },
+  {
+   "year": 2011,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 5542,
+   "denied": 777.0,
+   "rate": 0.140202
+  },
+  {
+   "year": 2011,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 8372,
+   "denied": 1475.0,
+   "rate": 0.176183
+  },
+  {
+   "year": 2011,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 4037,
+   "denied": 621.0,
+   "rate": 0.153827
+  },
+  {
+   "year": 2011,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 366,
+   "denied": 48.0,
+   "rate": 0.131148
+  },
+  {
+   "year": 2011,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 214,
+   "denied": 17.0,
+   "rate": 0.0794393
+  },
+  {
+   "year": 2011,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 9117,
+   "denied": 1259.0,
+   "rate": 0.138094
+  },
+  {
+   "year": 2011,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 51866,
+   "denied": 4655.0,
+   "rate": 0.0897505
+  },
+  {
+   "year": 2011,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 360,
+   "denied": 114.0,
+   "rate": 0.316667
+  },
+  {
+   "year": 2011,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 10802,
+   "denied": 2115.0,
+   "rate": 0.195797
+  },
+  {
+   "year": 2011,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 14615,
+   "denied": 4820.0,
+   "rate": 0.329798
+  },
+  {
+   "year": 2011,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 5263,
+   "denied": 1454.0,
+   "rate": 0.276268
+  },
+  {
+   "year": 2011,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 653,
+   "denied": 173.0,
+   "rate": 0.264931
+  },
+  {
+   "year": 2011,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 451,
+   "denied": 110.0,
+   "rate": 0.243902
+  },
+  {
+   "year": 2011,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 27524,
+   "denied": 6880.0,
+   "rate": 0.249964
+  },
+  {
+   "year": 2011,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 122166,
+   "denied": 21488.0,
+   "rate": 0.175892
+  },
+  {
+   "year": 2012,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 149,
+   "denied": 28.0,
+   "rate": 0.187919
+  },
+  {
+   "year": 2012,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 6395,
+   "denied": 846.0,
+   "rate": 0.132291
+  },
+  {
+   "year": 2012,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 8344,
+   "denied": 1550.0,
+   "rate": 0.185762
+  },
+  {
+   "year": 2012,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 4638,
+   "denied": 749.0,
+   "rate": 0.161492
+  },
+  {
+   "year": 2012,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 430,
+   "denied": 58.0,
+   "rate": 0.134884
+  },
+  {
+   "year": 2012,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 242,
+   "denied": 33.0,
+   "rate": 0.136364
+  },
+  {
+   "year": 2012,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 10238,
+   "denied": 1337.0,
+   "rate": 0.130592
+  },
+  {
+   "year": 2012,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 56889,
+   "denied": 5028.0,
+   "rate": 0.0883826
+  },
+  {
+   "year": 2012,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 509,
+   "denied": 124.0,
+   "rate": 0.243615
+  },
+  {
+   "year": 2012,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 17342,
+   "denied": 2870.0,
+   "rate": 0.165494
+  },
+  {
+   "year": 2012,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 21252,
+   "denied": 5662.0,
+   "rate": 0.266422
+  },
+  {
+   "year": 2012,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 8600,
+   "denied": 1852.0,
+   "rate": 0.215349
+  },
+  {
+   "year": 2012,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 1146,
+   "denied": 260.0,
+   "rate": 0.226876
+  },
+  {
+   "year": 2012,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 661,
+   "denied": 126.0,
+   "rate": 0.19062
+  },
+  {
+   "year": 2012,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 39534,
+   "denied": 8124.0,
+   "rate": 0.205494
+  },
+  {
+   "year": 2012,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 177490,
+   "denied": 25261.0,
+   "rate": 0.142324
+  },
+  {
+   "year": 2013,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 163,
+   "denied": 29.0,
+   "rate": 0.177914
+  },
+  {
+   "year": 2013,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 8030,
+   "denied": 990.0,
+   "rate": 0.123288
+  },
+  {
+   "year": 2013,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 9093,
+   "denied": 1624.0,
+   "rate": 0.178599
+  },
+  {
+   "year": 2013,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 5545,
+   "denied": 810.0,
+   "rate": 0.146078
+  },
+  {
+   "year": 2013,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 557,
+   "denied": 86.0,
+   "rate": 0.154399
+  },
+  {
+   "year": 2013,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 264,
+   "denied": 31.0,
+   "rate": 0.117424
+  },
+  {
+   "year": 2013,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 11719,
+   "denied": 1518.0,
+   "rate": 0.129533
+  },
+  {
+   "year": 2013,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 64229,
+   "denied": 5697.0,
+   "rate": 0.0886983
+  },
+  {
+   "year": 2013,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 431,
+   "denied": 96.0,
+   "rate": 0.222738
+  },
+  {
+   "year": 2013,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 11339,
+   "denied": 2201.0,
+   "rate": 0.194109
+  },
+  {
+   "year": 2013,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 20174,
+   "denied": 5746.0,
+   "rate": 0.284822
+  },
+  {
+   "year": 2013,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 7977,
+   "denied": 1924.0,
+   "rate": 0.241193
+  },
+  {
+   "year": 2013,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 1044,
+   "denied": 298.0,
+   "rate": 0.285441
+  },
+  {
+   "year": 2013,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 536,
+   "denied": 104.0,
+   "rate": 0.19403
+  },
+  {
+   "year": 2013,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 30584,
+   "denied": 7491.0,
+   "rate": 0.244932
+  },
+  {
+   "year": 2013,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 133463,
+   "denied": 21887.0,
+   "rate": 0.163993
+  },
+  {
+   "year": 2014,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 185,
+   "denied": 27.0,
+   "rate": 0.145946
+  },
+  {
+   "year": 2014,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 7411,
+   "denied": 938.0,
+   "rate": 0.126569
+  },
+  {
+   "year": 2014,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 9438,
+   "denied": 1544.0,
+   "rate": 0.163594
+  },
+  {
+   "year": 2014,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 5761,
+   "denied": 778.0,
+   "rate": 0.135046
+  },
+  {
+   "year": 2014,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 516,
+   "denied": 70.0,
+   "rate": 0.135659
+  },
+  {
+   "year": 2014,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 269,
+   "denied": 21.0,
+   "rate": 0.0780669
+  },
+  {
+   "year": 2014,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 11349,
+   "denied": 1320.0,
+   "rate": 0.11631
+  },
+  {
+   "year": 2014,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 59531,
+   "denied": 4837.0,
+   "rate": 0.0812518
+  },
+  {
+   "year": 2014,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 284,
+   "denied": 108.0,
+   "rate": 0.380282
+  },
+  {
+   "year": 2014,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 4869,
+   "denied": 1294.0,
+   "rate": 0.265763
+  },
+  {
+   "year": 2014,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 12312,
+   "denied": 4998.0,
+   "rate": 0.405945
+  },
+  {
+   "year": 2014,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 4031,
+   "denied": 1422.0,
+   "rate": 0.352766
+  },
+  {
+   "year": 2014,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 568,
+   "denied": 222.0,
+   "rate": 0.390845
+  },
+  {
+   "year": 2014,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 242,
+   "denied": 73.0,
+   "rate": 0.301653
+  },
+  {
+   "year": 2014,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 14347,
+   "denied": 4816.0,
+   "rate": 0.33568
+  },
+  {
+   "year": 2014,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 56934,
+   "denied": 13814.0,
+   "rate": 0.242632
+  },
+  {
+   "year": 2015,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 184,
+   "denied": 23.0,
+   "rate": 0.125
+  },
+  {
+   "year": 2015,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 7977,
+   "denied": 855.0,
+   "rate": 0.107183
+  },
+  {
+   "year": 2015,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 11181,
+   "denied": 1758.0,
+   "rate": 0.157231
+  },
+  {
+   "year": 2015,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 7331,
+   "denied": 921.0,
+   "rate": 0.125631
+  },
+  {
+   "year": 2015,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 671,
+   "denied": 64.0,
+   "rate": 0.09538
+  },
+  {
+   "year": 2015,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 287,
+   "denied": 27.0,
+   "rate": 0.0940767
+  },
+  {
+   "year": 2015,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 12948,
+   "denied": 1388.0,
+   "rate": 0.107198
+  },
+  {
+   "year": 2015,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 66416,
+   "denied": 4914.0,
+   "rate": 0.0739882
+  },
+  {
+   "year": 2015,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 390,
+   "denied": 133.0,
+   "rate": 0.341026
+  },
+  {
+   "year": 2015,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 8105,
+   "denied": 1975.0,
+   "rate": 0.243677
+  },
+  {
+   "year": 2015,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 16500,
+   "denied": 6068.0,
+   "rate": 0.367758
+  },
+  {
+   "year": 2015,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 6730,
+   "denied": 1906.0,
+   "rate": 0.28321
+  },
+  {
+   "year": 2015,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 816,
+   "denied": 287.0,
+   "rate": 0.351716
+  },
+  {
+   "year": 2015,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 345,
+   "denied": 107.0,
+   "rate": 0.310145
+  },
+  {
+   "year": 2015,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 20639,
+   "denied": 6167.0,
+   "rate": 0.298803
+  },
+  {
+   "year": 2015,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 80207,
+   "denied": 17643.0,
+   "rate": 0.219968
+  },
+  {
+   "year": 2016,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 188,
+   "denied": 22.0,
+   "rate": 0.117021
+  },
+  {
+   "year": 2016,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 8617,
+   "denied": 937.0,
+   "rate": 0.108739
+  },
+  {
+   "year": 2016,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 13258,
+   "denied": 2184.0,
+   "rate": 0.164731
+  },
+  {
+   "year": 2016,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 8553,
+   "denied": 1100.0,
+   "rate": 0.12861
+  },
+  {
+   "year": 2016,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 835,
+   "denied": 87.0,
+   "rate": 0.104192
+  },
+  {
+   "year": 2016,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 313,
+   "denied": 25.0,
+   "rate": 0.0798722
+  },
+  {
+   "year": 2016,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 13754,
+   "denied": 1402.0,
+   "rate": 0.101934
+  },
+  {
+   "year": 2016,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 71705,
+   "denied": 5229.0,
+   "rate": 0.0729238
+  },
+  {
+   "year": 2016,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 464,
+   "denied": 181.0,
+   "rate": 0.390086
+  },
+  {
+   "year": 2016,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 10280,
+   "denied": 2594.0,
+   "rate": 0.252335
+  },
+  {
+   "year": 2016,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 19695,
+   "denied": 7806.0,
+   "rate": 0.396344
+  },
+  {
+   "year": 2016,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 7829,
+   "denied": 2482.0,
+   "rate": 0.317026
+  },
+  {
+   "year": 2016,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 1100,
+   "denied": 445.0,
+   "rate": 0.404545
+  },
+  {
+   "year": 2016,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 457,
+   "denied": 150.0,
+   "rate": 0.328228
+  },
+  {
+   "year": 2016,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 25520,
+   "denied": 7190.0,
+   "rate": 0.28174
+  },
+  {
+   "year": 2016,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 93457,
+   "denied": 23291.0,
+   "rate": 0.249216
+  },
+  {
+   "year": 2017,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 232,
+   "denied": 29.0,
+   "rate": 0.125
+  },
+  {
+   "year": 2017,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 9225,
+   "denied": 901.0,
+   "rate": 0.0976694
+  },
+  {
+   "year": 2017,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 13903,
+   "denied": 2010.0,
+   "rate": 0.144573
+  },
+  {
+   "year": 2017,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 8769,
+   "denied": 977.0,
+   "rate": 0.111415
+  },
+  {
+   "year": 2017,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 994,
+   "denied": 99.0,
+   "rate": 0.0995976
+  },
+  {
+   "year": 2017,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 333,
+   "denied": 26.0,
+   "rate": 0.0780781
+  },
+  {
+   "year": 2017,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 14665,
+   "denied": 1656.0,
+   "rate": 0.112922
+  },
+  {
+   "year": 2017,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 74817,
+   "denied": 5077.0,
+   "rate": 0.0678589
+  },
+  {
+   "year": 2017,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 289,
+   "denied": 114.0,
+   "rate": 0.394464
+  },
+  {
+   "year": 2017,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 4299,
+   "denied": 1057.0,
+   "rate": 0.245871
+  },
+  {
+   "year": 2017,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 13156,
+   "denied": 4735.0,
+   "rate": 0.359912
+  },
+  {
+   "year": 2017,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 4844,
+   "denied": 1509.0,
+   "rate": 0.311519
+  },
+  {
+   "year": 2017,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 654,
+   "denied": 247.0,
+   "rate": 0.377676
+  },
+  {
+   "year": 2017,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 261,
+   "denied": 86.0,
+   "rate": 0.329502
+  },
+  {
+   "year": 2017,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 16236,
+   "denied": 4972.0,
+   "rate": 0.306233
+  },
+  {
+   "year": 2017,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 52136,
+   "denied": 11688.0,
+   "rate": 0.224183
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 183,
+   "denied": 16.0,
+   "rate": 0.0874317
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 9196,
+   "denied": 836.0,
+   "rate": 0.0909091
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 13714,
+   "denied": 1827.0,
+   "rate": 0.133222
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 9108,
+   "denied": 1010.0,
+   "rate": 0.110892
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 1463,
+   "denied": 145.0,
+   "rate": 0.0991114
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 166,
+   "denied": 18.0,
+   "rate": 0.108434
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 14849,
+   "denied": 1351.0,
+   "rate": 0.0909826
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 72454,
+   "denied": 4211.0,
+   "rate": 0.0581196
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 180,
+   "denied": 78.0,
+   "rate": 0.433333
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 2544,
+   "denied": 806.0,
+   "rate": 0.316824
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 9349,
+   "denied": 4187.0,
+   "rate": 0.447855
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 3385,
+   "denied": 1232.0,
+   "rate": 0.363959
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 656,
+   "denied": 257.0,
+   "rate": 0.391768
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 110,
+   "denied": 44.0,
+   "rate": 0.4
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 10194,
+   "denied": 3481.0,
+   "rate": 0.341475
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 36034,
+   "denied": 9636.0,
+   "rate": 0.267414
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 228,
+   "denied": 22.0,
+   "rate": 0.0964912
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 9345,
+   "denied": 712.0,
+   "rate": 0.0761905
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 14429,
+   "denied": 1636.0,
+   "rate": 0.113383
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 9777,
+   "denied": 880.0,
+   "rate": 0.0900072
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 1617,
+   "denied": 122.0,
+   "rate": 0.0754484
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 131,
+   "denied": 6.0,
+   "rate": 0.0458015
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 16688,
+   "denied": 1366.0,
+   "rate": 0.0818552
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 74707,
+   "denied": 3579.0,
+   "rate": 0.0479072
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 236,
+   "denied": 64.0,
+   "rate": 0.271186
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 7007,
+   "denied": 1132.0,
+   "rate": 0.161553
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 14047,
+   "denied": 4265.0,
+   "rate": 0.303624
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 6167,
+   "denied": 1460.0,
+   "rate": 0.236744
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 1205,
+   "denied": 310.0,
+   "rate": 0.257261
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 172,
+   "denied": 34.0,
+   "rate": 0.197674
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 20650,
+   "denied": 4337.0,
+   "rate": 0.210024
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 64835,
+   "denied": 10375.0,
+   "rate": 0.160022
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 249,
+   "denied": 11.0,
+   "rate": 0.0441767
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 9780,
+   "denied": 753.0,
+   "rate": 0.0769939
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 16839,
+   "denied": 1995.0,
+   "rate": 0.118475
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 11487,
+   "denied": 1017.0,
+   "rate": 0.0885349
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 2249,
+   "denied": 168.0,
+   "rate": 0.0746999
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 184,
+   "denied": 13.0,
+   "rate": 0.0706522
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 18985,
+   "denied": 1390.0,
+   "rate": 0.0732157
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 81406,
+   "denied": 4103.0,
+   "rate": 0.0504017
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 532,
+   "denied": 98.0,
+   "rate": 0.184211
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 28891,
+   "denied": 3439.0,
+   "rate": 0.119034
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 28058,
+   "denied": 5488.0,
+   "rate": 0.195595
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 16779,
+   "denied": 2843.0,
+   "rate": 0.169438
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 3305,
+   "denied": 452.0,
+   "rate": 0.136762
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 402,
+   "denied": 52.0,
+   "rate": 0.129353
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 62022,
+   "denied": 8955.0,
+   "rate": 0.144384
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 185927,
+   "denied": 18833.0,
+   "rate": 0.101292
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 252,
+   "denied": 15.0,
+   "rate": 0.0595238
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 12274,
+   "denied": 758.0,
+   "rate": 0.0617566
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 19877,
+   "denied": 2041.0,
+   "rate": 0.102681
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 13358,
+   "denied": 1044.0,
+   "rate": 0.0781554
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 2654,
+   "denied": 145.0,
+   "rate": 0.0546345
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 178,
+   "denied": 12.0,
+   "rate": 0.0674157
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 22950,
+   "denied": 1667.0,
+   "rate": 0.0726362
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 84907,
+   "denied": 3924.0,
+   "rate": 0.0462153
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 564,
+   "denied": 119.0,
+   "rate": 0.210993
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 21118,
+   "denied": 2628.0,
+   "rate": 0.124444
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 32385,
+   "denied": 6724.0,
+   "rate": 0.207627
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 16823,
+   "denied": 2895.0,
+   "rate": 0.172086
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 3155,
+   "denied": 473.0,
+   "rate": 0.149921
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 405,
+   "denied": 71.0,
+   "rate": 0.175309
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 60370,
+   "denied": 9628.0,
+   "rate": 0.159483
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 168221,
+   "denied": 18313.0,
+   "rate": 0.108863
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 210,
+   "denied": 19.0,
+   "rate": 0.0904762
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 10699,
+   "denied": 919.0,
+   "rate": 0.0858959
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 15882,
+   "denied": 2076.0,
+   "rate": 0.130714
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 11040,
+   "denied": 973.0,
+   "rate": 0.0881341
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 2194,
+   "denied": 185.0,
+   "rate": 0.0843209
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 133,
+   "denied": 12.0,
+   "rate": 0.0902256
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 17733,
+   "denied": 1529.0,
+   "rate": 0.0862234
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 66390,
+   "denied": 3458.0,
+   "rate": 0.0520862
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 156,
+   "denied": 55.0,
+   "rate": 0.352564
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 2587,
+   "denied": 616.0,
+   "rate": 0.238114
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 11887,
+   "denied": 3887.0,
+   "rate": 0.326996
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 4235,
+   "denied": 1251.0,
+   "rate": 0.295396
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 777,
+   "denied": 217.0,
+   "rate": 0.279279
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 93,
+   "denied": 32.0,
+   "rate": 0.344086
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 14913,
+   "denied": 4496.0,
+   "rate": 0.301482
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 38190,
+   "denied": 7574.0,
+   "rate": 0.198324
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 183,
+   "denied": 17.0,
+   "rate": 0.0928962
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 8414,
+   "denied": 760.0,
+   "rate": 0.0903256
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 11764,
+   "denied": 1716.0,
+   "rate": 0.145869
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 9008,
+   "denied": 938.0,
+   "rate": 0.10413
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 1685,
+   "denied": 126.0,
+   "rate": 0.0747774
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 110,
+   "denied": 8.0,
+   "rate": 0.0727273
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 13494,
+   "denied": 1120.0,
+   "rate": 0.0829999
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 49074,
+   "denied": 2582.0,
+   "rate": 0.0526144
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 64,
+   "denied": 28.0,
+   "rate": 0.4375
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 700,
+   "denied": 243.0,
+   "rate": 0.347143
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 4906,
+   "denied": 1881.0,
+   "rate": 0.383408
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 1293,
+   "denied": 527.0,
+   "rate": 0.407579
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 273,
+   "denied": 99.0,
+   "rate": 0.362637
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 38,
+   "denied": 14.0,
+   "rate": 0.368421
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 5152,
+   "denied": 1850.0,
+   "rate": 0.359084
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 12145,
+   "denied": 3274.0,
+   "rate": 0.269576
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 172,
+   "denied": 14.0,
+   "rate": 0.0813953
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 9183,
+   "denied": 683.0,
+   "rate": 0.0743766
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 11089,
+   "denied": 1422.0,
+   "rate": 0.128235
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 9616,
+   "denied": 894.0,
+   "rate": 0.09297
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 1843,
+   "denied": 129.0,
+   "rate": 0.0699946
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 93,
+   "denied": 5.0,
+   "rate": 0.0537634
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 12904,
+   "denied": 870.0,
+   "rate": 0.067421
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 49550,
+   "denied": 2439.0,
+   "rate": 0.049223
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 131,
+   "denied": 40.0,
+   "rate": 0.305344
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 1735,
+   "denied": 416.0,
+   "rate": 0.239769
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 7549,
+   "denied": 2312.0,
+   "rate": 0.306266
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 2323,
+   "denied": 618.0,
+   "rate": 0.266035
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 536,
+   "denied": 132.0,
+   "rate": 0.246269
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 62,
+   "denied": 17.0,
+   "rate": 0.274194
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 8533,
+   "denied": 2674.0,
+   "rate": 0.313372
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 19144,
+   "denied": 4020.0,
+   "rate": 0.209987
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "group": "AIAN",
+   "n": 159,
+   "denied": 16.0,
+   "rate": 0.100629
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "group": "Asian",
+   "n": 8292,
+   "denied": 720.0,
+   "rate": 0.0868307
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "group": "Black",
+   "n": 10925,
+   "denied": 1560.0,
+   "rate": 0.142792
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "group": "Hispanic",
+   "n": 9272,
+   "denied": 855.0,
+   "rate": 0.0922131
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "group": "Multiracial",
+   "n": 1820,
+   "denied": 122.0,
+   "rate": 0.067033
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "group": "NHPI",
+   "n": 89,
+   "denied": 8.0,
+   "rate": 0.0898876
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "group": "Not reported",
+   "n": 12495,
+   "denied": 920.0,
+   "rate": 0.0736295
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "group": "White",
+   "n": 52254,
+   "denied": 2386.0,
+   "rate": 0.0456616
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "group": "AIAN",
+   "n": 143,
+   "denied": 46.0,
+   "rate": 0.321678
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "group": "Asian",
+   "n": 3302,
+   "denied": 533.0,
+   "rate": 0.161417
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "group": "Black",
+   "n": 8682,
+   "denied": 2529.0,
+   "rate": 0.291292
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "group": "Hispanic",
+   "n": 3266,
+   "denied": 830.0,
+   "rate": 0.254133
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "group": "Multiracial",
+   "n": 761,
+   "denied": 209.0,
+   "rate": 0.274639
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "group": "NHPI",
+   "n": 73,
+   "denied": 15.0,
+   "rate": 0.205479
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "group": "Not reported",
+   "n": 11084,
+   "denied": 3029.0,
+   "rate": 0.273277
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "group": "White",
+   "n": 26275,
+   "denied": 5085.0,
+   "rate": 0.19353
+  }
+ ],
+ "yearly": [
+  {
+   "year": 2004,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0927676,
+   "se": 0.00989481,
+   "n": 186908,
+   "clusters": 891,
+   "mean": 0.0970156
+  },
+  {
+   "year": 2004,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.053645,
+   "se": 0.00858945,
+   "n": 186908,
+   "clusters": 891,
+   "mean": 0.0970156
+  },
+  {
+   "year": 2004,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.03443,
+   "se": 0.00851947,
+   "n": 186908,
+   "clusters": 891,
+   "mean": 0.0970156
+  },
+  {
+   "year": 2004,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0766427,
+   "se": 0.00809387,
+   "n": 186908,
+   "clusters": 891,
+   "mean": 0.0970156
+  },
+  {
+   "year": 2004,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0516851,
+   "se": 0.00758138,
+   "n": 186908,
+   "clusters": 891,
+   "mean": 0.0970156
+  },
+  {
+   "year": 2004,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0452049,
+   "se": 0.00689161,
+   "n": 186908,
+   "clusters": 891,
+   "mean": 0.0970156
+  },
+  {
+   "year": 2004,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0464569,
+   "se": 0.00511785,
+   "n": 186702,
+   "clusters": 891,
+   "mean": 0.0969781
+  },
+  {
+   "year": 2004,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0221605,
+   "se": 0.00601512,
+   "n": 186702,
+   "clusters": 891,
+   "mean": 0.0969781
+  },
+  {
+   "year": 2004,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0207403,
+   "se": 0.0043411,
+   "n": 186702,
+   "clusters": 891,
+   "mean": 0.0969781
+  },
+  {
+   "year": 2004,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.162436,
+   "se": 0.0210267,
+   "n": 315897,
+   "clusters": 898,
+   "mean": 0.24974
+  },
+  {
+   "year": 2004,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0249571,
+   "se": 0.0186123,
+   "n": 315897,
+   "clusters": 898,
+   "mean": 0.24974
+  },
+  {
+   "year": 2004,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": -0.0262136,
+   "se": 0.021306,
+   "n": 315897,
+   "clusters": 898,
+   "mean": 0.24974
+  },
+  {
+   "year": 2004,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.11105,
+   "se": 0.017268,
+   "n": 315897,
+   "clusters": 898,
+   "mean": 0.24974
+  },
+  {
+   "year": 2004,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0565226,
+   "se": 0.0117064,
+   "n": 315897,
+   "clusters": 898,
+   "mean": 0.24974
+  },
+  {
+   "year": 2004,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0341463,
+   "se": 0.00958458,
+   "n": 315897,
+   "clusters": 898,
+   "mean": 0.24974
+  },
+  {
+   "year": 2004,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0426361,
+   "se": 0.00717135,
+   "n": 315742,
+   "clusters": 898,
+   "mean": 0.249789
+  },
+  {
+   "year": 2004,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0380411,
+   "se": 0.0108673,
+   "n": 315742,
+   "clusters": 898,
+   "mean": 0.249789
+  },
+  {
+   "year": 2004,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0333866,
+   "se": 0.00577539,
+   "n": 315742,
+   "clusters": 898,
+   "mean": 0.249789
+  },
+  {
+   "year": 2005,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0928906,
+   "se": 0.00893201,
+   "n": 187660,
+   "clusters": 929,
+   "mean": 0.109357
+  },
+  {
+   "year": 2005,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0710219,
+   "se": 0.0130907,
+   "n": 187660,
+   "clusters": 929,
+   "mean": 0.109357
+  },
+  {
+   "year": 2005,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0517272,
+   "se": 0.0103852,
+   "n": 187660,
+   "clusters": 929,
+   "mean": 0.109357
+  },
+  {
+   "year": 2005,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0776318,
+   "se": 0.00751095,
+   "n": 187660,
+   "clusters": 929,
+   "mean": 0.109357
+  },
+  {
+   "year": 2005,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0657938,
+   "se": 0.0106589,
+   "n": 187660,
+   "clusters": 929,
+   "mean": 0.109357
+  },
+  {
+   "year": 2005,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0558014,
+   "se": 0.00733288,
+   "n": 187660,
+   "clusters": 929,
+   "mean": 0.109357
+  },
+  {
+   "year": 2005,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0446073,
+   "se": 0.00525663,
+   "n": 187457,
+   "clusters": 929,
+   "mean": 0.109353
+  },
+  {
+   "year": 2005,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0239963,
+   "se": 0.00854345,
+   "n": 187457,
+   "clusters": 929,
+   "mean": 0.109353
+  },
+  {
+   "year": 2005,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0173811,
+   "se": 0.0122392,
+   "n": 187457,
+   "clusters": 929,
+   "mean": 0.109353
+  },
+  {
+   "year": 2005,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.155657,
+   "se": 0.0149293,
+   "n": 312475,
+   "clusters": 965,
+   "mean": 0.262747
+  },
+  {
+   "year": 2005,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0074402,
+   "se": 0.0239113,
+   "n": 312475,
+   "clusters": 965,
+   "mean": 0.262747
+  },
+  {
+   "year": 2005,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": -0.0241504,
+   "se": 0.0272466,
+   "n": 312475,
+   "clusters": 965,
+   "mean": 0.262747
+  },
+  {
+   "year": 2005,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.11358,
+   "se": 0.0126404,
+   "n": 312475,
+   "clusters": 965,
+   "mean": 0.262747
+  },
+  {
+   "year": 2005,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0519182,
+   "se": 0.0131065,
+   "n": 312475,
+   "clusters": 965,
+   "mean": 0.262747
+  },
+  {
+   "year": 2005,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0439134,
+   "se": 0.0126688,
+   "n": 312475,
+   "clusters": 965,
+   "mean": 0.262747
+  },
+  {
+   "year": 2005,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0451771,
+   "se": 0.00600983,
+   "n": 312298,
+   "clusters": 965,
+   "mean": 0.26281
+  },
+  {
+   "year": 2005,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0406251,
+   "se": 0.00900062,
+   "n": 312298,
+   "clusters": 965,
+   "mean": 0.26281
+  },
+  {
+   "year": 2005,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0358693,
+   "se": 0.00692574,
+   "n": 312298,
+   "clusters": 965,
+   "mean": 0.26281
+  },
+  {
+   "year": 2006,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.108838,
+   "se": 0.0103539,
+   "n": 158875,
+   "clusters": 905,
+   "mean": 0.125463
+  },
+  {
+   "year": 2006,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0874456,
+   "se": 0.0115522,
+   "n": 158875,
+   "clusters": 905,
+   "mean": 0.125463
+  },
+  {
+   "year": 2006,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0453903,
+   "se": 0.0078583,
+   "n": 158875,
+   "clusters": 905,
+   "mean": 0.125463
+  },
+  {
+   "year": 2006,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0923429,
+   "se": 0.00825522,
+   "n": 158875,
+   "clusters": 905,
+   "mean": 0.125463
+  },
+  {
+   "year": 2006,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0809514,
+   "se": 0.00917034,
+   "n": 158875,
+   "clusters": 905,
+   "mean": 0.125463
+  },
+  {
+   "year": 2006,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0527256,
+   "se": 0.00549246,
+   "n": 158875,
+   "clusters": 905,
+   "mean": 0.125463
+  },
+  {
+   "year": 2006,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0458282,
+   "se": 0.00599624,
+   "n": 158687,
+   "clusters": 905,
+   "mean": 0.125423
+  },
+  {
+   "year": 2006,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0207506,
+   "se": 0.0101291,
+   "n": 158687,
+   "clusters": 905,
+   "mean": 0.125423
+  },
+  {
+   "year": 2006,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0222703,
+   "se": 0.00677605,
+   "n": 158687,
+   "clusters": 905,
+   "mean": 0.125423
+  },
+  {
+   "year": 2006,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.13261,
+   "se": 0.0113211,
+   "n": 259930,
+   "clusters": 926,
+   "mean": 0.320059
+  },
+  {
+   "year": 2006,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0200432,
+   "se": 0.0252778,
+   "n": 259930,
+   "clusters": 926,
+   "mean": 0.320059
+  },
+  {
+   "year": 2006,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": -0.0115333,
+   "se": 0.0264635,
+   "n": 259930,
+   "clusters": 926,
+   "mean": 0.320059
+  },
+  {
+   "year": 2006,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.108845,
+   "se": 0.0103255,
+   "n": 259930,
+   "clusters": 926,
+   "mean": 0.320059
+  },
+  {
+   "year": 2006,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0519382,
+   "se": 0.0179982,
+   "n": 259930,
+   "clusters": 926,
+   "mean": 0.320059
+  },
+  {
+   "year": 2006,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0482996,
+   "se": 0.0151678,
+   "n": 259930,
+   "clusters": 926,
+   "mean": 0.320059
+  },
+  {
+   "year": 2006,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0450287,
+   "se": 0.00691734,
+   "n": 259765,
+   "clusters": 925,
+   "mean": 0.320124
+  },
+  {
+   "year": 2006,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0487446,
+   "se": 0.0113441,
+   "n": 259765,
+   "clusters": 925,
+   "mean": 0.320124
+  },
+  {
+   "year": 2006,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0537821,
+   "se": 0.00916675,
+   "n": 259765,
+   "clusters": 925,
+   "mean": 0.320124
+  },
+  {
+   "year": 2007,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.135056,
+   "se": 0.0137681,
+   "n": 125579,
+   "clusters": 819,
+   "mean": 0.128811
+  },
+  {
+   "year": 2007,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.14396,
+   "se": 0.0169123,
+   "n": 125579,
+   "clusters": 819,
+   "mean": 0.128811
+  },
+  {
+   "year": 2007,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.053664,
+   "se": 0.0141297,
+   "n": 125579,
+   "clusters": 819,
+   "mean": 0.128811
+  },
+  {
+   "year": 2007,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.116097,
+   "se": 0.0117894,
+   "n": 125579,
+   "clusters": 819,
+   "mean": 0.128811
+  },
+  {
+   "year": 2007,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.128775,
+   "se": 0.0137704,
+   "n": 125579,
+   "clusters": 819,
+   "mean": 0.128811
+  },
+  {
+   "year": 2007,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0588295,
+   "se": 0.0104871,
+   "n": 125579,
+   "clusters": 819,
+   "mean": 0.128811
+  },
+  {
+   "year": 2007,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0660073,
+   "se": 0.0067723,
+   "n": 125392,
+   "clusters": 819,
+   "mean": 0.128724
+  },
+  {
+   "year": 2007,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0666864,
+   "se": 0.0117051,
+   "n": 125392,
+   "clusters": 819,
+   "mean": 0.128724
+  },
+  {
+   "year": 2007,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.03067,
+   "se": 0.00612674,
+   "n": 125392,
+   "clusters": 819,
+   "mean": 0.128724
+  },
+  {
+   "year": 2007,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.171554,
+   "se": 0.0129724,
+   "n": 230482,
+   "clusters": 850,
+   "mean": 0.385796
+  },
+  {
+   "year": 2007,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.106773,
+   "se": 0.0262501,
+   "n": 230482,
+   "clusters": 850,
+   "mean": 0.385796
+  },
+  {
+   "year": 2007,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.00642328,
+   "se": 0.0334647,
+   "n": 230482,
+   "clusters": 850,
+   "mean": 0.385796
+  },
+  {
+   "year": 2007,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.144248,
+   "se": 0.0112241,
+   "n": 230482,
+   "clusters": 850,
+   "mean": 0.385796
+  },
+  {
+   "year": 2007,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.096771,
+   "se": 0.0160706,
+   "n": 230482,
+   "clusters": 850,
+   "mean": 0.385796
+  },
+  {
+   "year": 2007,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0353725,
+   "se": 0.0187155,
+   "n": 230482,
+   "clusters": 850,
+   "mean": 0.385796
+  },
+  {
+   "year": 2007,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0499153,
+   "se": 0.00868462,
+   "n": 230314,
+   "clusters": 850,
+   "mean": 0.385969
+  },
+  {
+   "year": 2007,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0840963,
+   "se": 0.0110167,
+   "n": 230314,
+   "clusters": 850,
+   "mean": 0.385969
+  },
+  {
+   "year": 2007,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0418856,
+   "se": 0.00757874,
+   "n": 230314,
+   "clusters": 850,
+   "mean": 0.385969
+  },
+  {
+   "year": 2008,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0954282,
+   "se": 0.0101048,
+   "n": 100508,
+   "clusters": 729,
+   "mean": 0.117483
+  },
+  {
+   "year": 2008,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.126977,
+   "se": 0.0125846,
+   "n": 100508,
+   "clusters": 729,
+   "mean": 0.117483
+  },
+  {
+   "year": 2008,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0666839,
+   "se": 0.0130724,
+   "n": 100508,
+   "clusters": 729,
+   "mean": 0.117483
+  },
+  {
+   "year": 2008,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0919546,
+   "se": 0.00821841,
+   "n": 100508,
+   "clusters": 729,
+   "mean": 0.117483
+  },
+  {
+   "year": 2008,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.114962,
+   "se": 0.010792,
+   "n": 100508,
+   "clusters": 729,
+   "mean": 0.117483
+  },
+  {
+   "year": 2008,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0597227,
+   "se": 0.0112256,
+   "n": 100508,
+   "clusters": 729,
+   "mean": 0.117483
+  },
+  {
+   "year": 2008,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0725451,
+   "se": 0.00760136,
+   "n": 100327,
+   "clusters": 728,
+   "mean": 0.117406
+  },
+  {
+   "year": 2008,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.093136,
+   "se": 0.0106927,
+   "n": 100327,
+   "clusters": 728,
+   "mean": 0.117406
+  },
+  {
+   "year": 2008,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0346954,
+   "se": 0.0102544,
+   "n": 100327,
+   "clusters": 728,
+   "mean": 0.117406
+  },
+  {
+   "year": 2008,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.225623,
+   "se": 0.0269048,
+   "n": 184054,
+   "clusters": 776,
+   "mean": 0.384251
+  },
+  {
+   "year": 2008,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.141832,
+   "se": 0.0266408,
+   "n": 184054,
+   "clusters": 776,
+   "mean": 0.384251
+  },
+  {
+   "year": 2008,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0303627,
+   "se": 0.0346535,
+   "n": 184054,
+   "clusters": 776,
+   "mean": 0.384251
+  },
+  {
+   "year": 2008,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.182703,
+   "se": 0.0236821,
+   "n": 184054,
+   "clusters": 776,
+   "mean": 0.384251
+  },
+  {
+   "year": 2008,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.105819,
+   "se": 0.0133042,
+   "n": 184054,
+   "clusters": 776,
+   "mean": 0.384251
+  },
+  {
+   "year": 2008,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0569364,
+   "se": 0.0154554,
+   "n": 184054,
+   "clusters": 776,
+   "mean": 0.384251
+  },
+  {
+   "year": 2008,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0605936,
+   "se": 0.00992827,
+   "n": 183894,
+   "clusters": 775,
+   "mean": 0.384384
+  },
+  {
+   "year": 2008,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0906772,
+   "se": 0.011077,
+   "n": 183894,
+   "clusters": 775,
+   "mean": 0.384384
+  },
+  {
+   "year": 2008,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0576452,
+   "se": 0.00804387,
+   "n": 183894,
+   "clusters": 775,
+   "mean": 0.384384
+  },
+  {
+   "year": 2009,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0665585,
+   "se": 0.00731765,
+   "n": 92747,
+   "clusters": 609,
+   "mean": 0.0979978
+  },
+  {
+   "year": 2009,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0713665,
+   "se": 0.00998559,
+   "n": 92747,
+   "clusters": 609,
+   "mean": 0.0979978
+  },
+  {
+   "year": 2009,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0441829,
+   "se": 0.00974915,
+   "n": 92747,
+   "clusters": 609,
+   "mean": 0.0979978
+  },
+  {
+   "year": 2009,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.06649,
+   "se": 0.00681294,
+   "n": 92747,
+   "clusters": 609,
+   "mean": 0.0979978
+  },
+  {
+   "year": 2009,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0665229,
+   "se": 0.00792469,
+   "n": 92747,
+   "clusters": 609,
+   "mean": 0.0979978
+  },
+  {
+   "year": 2009,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.042037,
+   "se": 0.007819,
+   "n": 92747,
+   "clusters": 609,
+   "mean": 0.0979978
+  },
+  {
+   "year": 2009,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0559645,
+   "se": 0.00581843,
+   "n": 92611,
+   "clusters": 609,
+   "mean": 0.0978825
+  },
+  {
+   "year": 2009,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0572013,
+   "se": 0.00828809,
+   "n": 92611,
+   "clusters": 609,
+   "mean": 0.0978825
+  },
+  {
+   "year": 2009,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0269797,
+   "se": 0.00693187,
+   "n": 92611,
+   "clusters": 609,
+   "mean": 0.0978825
+  },
+  {
+   "year": 2009,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.173697,
+   "se": 0.0258688,
+   "n": 257190,
+   "clusters": 803,
+   "mean": 0.219153
+  },
+  {
+   "year": 2009,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.107055,
+   "se": 0.0155994,
+   "n": 257190,
+   "clusters": 803,
+   "mean": 0.219153
+  },
+  {
+   "year": 2009,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.03877,
+   "se": 0.0173761,
+   "n": 257190,
+   "clusters": 803,
+   "mean": 0.219153
+  },
+  {
+   "year": 2009,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.12583,
+   "se": 0.0204969,
+   "n": 257190,
+   "clusters": 803,
+   "mean": 0.219153
+  },
+  {
+   "year": 2009,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0951593,
+   "se": 0.0112897,
+   "n": 257190,
+   "clusters": 803,
+   "mean": 0.219153
+  },
+  {
+   "year": 2009,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0485773,
+   "se": 0.0144503,
+   "n": 257190,
+   "clusters": 803,
+   "mean": 0.219153
+  },
+  {
+   "year": 2009,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0673365,
+   "se": 0.00903975,
+   "n": 257014,
+   "clusters": 803,
+   "mean": 0.219144
+  },
+  {
+   "year": 2009,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0816461,
+   "se": 0.00760507,
+   "n": 257014,
+   "clusters": 803,
+   "mean": 0.219144
+  },
+  {
+   "year": 2009,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0465466,
+   "se": 0.008221,
+   "n": 257014,
+   "clusters": 803,
+   "mean": 0.219144
+  },
+  {
+   "year": 2010,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0718215,
+   "se": 0.00842502,
+   "n": 83525,
+   "clusters": 558,
+   "mean": 0.106423
+  },
+  {
+   "year": 2010,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0827729,
+   "se": 0.0132343,
+   "n": 83525,
+   "clusters": 558,
+   "mean": 0.106423
+  },
+  {
+   "year": 2010,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0391378,
+   "se": 0.0114701,
+   "n": 83525,
+   "clusters": 558,
+   "mean": 0.106423
+  },
+  {
+   "year": 2010,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0646602,
+   "se": 0.00658027,
+   "n": 83525,
+   "clusters": 558,
+   "mean": 0.106423
+  },
+  {
+   "year": 2010,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0667609,
+   "se": 0.00806059,
+   "n": 83525,
+   "clusters": 558,
+   "mean": 0.106423
+  },
+  {
+   "year": 2010,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0383552,
+   "se": 0.00940392,
+   "n": 83525,
+   "clusters": 558,
+   "mean": 0.106423
+  },
+  {
+   "year": 2010,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.058214,
+   "se": 0.00592111,
+   "n": 83408,
+   "clusters": 558,
+   "mean": 0.106189
+  },
+  {
+   "year": 2010,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0594225,
+   "se": 0.00846403,
+   "n": 83408,
+   "clusters": 558,
+   "mean": 0.106189
+  },
+  {
+   "year": 2010,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0260631,
+   "se": 0.00699201,
+   "n": 83408,
+   "clusters": 558,
+   "mean": 0.106189
+  },
+  {
+   "year": 2010,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.17255,
+   "se": 0.0311201,
+   "n": 201741,
+   "clusters": 685,
+   "mean": 0.198457
+  },
+  {
+   "year": 2010,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.105325,
+   "se": 0.0127881,
+   "n": 201741,
+   "clusters": 685,
+   "mean": 0.198457
+  },
+  {
+   "year": 2010,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0128962,
+   "se": 0.0133884,
+   "n": 201741,
+   "clusters": 685,
+   "mean": 0.198457
+  },
+  {
+   "year": 2010,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.108981,
+   "se": 0.0229662,
+   "n": 201741,
+   "clusters": 685,
+   "mean": 0.198457
+  },
+  {
+   "year": 2010,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.089312,
+   "se": 0.0113097,
+   "n": 201741,
+   "clusters": 685,
+   "mean": 0.198457
+  },
+  {
+   "year": 2010,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0316925,
+   "se": 0.00906979,
+   "n": 201741,
+   "clusters": 685,
+   "mean": 0.198457
+  },
+  {
+   "year": 2010,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0739025,
+   "se": 0.00793651,
+   "n": 201618,
+   "clusters": 685,
+   "mean": 0.198455
+  },
+  {
+   "year": 2010,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0829101,
+   "se": 0.0106715,
+   "n": 201618,
+   "clusters": 685,
+   "mean": 0.198455
+  },
+  {
+   "year": 2010,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0358911,
+   "se": 0.00694055,
+   "n": 201618,
+   "clusters": 685,
+   "mean": 0.198455
+  },
+  {
+   "year": 2011,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.086432,
+   "se": 0.0104201,
+   "n": 79652,
+   "clusters": 584,
+   "mean": 0.11146
+  },
+  {
+   "year": 2011,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0640766,
+   "se": 0.00996727,
+   "n": 79652,
+   "clusters": 584,
+   "mean": 0.11146
+  },
+  {
+   "year": 2011,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0504516,
+   "se": 0.00993771,
+   "n": 79652,
+   "clusters": 584,
+   "mean": 0.11146
+  },
+  {
+   "year": 2011,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0753868,
+   "se": 0.00927748,
+   "n": 79652,
+   "clusters": 584,
+   "mean": 0.11146
+  },
+  {
+   "year": 2011,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.053001,
+   "se": 0.00724101,
+   "n": 79652,
+   "clusters": 584,
+   "mean": 0.11146
+  },
+  {
+   "year": 2011,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0496372,
+   "se": 0.00609906,
+   "n": 79652,
+   "clusters": 584,
+   "mean": 0.11146
+  },
+  {
+   "year": 2011,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0661171,
+   "se": 0.00712158,
+   "n": 79518,
+   "clusters": 584,
+   "mean": 0.111346
+  },
+  {
+   "year": 2011,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0430366,
+   "se": 0.00621285,
+   "n": 79518,
+   "clusters": 584,
+   "mean": 0.111346
+  },
+  {
+   "year": 2011,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0352142,
+   "se": 0.00499913,
+   "n": 79518,
+   "clusters": 584,
+   "mean": 0.111346
+  },
+  {
+   "year": 2011,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.153906,
+   "se": 0.0255572,
+   "n": 181834,
+   "clusters": 675,
+   "mean": 0.204329
+  },
+  {
+   "year": 2011,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.100376,
+   "se": 0.0214729,
+   "n": 181834,
+   "clusters": 675,
+   "mean": 0.204329
+  },
+  {
+   "year": 2011,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0199053,
+   "se": 0.0169706,
+   "n": 181834,
+   "clusters": 675,
+   "mean": 0.204329
+  },
+  {
+   "year": 2011,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0998393,
+   "se": 0.014613,
+   "n": 181834,
+   "clusters": 675,
+   "mean": 0.204329
+  },
+  {
+   "year": 2011,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.079724,
+   "se": 0.0178558,
+   "n": 181834,
+   "clusters": 675,
+   "mean": 0.204329
+  },
+  {
+   "year": 2011,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0256875,
+   "se": 0.0118926,
+   "n": 181834,
+   "clusters": 675,
+   "mean": 0.204329
+  },
+  {
+   "year": 2011,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.080168,
+   "se": 0.0109475,
+   "n": 181734,
+   "clusters": 675,
+   "mean": 0.204315
+  },
+  {
+   "year": 2011,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.065186,
+   "se": 0.0114108,
+   "n": 181734,
+   "clusters": 675,
+   "mean": 0.204315
+  },
+  {
+   "year": 2011,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0352431,
+   "se": 0.00774948,
+   "n": 181734,
+   "clusters": 675,
+   "mean": 0.204315
+  },
+  {
+   "year": 2012,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0973796,
+   "se": 0.0139492,
+   "n": 87325,
+   "clusters": 571,
+   "mean": 0.110266
+  },
+  {
+   "year": 2012,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0731094,
+   "se": 0.0121178,
+   "n": 87325,
+   "clusters": 571,
+   "mean": 0.110266
+  },
+  {
+   "year": 2012,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0439082,
+   "se": 0.00887804,
+   "n": 87325,
+   "clusters": 571,
+   "mean": 0.110266
+  },
+  {
+   "year": 2012,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0831479,
+   "se": 0.0119961,
+   "n": 87325,
+   "clusters": 571,
+   "mean": 0.110266
+  },
+  {
+   "year": 2012,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0553913,
+   "se": 0.0101265,
+   "n": 87325,
+   "clusters": 571,
+   "mean": 0.110266
+  },
+  {
+   "year": 2012,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0472771,
+   "se": 0.00666321,
+   "n": 87325,
+   "clusters": 571,
+   "mean": 0.110266
+  },
+  {
+   "year": 2012,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0667559,
+   "se": 0.00699678,
+   "n": 87203,
+   "clusters": 571,
+   "mean": 0.11018
+  },
+  {
+   "year": 2012,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0460516,
+   "se": 0.007724,
+   "n": 87203,
+   "clusters": 571,
+   "mean": 0.11018
+  },
+  {
+   "year": 2012,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0282844,
+   "se": 0.00607081,
+   "n": 87203,
+   "clusters": 571,
+   "mean": 0.11018
+  },
+  {
+   "year": 2012,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.124098,
+   "se": 0.0185946,
+   "n": 266534,
+   "clusters": 719,
+   "mean": 0.166129
+  },
+  {
+   "year": 2012,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0730253,
+   "se": 0.0112421,
+   "n": 266534,
+   "clusters": 719,
+   "mean": 0.166129
+  },
+  {
+   "year": 2012,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0231707,
+   "se": 0.0119909,
+   "n": 266534,
+   "clusters": 719,
+   "mean": 0.166129
+  },
+  {
+   "year": 2012,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0880128,
+   "se": 0.0109259,
+   "n": 266534,
+   "clusters": 719,
+   "mean": 0.166129
+  },
+  {
+   "year": 2012,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0645637,
+   "se": 0.00869761,
+   "n": 266534,
+   "clusters": 719,
+   "mean": 0.166129
+  },
+  {
+   "year": 2012,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.032023,
+   "se": 0.00904848,
+   "n": 266534,
+   "clusters": 719,
+   "mean": 0.166129
+  },
+  {
+   "year": 2012,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0721824,
+   "se": 0.00942042,
+   "n": 266409,
+   "clusters": 719,
+   "mean": 0.166143
+  },
+  {
+   "year": 2012,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.05523,
+   "se": 0.00753129,
+   "n": 266409,
+   "clusters": 719,
+   "mean": 0.166143
+  },
+  {
+   "year": 2012,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0417332,
+   "se": 0.00685929,
+   "n": 266409,
+   "clusters": 719,
+   "mean": 0.166143
+  },
+  {
+   "year": 2013,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0899007,
+   "se": 0.0137391,
+   "n": 99600,
+   "clusters": 609,
+   "mean": 0.108283
+  },
+  {
+   "year": 2013,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0573793,
+   "se": 0.0121141,
+   "n": 99600,
+   "clusters": 609,
+   "mean": 0.108283
+  },
+  {
+   "year": 2013,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0345894,
+   "se": 0.0086183,
+   "n": 99600,
+   "clusters": 609,
+   "mean": 0.108283
+  },
+  {
+   "year": 2013,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0749145,
+   "se": 0.0121371,
+   "n": 99600,
+   "clusters": 609,
+   "mean": 0.108283
+  },
+  {
+   "year": 2013,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0377237,
+   "se": 0.0110521,
+   "n": 99600,
+   "clusters": 609,
+   "mean": 0.108283
+  },
+  {
+   "year": 2013,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0493432,
+   "se": 0.00611381,
+   "n": 99600,
+   "clusters": 609,
+   "mean": 0.108283
+  },
+  {
+   "year": 2013,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0629938,
+   "se": 0.00769636,
+   "n": 99474,
+   "clusters": 608,
+   "mean": 0.108239
+  },
+  {
+   "year": 2013,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0337895,
+   "se": 0.00749165,
+   "n": 99474,
+   "clusters": 608,
+   "mean": 0.108239
+  },
+  {
+   "year": 2013,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0309917,
+   "se": 0.00448555,
+   "n": 99474,
+   "clusters": 608,
+   "mean": 0.108239
+  },
+  {
+   "year": 2013,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.120829,
+   "se": 0.0153595,
+   "n": 205548,
+   "clusters": 711,
+   "mean": 0.193371
+  },
+  {
+   "year": 2013,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0772004,
+   "se": 0.00958189,
+   "n": 205548,
+   "clusters": 711,
+   "mean": 0.193371
+  },
+  {
+   "year": 2013,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0301158,
+   "se": 0.0108776,
+   "n": 205548,
+   "clusters": 711,
+   "mean": 0.193371
+  },
+  {
+   "year": 2013,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0895694,
+   "se": 0.010174,
+   "n": 205548,
+   "clusters": 711,
+   "mean": 0.193371
+  },
+  {
+   "year": 2013,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0689277,
+   "se": 0.00804657,
+   "n": 205548,
+   "clusters": 711,
+   "mean": 0.193371
+  },
+  {
+   "year": 2013,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0425189,
+   "se": 0.00779076,
+   "n": 205548,
+   "clusters": 711,
+   "mean": 0.193371
+  },
+  {
+   "year": 2013,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0751786,
+   "se": 0.0084196,
+   "n": 205426,
+   "clusters": 710,
+   "mean": 0.193364
+  },
+  {
+   "year": 2013,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0648364,
+   "se": 0.00666287,
+   "n": 205426,
+   "clusters": 710,
+   "mean": 0.193364
+  },
+  {
+   "year": 2013,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.04989,
+   "se": 0.00628349,
+   "n": 205426,
+   "clusters": 710,
+   "mean": 0.193364
+  },
+  {
+   "year": 2014,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0823422,
+   "se": 0.0143484,
+   "n": 94460,
+   "clusters": 655,
+   "mean": 0.100942
+  },
+  {
+   "year": 2014,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0537942,
+   "se": 0.0116636,
+   "n": 94460,
+   "clusters": 655,
+   "mean": 0.100942
+  },
+  {
+   "year": 2014,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0453168,
+   "se": 0.00917393,
+   "n": 94460,
+   "clusters": 655,
+   "mean": 0.100942
+  },
+  {
+   "year": 2014,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0690012,
+   "se": 0.0126121,
+   "n": 94458,
+   "clusters": 655,
+   "mean": 0.100934
+  },
+  {
+   "year": 2014,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0305048,
+   "se": 0.0102082,
+   "n": 94458,
+   "clusters": 655,
+   "mean": 0.100934
+  },
+  {
+   "year": 2014,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0488366,
+   "se": 0.00716535,
+   "n": 94458,
+   "clusters": 655,
+   "mean": 0.100934
+  },
+  {
+   "year": 2014,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0556467,
+   "se": 0.00837035,
+   "n": 94322,
+   "clusters": 655,
+   "mean": 0.10091
+  },
+  {
+   "year": 2014,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0232454,
+   "se": 0.00717017,
+   "n": 94322,
+   "clusters": 655,
+   "mean": 0.10091
+  },
+  {
+   "year": 2014,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0288679,
+   "se": 0.00662098,
+   "n": 94322,
+   "clusters": 655,
+   "mean": 0.10091
+  },
+  {
+   "year": 2014,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.163314,
+   "se": 0.0248498,
+   "n": 93587,
+   "clusters": 645,
+   "mean": 0.285798
+  },
+  {
+   "year": 2014,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.110134,
+   "se": 0.0154095,
+   "n": 93587,
+   "clusters": 645,
+   "mean": 0.285798
+  },
+  {
+   "year": 2014,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0231312,
+   "se": 0.0172546,
+   "n": 93587,
+   "clusters": 645,
+   "mean": 0.285798
+  },
+  {
+   "year": 2014,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.118116,
+   "se": 0.016329,
+   "n": 93587,
+   "clusters": 645,
+   "mean": 0.285798
+  },
+  {
+   "year": 2014,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0976749,
+   "se": 0.0133598,
+   "n": 93587,
+   "clusters": 645,
+   "mean": 0.285798
+  },
+  {
+   "year": 2014,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0441328,
+   "se": 0.0128203,
+   "n": 93587,
+   "clusters": 645,
+   "mean": 0.285798
+  },
+  {
+   "year": 2014,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0895649,
+   "se": 0.00985925,
+   "n": 93496,
+   "clusters": 645,
+   "mean": 0.28582
+  },
+  {
+   "year": 2014,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0958794,
+   "se": 0.0117677,
+   "n": 93496,
+   "clusters": 645,
+   "mean": 0.28582
+  },
+  {
+   "year": 2014,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0550988,
+   "se": 0.00841371,
+   "n": 93496,
+   "clusters": 645,
+   "mean": 0.28582
+  },
+  {
+   "year": 2015,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0832428,
+   "se": 0.0120861,
+   "n": 106995,
+   "clusters": 667,
+   "mean": 0.092995
+  },
+  {
+   "year": 2015,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0516427,
+   "se": 0.00788965,
+   "n": 106995,
+   "clusters": 667,
+   "mean": 0.092995
+  },
+  {
+   "year": 2015,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.033195,
+   "se": 0.00631328,
+   "n": 106995,
+   "clusters": 667,
+   "mean": 0.092995
+  },
+  {
+   "year": 2015,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0710303,
+   "se": 0.0104497,
+   "n": 106995,
+   "clusters": 667,
+   "mean": 0.092995
+  },
+  {
+   "year": 2015,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0287257,
+   "se": 0.00694866,
+   "n": 106995,
+   "clusters": 667,
+   "mean": 0.092995
+  },
+  {
+   "year": 2015,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0360453,
+   "se": 0.00486774,
+   "n": 106995,
+   "clusters": 667,
+   "mean": 0.092995
+  },
+  {
+   "year": 2015,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0579249,
+   "se": 0.00717487,
+   "n": 106856,
+   "clusters": 667,
+   "mean": 0.0928633
+  },
+  {
+   "year": 2015,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0259313,
+   "se": 0.00550809,
+   "n": 106856,
+   "clusters": 667,
+   "mean": 0.0928633
+  },
+  {
+   "year": 2015,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0205115,
+   "se": 0.00472802,
+   "n": 106856,
+   "clusters": 667,
+   "mean": 0.0928633
+  },
+  {
+   "year": 2015,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.147789,
+   "se": 0.0233788,
+   "n": 133732,
+   "clusters": 680,
+   "mean": 0.256378
+  },
+  {
+   "year": 2015,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0632412,
+   "se": 0.0149487,
+   "n": 133732,
+   "clusters": 680,
+   "mean": 0.256378
+  },
+  {
+   "year": 2015,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0237084,
+   "se": 0.0147238,
+   "n": 133732,
+   "clusters": 680,
+   "mean": 0.256378
+  },
+  {
+   "year": 2015,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.112932,
+   "se": 0.0159942,
+   "n": 133732,
+   "clusters": 680,
+   "mean": 0.256378
+  },
+  {
+   "year": 2015,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0599329,
+   "se": 0.0122216,
+   "n": 133732,
+   "clusters": 680,
+   "mean": 0.256378
+  },
+  {
+   "year": 2015,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0440912,
+   "se": 0.0112006,
+   "n": 133732,
+   "clusters": 680,
+   "mean": 0.256378
+  },
+  {
+   "year": 2015,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0763488,
+   "se": 0.00932867,
+   "n": 133617,
+   "clusters": 679,
+   "mean": 0.256367
+  },
+  {
+   "year": 2015,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0658499,
+   "se": 0.00995496,
+   "n": 133617,
+   "clusters": 679,
+   "mean": 0.256367
+  },
+  {
+   "year": 2015,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0481836,
+   "se": 0.00790814,
+   "n": 133617,
+   "clusters": 679,
+   "mean": 0.256367
+  },
+  {
+   "year": 2016,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0918069,
+   "se": 0.0159947,
+   "n": 117223,
+   "clusters": 668,
+   "mean": 0.0937188
+  },
+  {
+   "year": 2016,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0556861,
+   "se": 0.00648237,
+   "n": 117223,
+   "clusters": 668,
+   "mean": 0.0937188
+  },
+  {
+   "year": 2016,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0358148,
+   "se": 0.00790062,
+   "n": 117223,
+   "clusters": 668,
+   "mean": 0.0937188
+  },
+  {
+   "year": 2016,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0814863,
+   "se": 0.0142977,
+   "n": 117223,
+   "clusters": 668,
+   "mean": 0.0937188
+  },
+  {
+   "year": 2016,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0354259,
+   "se": 0.00555815,
+   "n": 117223,
+   "clusters": 668,
+   "mean": 0.0937188
+  },
+  {
+   "year": 2016,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0387931,
+   "se": 0.00627496,
+   "n": 117223,
+   "clusters": 668,
+   "mean": 0.0937188
+  },
+  {
+   "year": 2016,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0616827,
+   "se": 0.0089477,
+   "n": 117091,
+   "clusters": 667,
+   "mean": 0.0936878
+  },
+  {
+   "year": 2016,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0285279,
+   "se": 0.00436058,
+   "n": 117091,
+   "clusters": 667,
+   "mean": 0.0936878
+  },
+  {
+   "year": 2016,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0258015,
+   "se": 0.00420184,
+   "n": 117091,
+   "clusters": 667,
+   "mean": 0.0936878
+  },
+  {
+   "year": 2016,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.147128,
+   "se": 0.0217153,
+   "n": 158802,
+   "clusters": 690,
+   "mean": 0.27795
+  },
+  {
+   "year": 2016,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0678102,
+   "se": 0.01843,
+   "n": 158802,
+   "clusters": 690,
+   "mean": 0.27795
+  },
+  {
+   "year": 2016,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.00311841,
+   "se": 0.0207144,
+   "n": 158802,
+   "clusters": 690,
+   "mean": 0.27795
+  },
+  {
+   "year": 2016,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.108068,
+   "se": 0.0114516,
+   "n": 158802,
+   "clusters": 690,
+   "mean": 0.27795
+  },
+  {
+   "year": 2016,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0590647,
+   "se": 0.0141153,
+   "n": 158802,
+   "clusters": 690,
+   "mean": 0.27795
+  },
+  {
+   "year": 2016,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0138185,
+   "se": 0.0174288,
+   "n": 158802,
+   "clusters": 690,
+   "mean": 0.27795
+  },
+  {
+   "year": 2016,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0742638,
+   "se": 0.0108555,
+   "n": 158697,
+   "clusters": 690,
+   "mean": 0.27797
+  },
+  {
+   "year": 2016,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0592578,
+   "se": 0.00887999,
+   "n": 158697,
+   "clusters": 690,
+   "mean": 0.27797
+  },
+  {
+   "year": 2016,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.040873,
+   "se": 0.00854467,
+   "n": 158697,
+   "clusters": 690,
+   "mean": 0.27797
+  },
+  {
+   "year": 2017,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0767142,
+   "se": 0.0116895,
+   "n": 122938,
+   "clusters": 672,
+   "mean": 0.0876458
+  },
+  {
+   "year": 2017,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0435563,
+   "se": 0.00577442,
+   "n": 122938,
+   "clusters": 672,
+   "mean": 0.0876458
+  },
+  {
+   "year": 2017,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0298105,
+   "se": 0.00681236,
+   "n": 122938,
+   "clusters": 672,
+   "mean": 0.0876458
+  },
+  {
+   "year": 2017,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0669591,
+   "se": 0.0101782,
+   "n": 122938,
+   "clusters": 672,
+   "mean": 0.0876458
+  },
+  {
+   "year": 2017,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0287005,
+   "se": 0.00480703,
+   "n": 122938,
+   "clusters": 672,
+   "mean": 0.0876458
+  },
+  {
+   "year": 2017,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0369904,
+   "se": 0.00482046,
+   "n": 122938,
+   "clusters": 672,
+   "mean": 0.0876458
+  },
+  {
+   "year": 2017,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0572092,
+   "se": 0.00853857,
+   "n": 122817,
+   "clusters": 672,
+   "mean": 0.08761
+  },
+  {
+   "year": 2017,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0262502,
+   "se": 0.0041206,
+   "n": 122817,
+   "clusters": 672,
+   "mean": 0.08761
+  },
+  {
+   "year": 2017,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0263962,
+   "se": 0.00477467,
+   "n": 122817,
+   "clusters": 672,
+   "mean": 0.08761
+  },
+  {
+   "year": 2017,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.135729,
+   "se": 0.0176679,
+   "n": 91875,
+   "clusters": 628,
+   "mean": 0.265665
+  },
+  {
+   "year": 2017,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0873365,
+   "se": 0.0136906,
+   "n": 91875,
+   "clusters": 628,
+   "mean": 0.265665
+  },
+  {
+   "year": 2017,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0216882,
+   "se": 0.0141296,
+   "n": 91875,
+   "clusters": 628,
+   "mean": 0.265665
+  },
+  {
+   "year": 2017,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.101913,
+   "se": 0.0121961,
+   "n": 91875,
+   "clusters": 628,
+   "mean": 0.265665
+  },
+  {
+   "year": 2017,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0769724,
+   "se": 0.010612,
+   "n": 91875,
+   "clusters": 628,
+   "mean": 0.265665
+  },
+  {
+   "year": 2017,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0385064,
+   "se": 0.00993379,
+   "n": 91875,
+   "clusters": 628,
+   "mean": 0.265665
+  },
+  {
+   "year": 2017,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0825146,
+   "se": 0.0099588,
+   "n": 91784,
+   "clusters": 628,
+   "mean": 0.265591
+  },
+  {
+   "year": 2017,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0828877,
+   "se": 0.00791294,
+   "n": 91784,
+   "clusters": 628,
+   "mean": 0.265591
+  },
+  {
+   "year": 2017,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0472481,
+   "se": 0.00827207,
+   "n": 91784,
+   "clusters": 628,
+   "mean": 0.265591
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0751019,
+   "se": 0.00818268,
+   "n": 121133,
+   "clusters": 688,
+   "mean": 0.0777162
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0527719,
+   "se": 0.0059258,
+   "n": 121133,
+   "clusters": 688,
+   "mean": 0.0777162
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0327895,
+   "se": 0.00727133,
+   "n": 121133,
+   "clusters": 688,
+   "mean": 0.0777162
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0589862,
+   "se": 0.00603155,
+   "n": 121125,
+   "clusters": 688,
+   "mean": 0.0776883
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0371627,
+   "se": 0.00565714,
+   "n": 121125,
+   "clusters": 688,
+   "mean": 0.0776883
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0401193,
+   "se": 0.00679843,
+   "n": 121125,
+   "clusters": 688,
+   "mean": 0.0776883
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0527335,
+   "se": 0.00513818,
+   "n": 120983,
+   "clusters": 688,
+   "mean": 0.0776638
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0305785,
+   "se": 0.00465809,
+   "n": 120983,
+   "clusters": 688,
+   "mean": 0.0776638
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0253383,
+   "se": 0.00393317,
+   "n": 120983,
+   "clusters": 688,
+   "mean": 0.0776638
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Black",
+   "est": 0.0365643,
+   "se": 0.003822,
+   "n": 120983,
+   "clusters": 688,
+   "mean": 0.0776638
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Hispanic",
+   "est": 0.0240405,
+   "se": 0.00445815,
+   "n": 120983,
+   "clusters": 688,
+   "mean": 0.0776638
+  },
+  {
+   "year": 2018,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Asian",
+   "est": 0.0226569,
+   "se": 0.00378644,
+   "n": 120983,
+   "clusters": 688,
+   "mean": 0.0776638
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.180441,
+   "se": 0.0222129,
+   "n": 62452,
+   "clusters": 584,
+   "mean": 0.315779
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0965445,
+   "se": 0.0157525,
+   "n": 62452,
+   "clusters": 584,
+   "mean": 0.315779
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0494098,
+   "se": 0.0171411,
+   "n": 62452,
+   "clusters": 584,
+   "mean": 0.315779
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.112689,
+   "se": 0.0143991,
+   "n": 62422,
+   "clusters": 584,
+   "mean": 0.315738
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0825571,
+   "se": 0.0161367,
+   "n": 62422,
+   "clusters": 584,
+   "mean": 0.315738
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0849427,
+   "se": 0.0158555,
+   "n": 62422,
+   "clusters": 584,
+   "mean": 0.315738
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.092351,
+   "se": 0.0118643,
+   "n": 62336,
+   "clusters": 584,
+   "mean": 0.315869
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0827182,
+   "se": 0.0114125,
+   "n": 62336,
+   "clusters": 584,
+   "mean": 0.315869
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0847017,
+   "se": 0.0101921,
+   "n": 62336,
+   "clusters": 584,
+   "mean": 0.315869
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Black",
+   "est": 0.0619811,
+   "se": 0.00863085,
+   "n": 62336,
+   "clusters": 584,
+   "mean": 0.315869
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Hispanic",
+   "est": 0.0608088,
+   "se": 0.00870237,
+   "n": 62336,
+   "clusters": 584,
+   "mean": 0.315869
+  },
+  {
+   "year": 2018,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Asian",
+   "est": 0.0684569,
+   "se": 0.00777163,
+   "n": 62336,
+   "clusters": 584,
+   "mean": 0.315869
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0654756,
+   "se": 0.00627626,
+   "n": 126922,
+   "clusters": 677,
+   "mean": 0.0655757
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0421,
+   "se": 0.00477382,
+   "n": 126922,
+   "clusters": 677,
+   "mean": 0.0655757
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0282833,
+   "se": 0.00510599,
+   "n": 126922,
+   "clusters": 677,
+   "mean": 0.0655757
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0526412,
+   "se": 0.00493992,
+   "n": 126920,
+   "clusters": 677,
+   "mean": 0.0655689
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0289133,
+   "se": 0.00483851,
+   "n": 126920,
+   "clusters": 677,
+   "mean": 0.0655689
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0345036,
+   "se": 0.00521317,
+   "n": 126920,
+   "clusters": 677,
+   "mean": 0.0655689
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0462763,
+   "se": 0.00449703,
+   "n": 126794,
+   "clusters": 677,
+   "mean": 0.0655315
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0232957,
+   "se": 0.00347059,
+   "n": 126794,
+   "clusters": 677,
+   "mean": 0.0655315
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0187858,
+   "se": 0.00378004,
+   "n": 126794,
+   "clusters": 677,
+   "mean": 0.0655315
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Black",
+   "est": 0.033488,
+   "se": 0.00374861,
+   "n": 126794,
+   "clusters": 677,
+   "mean": 0.0655315
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Hispanic",
+   "est": 0.0181851,
+   "se": 0.00313673,
+   "n": 126794,
+   "clusters": 677,
+   "mean": 0.0655315
+  },
+  {
+   "year": 2019,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Asian",
+   "est": 0.0181355,
+   "se": 0.00350236,
+   "n": 126794,
+   "clusters": 677,
+   "mean": 0.0655315
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.143602,
+   "se": 0.0224949,
+   "n": 114319,
+   "clusters": 647,
+   "mean": 0.192243
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0767224,
+   "se": 0.0155455,
+   "n": 114319,
+   "clusters": 647,
+   "mean": 0.192243
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.00153114,
+   "se": 0.012742,
+   "n": 114319,
+   "clusters": 647,
+   "mean": 0.192243
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.100305,
+   "se": 0.0153102,
+   "n": 114318,
+   "clusters": 647,
+   "mean": 0.192236
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0693153,
+   "se": 0.0148886,
+   "n": 114318,
+   "clusters": 647,
+   "mean": 0.192236
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0336993,
+   "se": 0.0112006,
+   "n": 114318,
+   "clusters": 647,
+   "mean": 0.192236
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0859263,
+   "se": 0.0109613,
+   "n": 114216,
+   "clusters": 646,
+   "mean": 0.192267
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0663871,
+   "se": 0.0104165,
+   "n": 114216,
+   "clusters": 646,
+   "mean": 0.192267
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0353012,
+   "se": 0.00933029,
+   "n": 114216,
+   "clusters": 646,
+   "mean": 0.192267
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Black",
+   "est": 0.0583171,
+   "se": 0.00645321,
+   "n": 114216,
+   "clusters": 646,
+   "mean": 0.192267
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Hispanic",
+   "est": 0.0469097,
+   "se": 0.00641581,
+   "n": 114216,
+   "clusters": 646,
+   "mean": 0.192267
+  },
+  {
+   "year": 2019,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Asian",
+   "est": 0.0359374,
+   "se": 0.00772479,
+   "n": 114216,
+   "clusters": 646,
+   "mean": 0.192267
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0680733,
+   "se": 0.00765031,
+   "n": 141179,
+   "clusters": 681,
+   "mean": 0.0669363
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0381332,
+   "se": 0.00485266,
+   "n": 141179,
+   "clusters": 681,
+   "mean": 0.0669363
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0265922,
+   "se": 0.00540017,
+   "n": 141179,
+   "clusters": 681,
+   "mean": 0.0669363
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0595848,
+   "se": 0.00650758,
+   "n": 141179,
+   "clusters": 681,
+   "mean": 0.0669363
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0245487,
+   "se": 0.00496087,
+   "n": 141179,
+   "clusters": 681,
+   "mean": 0.0669363
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0263157,
+   "se": 0.00570713,
+   "n": 141179,
+   "clusters": 681,
+   "mean": 0.0669363
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0456739,
+   "se": 0.00433869,
+   "n": 141044,
+   "clusters": 681,
+   "mean": 0.0669578
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0181764,
+   "se": 0.0037318,
+   "n": 141044,
+   "clusters": 681,
+   "mean": 0.0669578
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0169821,
+   "se": 0.004693,
+   "n": 141044,
+   "clusters": 681,
+   "mean": 0.0669578
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Black",
+   "est": 0.0299806,
+   "se": 0.00295067,
+   "n": 141044,
+   "clusters": 681,
+   "mean": 0.0669578
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Hispanic",
+   "est": 0.0149894,
+   "se": 0.00280107,
+   "n": 141044,
+   "clusters": 681,
+   "mean": 0.0669578
+  },
+  {
+   "year": 2020,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Asian",
+   "est": 0.0162106,
+   "se": 0.00375597,
+   "n": 141044,
+   "clusters": 681,
+   "mean": 0.0669578
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0943024,
+   "se": 0.0219564,
+   "n": 325916,
+   "clusters": 802,
+   "mean": 0.123222
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0681455,
+   "se": 0.0142166,
+   "n": 325916,
+   "clusters": 802,
+   "mean": 0.123222
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0177412,
+   "se": 0.0108274,
+   "n": 325916,
+   "clusters": 802,
+   "mean": 0.123222
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0696124,
+   "se": 0.0140713,
+   "n": 325916,
+   "clusters": 802,
+   "mean": 0.123222
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0508335,
+   "se": 0.0126405,
+   "n": 325916,
+   "clusters": 802,
+   "mean": 0.123222
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0205653,
+   "se": 0.00855525,
+   "n": 325916,
+   "clusters": 802,
+   "mean": 0.123222
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0638815,
+   "se": 0.0125453,
+   "n": 325784,
+   "clusters": 802,
+   "mean": 0.123247
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0523474,
+   "se": 0.0103965,
+   "n": 325784,
+   "clusters": 802,
+   "mean": 0.123247
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0157127,
+   "se": 0.00758966,
+   "n": 325784,
+   "clusters": 802,
+   "mean": 0.123247
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Black",
+   "est": 0.0466565,
+   "se": 0.00924594,
+   "n": 325784,
+   "clusters": 802,
+   "mean": 0.123247
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Hispanic",
+   "est": 0.0395767,
+   "se": 0.00721813,
+   "n": 325784,
+   "clusters": 802,
+   "mean": 0.123247
+  },
+  {
+   "year": 2020,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Asian",
+   "est": 0.0153866,
+   "se": 0.00602531,
+   "n": 325784,
+   "clusters": 802,
+   "mean": 0.123247
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0564662,
+   "se": 0.00711326,
+   "n": 156450,
+   "clusters": 730,
+   "mean": 0.0613998
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0319401,
+   "se": 0.00520439,
+   "n": 156450,
+   "clusters": 730,
+   "mean": 0.0613998
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0155413,
+   "se": 0.00424708,
+   "n": 156450,
+   "clusters": 730,
+   "mean": 0.0613998
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0465883,
+   "se": 0.00650217,
+   "n": 156450,
+   "clusters": 730,
+   "mean": 0.0613998
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0203455,
+   "se": 0.00470079,
+   "n": 156450,
+   "clusters": 730,
+   "mean": 0.0613998
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0183114,
+   "se": 0.00331074,
+   "n": 156450,
+   "clusters": 730,
+   "mean": 0.0613998
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0365271,
+   "se": 0.00511665,
+   "n": 156301,
+   "clusters": 730,
+   "mean": 0.0613816
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0139219,
+   "se": 0.00384562,
+   "n": 156301,
+   "clusters": 730,
+   "mean": 0.0613816
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.00620072,
+   "se": 0.00335242,
+   "n": 156301,
+   "clusters": 730,
+   "mean": 0.0613816
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Black",
+   "est": 0.0245167,
+   "se": 0.00336256,
+   "n": 156301,
+   "clusters": 730,
+   "mean": 0.0613816
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Hispanic",
+   "est": 0.0131519,
+   "se": 0.00310607,
+   "n": 156301,
+   "clusters": 730,
+   "mean": 0.0613816
+  },
+  {
+   "year": 2021,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Asian",
+   "est": 0.00896775,
+   "se": 0.00319283,
+   "n": 156301,
+   "clusters": 730,
+   "mean": 0.0613816
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0987642,
+   "se": 0.0152069,
+   "n": 303041,
+   "clusters": 767,
+   "mean": 0.134804
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0632231,
+   "se": 0.0103522,
+   "n": 303041,
+   "clusters": 767,
+   "mean": 0.134804
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0155809,
+   "se": 0.00962774,
+   "n": 303041,
+   "clusters": 767,
+   "mean": 0.134804
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0662086,
+   "se": 0.00904159,
+   "n": 303041,
+   "clusters": 767,
+   "mean": 0.134804
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0403097,
+   "se": 0.00870709,
+   "n": 303041,
+   "clusters": 767,
+   "mean": 0.134804
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0249351,
+   "se": 0.00651017,
+   "n": 303041,
+   "clusters": 767,
+   "mean": 0.134804
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0608561,
+   "se": 0.00760232,
+   "n": 302908,
+   "clusters": 767,
+   "mean": 0.13481
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0460871,
+   "se": 0.00766317,
+   "n": 302908,
+   "clusters": 767,
+   "mean": 0.13481
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0221974,
+   "se": 0.00713697,
+   "n": 302908,
+   "clusters": 767,
+   "mean": 0.13481
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Black",
+   "est": 0.041888,
+   "se": 0.00406536,
+   "n": 302908,
+   "clusters": 767,
+   "mean": 0.13481
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Hispanic",
+   "est": 0.0344159,
+   "se": 0.00414027,
+   "n": 302908,
+   "clusters": 767,
+   "mean": 0.13481
+  },
+  {
+   "year": 2021,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Asian",
+   "est": 0.0190241,
+   "se": 0.00540235,
+   "n": 302908,
+   "clusters": 767,
+   "mean": 0.13481
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0786279,
+   "se": 0.0109307,
+   "n": 124281,
+   "clusters": 768,
+   "mean": 0.0737925
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0360479,
+   "se": 0.00480703,
+   "n": 124281,
+   "clusters": 768,
+   "mean": 0.0737925
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0338097,
+   "se": 0.00697589,
+   "n": 124281,
+   "clusters": 768,
+   "mean": 0.0737925
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0629413,
+   "se": 0.0101244,
+   "n": 124281,
+   "clusters": 768,
+   "mean": 0.0737925
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0215455,
+   "se": 0.004886,
+   "n": 124281,
+   "clusters": 768,
+   "mean": 0.0737925
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.032375,
+   "se": 0.00598133,
+   "n": 124281,
+   "clusters": 768,
+   "mean": 0.0737925
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0485768,
+   "se": 0.00727226,
+   "n": 124141,
+   "clusters": 768,
+   "mean": 0.073771
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0174712,
+   "se": 0.00411073,
+   "n": 124141,
+   "clusters": 768,
+   "mean": 0.073771
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0206581,
+   "se": 0.00529062,
+   "n": 124141,
+   "clusters": 768,
+   "mean": 0.073771
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Black",
+   "est": 0.0314048,
+   "se": 0.0038524,
+   "n": 124141,
+   "clusters": 768,
+   "mean": 0.073771
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Hispanic",
+   "est": 0.0116959,
+   "se": 0.00307584,
+   "n": 124141,
+   "clusters": 768,
+   "mean": 0.073771
+  },
+  {
+   "year": 2022,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Asian",
+   "est": 0.0192741,
+   "se": 0.00453064,
+   "n": 124141,
+   "clusters": 768,
+   "mean": 0.073771
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.128672,
+   "se": 0.0167103,
+   "n": 72838,
+   "clusters": 629,
+   "mean": 0.248881
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0970713,
+   "se": 0.0168196,
+   "n": 72838,
+   "clusters": 629,
+   "mean": 0.248881
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0397895,
+   "se": 0.0147684,
+   "n": 72838,
+   "clusters": 629,
+   "mean": 0.248881
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0742531,
+   "se": 0.0110404,
+   "n": 72838,
+   "clusters": 629,
+   "mean": 0.248881
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0670346,
+   "se": 0.015642,
+   "n": 72838,
+   "clusters": 629,
+   "mean": 0.248881
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0461211,
+   "se": 0.00982871,
+   "n": 72838,
+   "clusters": 629,
+   "mean": 0.248881
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0651412,
+   "se": 0.00840486,
+   "n": 72730,
+   "clusters": 629,
+   "mean": 0.249017
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.061849,
+   "se": 0.0126265,
+   "n": 72730,
+   "clusters": 629,
+   "mean": 0.249017
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0523945,
+   "se": 0.00860635,
+   "n": 72730,
+   "clusters": 629,
+   "mean": 0.249017
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Black",
+   "est": 0.0460247,
+   "se": 0.00507501,
+   "n": 72730,
+   "clusters": 629,
+   "mean": 0.249017
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Hispanic",
+   "est": 0.0371633,
+   "se": 0.0080336,
+   "n": 72730,
+   "clusters": 629,
+   "mean": 0.249017
+  },
+  {
+   "year": 2022,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Asian",
+   "est": 0.0400726,
+   "se": 0.00824057,
+   "n": 72730,
+   "clusters": 629,
+   "mean": 0.249017
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0932543,
+   "se": 0.015178,
+   "n": 93732,
+   "clusters": 719,
+   "mean": 0.0775296
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0515152,
+   "se": 0.00723719,
+   "n": 93732,
+   "clusters": 719,
+   "mean": 0.0775296
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0377112,
+   "se": 0.00650962,
+   "n": 93732,
+   "clusters": 719,
+   "mean": 0.0775296
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0752412,
+   "se": 0.0112902,
+   "n": 93732,
+   "clusters": 719,
+   "mean": 0.0775296
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0338844,
+   "se": 0.00599816,
+   "n": 93732,
+   "clusters": 719,
+   "mean": 0.0775296
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0370975,
+   "se": 0.00525856,
+   "n": 93732,
+   "clusters": 719,
+   "mean": 0.0775296
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0594282,
+   "se": 0.00756965,
+   "n": 93596,
+   "clusters": 719,
+   "mean": 0.077514
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0263257,
+   "se": 0.00531574,
+   "n": 93596,
+   "clusters": 719,
+   "mean": 0.077514
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.025072,
+   "se": 0.00419187,
+   "n": 93596,
+   "clusters": 719,
+   "mean": 0.077514
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Black",
+   "est": 0.0437473,
+   "se": 0.00534572,
+   "n": 93596,
+   "clusters": 719,
+   "mean": 0.077514
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Hispanic",
+   "est": 0.0182605,
+   "se": 0.00416681,
+   "n": 93596,
+   "clusters": 719,
+   "mean": 0.077514
+  },
+  {
+   "year": 2023,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Asian",
+   "est": 0.022197,
+   "se": 0.00439311,
+   "n": 93596,
+   "clusters": 719,
+   "mean": 0.077514
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.113832,
+   "se": 0.0214948,
+   "n": 24571,
+   "clusters": 485,
+   "mean": 0.322168
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.138003,
+   "se": 0.0199688,
+   "n": 24571,
+   "clusters": 485,
+   "mean": 0.322168
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0775669,
+   "se": 0.0237675,
+   "n": 24571,
+   "clusters": 485,
+   "mean": 0.322168
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0690277,
+   "se": 0.0161198,
+   "n": 24571,
+   "clusters": 485,
+   "mean": 0.322168
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0929697,
+   "se": 0.0184482,
+   "n": 24571,
+   "clusters": 485,
+   "mean": 0.322168
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0560158,
+   "se": 0.0201065,
+   "n": 24571,
+   "clusters": 485,
+   "mean": 0.322168
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0542284,
+   "se": 0.0141595,
+   "n": 24476,
+   "clusters": 485,
+   "mean": 0.322561
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0745341,
+   "se": 0.0132919,
+   "n": 24476,
+   "clusters": 485,
+   "mean": 0.322561
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0475218,
+   "se": 0.0194941,
+   "n": 24476,
+   "clusters": 485,
+   "mean": 0.322561
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Black",
+   "est": 0.0475194,
+   "se": 0.0121098,
+   "n": 24476,
+   "clusters": 485,
+   "mean": 0.322561
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Hispanic",
+   "est": 0.0464938,
+   "se": 0.0146444,
+   "n": 24476,
+   "clusters": 485,
+   "mean": 0.322561
+  },
+  {
+   "year": 2023,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Asian",
+   "est": 0.0414458,
+   "se": 0.0159678,
+   "n": 24476,
+   "clusters": 485,
+   "mean": 0.322561
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0790122,
+   "se": 0.0155139,
+   "n": 94450,
+   "clusters": 680,
+   "mean": 0.0683536
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.043747,
+   "se": 0.00565239,
+   "n": 94450,
+   "clusters": 680,
+   "mean": 0.0683536
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0251536,
+   "se": 0.00713199,
+   "n": 94450,
+   "clusters": 680,
+   "mean": 0.0683536
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0648591,
+   "se": 0.0110014,
+   "n": 94450,
+   "clusters": 680,
+   "mean": 0.0683536
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0266701,
+   "se": 0.00407911,
+   "n": 94450,
+   "clusters": 680,
+   "mean": 0.0683536
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0264341,
+   "se": 0.00572958,
+   "n": 94450,
+   "clusters": 680,
+   "mean": 0.0683536
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0510482,
+   "se": 0.00591547,
+   "n": 94332,
+   "clusters": 680,
+   "mean": 0.0683331
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0224509,
+   "se": 0.00349893,
+   "n": 94332,
+   "clusters": 680,
+   "mean": 0.0683331
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0135425,
+   "se": 0.00373899,
+   "n": 94332,
+   "clusters": 680,
+   "mean": 0.0683331
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Black",
+   "est": 0.0374444,
+   "se": 0.0044397,
+   "n": 94332,
+   "clusters": 680,
+   "mean": 0.0683331
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Hispanic",
+   "est": 0.0178743,
+   "se": 0.00279836,
+   "n": 94332,
+   "clusters": 680,
+   "mean": 0.0683331
+  },
+  {
+   "year": 2024,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Asian",
+   "est": 0.0131063,
+   "se": 0.00366794,
+   "n": 94332,
+   "clusters": 680,
+   "mean": 0.0683331
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0962783,
+   "se": 0.0147548,
+   "n": 40013,
+   "clusters": 525,
+   "mean": 0.255642
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0560478,
+   "se": 0.0150277,
+   "n": 40013,
+   "clusters": 525,
+   "mean": 0.255642
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.029782,
+   "se": 0.0192173,
+   "n": 40013,
+   "clusters": 525,
+   "mean": 0.255642
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0692586,
+   "se": 0.00922968,
+   "n": 40013,
+   "clusters": 525,
+   "mean": 0.255642
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0557871,
+   "se": 0.0104095,
+   "n": 40013,
+   "clusters": 525,
+   "mean": 0.255642
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0386781,
+   "se": 0.0172995,
+   "n": 40013,
+   "clusters": 525,
+   "mean": 0.255642
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.059933,
+   "se": 0.00873888,
+   "n": 39902,
+   "clusters": 524,
+   "mean": 0.255852
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0473958,
+   "se": 0.00840169,
+   "n": 39902,
+   "clusters": 524,
+   "mean": 0.255852
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0309065,
+   "se": 0.0141775,
+   "n": 39902,
+   "clusters": 524,
+   "mean": 0.255852
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Black",
+   "est": 0.0486467,
+   "se": 0.00689758,
+   "n": 39902,
+   "clusters": 524,
+   "mean": 0.255852
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Hispanic",
+   "est": 0.0385708,
+   "se": 0.00785994,
+   "n": 39902,
+   "clusters": 524,
+   "mean": 0.255852
+  },
+  {
+   "year": 2024,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Asian",
+   "est": 0.035867,
+   "se": 0.0124129,
+   "n": 39902,
+   "clusters": 524,
+   "mean": 0.255852
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0971302,
+   "se": 0.0199227,
+   "n": 95306,
+   "clusters": 686,
+   "mean": 0.0691142
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0465515,
+   "se": 0.00739204,
+   "n": 95306,
+   "clusters": 686,
+   "mean": 0.0691142
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0411691,
+   "se": 0.00848609,
+   "n": 95306,
+   "clusters": 686,
+   "mean": 0.0691142
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0778237,
+   "se": 0.013718,
+   "n": 95306,
+   "clusters": 686,
+   "mean": 0.0691142
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0313351,
+   "se": 0.00531045,
+   "n": 95306,
+   "clusters": 686,
+   "mean": 0.0691142
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0357734,
+   "se": 0.00755178,
+   "n": 95306,
+   "clusters": 686,
+   "mean": 0.0691142
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0618216,
+   "se": 0.00654363,
+   "n": 95162,
+   "clusters": 686,
+   "mean": 0.0691032
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0261796,
+   "se": 0.00475674,
+   "n": 95162,
+   "clusters": 686,
+   "mean": 0.0691032
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0227693,
+   "se": 0.00488493,
+   "n": 95162,
+   "clusters": 686,
+   "mean": 0.0691032
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Black",
+   "est": 0.0500925,
+   "se": 0.0057111,
+   "n": 95162,
+   "clusters": 686,
+   "mean": 0.0691032
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Hispanic",
+   "est": 0.0193235,
+   "se": 0.00337804,
+   "n": 95162,
+   "clusters": 686,
+   "mean": 0.0691032
+  },
+  {
+   "year": 2025,
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Asian",
+   "est": 0.0181766,
+   "se": 0.00398176,
+   "n": 95162,
+   "clusters": 686,
+   "mean": 0.0691032
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0977624,
+   "se": 0.0172673,
+   "n": 53586,
+   "clusters": 549,
+   "mean": 0.22909
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0606035,
+   "se": 0.0175929,
+   "n": 53586,
+   "clusters": 549,
+   "mean": 0.22909
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": -0.0321126,
+   "se": 0.0164059,
+   "n": 53586,
+   "clusters": 549,
+   "mean": 0.22909
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0570502,
+   "se": 0.0111165,
+   "n": 53586,
+   "clusters": 549,
+   "mean": 0.22909
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0569905,
+   "se": 0.0110675,
+   "n": 53586,
+   "clusters": 549,
+   "mean": 0.22909
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0031125,
+   "se": 0.0152422,
+   "n": 53586,
+   "clusters": 549,
+   "mean": 0.22909
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.049209,
+   "se": 0.00907383,
+   "n": 53477,
+   "clusters": 549,
+   "mean": 0.229127
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0479459,
+   "se": 0.0102047,
+   "n": 53477,
+   "clusters": 549,
+   "mean": 0.229127
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.00651623,
+   "se": 0.0106662,
+   "n": 53477,
+   "clusters": 549,
+   "mean": 0.229127
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Black",
+   "est": 0.0373487,
+   "se": 0.00752554,
+   "n": 53477,
+   "clusters": 549,
+   "mean": 0.229127
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Hispanic",
+   "est": 0.0378947,
+   "se": 0.00812521,
+   "n": 53477,
+   "clusters": 549,
+   "mean": 0.229127
+  },
+  {
+   "year": 2025,
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Asian",
+   "est": 0.014898,
+   "se": 0.00856633,
+   "n": 53477,
+   "clusters": 549,
+   "mean": 0.229127
+  }
+ ],
+ "eras": [
+  {
+   "era": "2004-2011",
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0982932,
+   "se": 0.00668238,
+   "n": 1015454,
+   "clusters": 2094,
+   "mean": 0.111702
+  },
+  {
+   "era": "2004-2011",
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0830401,
+   "se": 0.00763993,
+   "n": 1015454,
+   "clusters": 2094,
+   "mean": 0.111702
+  },
+  {
+   "era": "2004-2011",
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0460297,
+   "se": 0.00576513,
+   "n": 1015454,
+   "clusters": 2094,
+   "mean": 0.111702
+  },
+  {
+   "era": "2004-2011",
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0855046,
+   "se": 0.00515572,
+   "n": 1015454,
+   "clusters": 2094,
+   "mean": 0.111702
+  },
+  {
+   "era": "2004-2011",
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0782841,
+   "se": 0.00547707,
+   "n": 1015454,
+   "clusters": 2094,
+   "mean": 0.111702
+  },
+  {
+   "era": "2004-2011",
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0518301,
+   "se": 0.00402199,
+   "n": 1015454,
+   "clusters": 2094,
+   "mean": 0.111702
+  },
+  {
+   "era": "2004-2011",
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0548708,
+   "se": 0.00373617,
+   "n": 1014102,
+   "clusters": 2094,
+   "mean": 0.11163
+  },
+  {
+   "era": "2004-2011",
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0398058,
+   "se": 0.00600844,
+   "n": 1014102,
+   "clusters": 2094,
+   "mean": 0.11163
+  },
+  {
+   "era": "2004-2011",
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0258112,
+   "se": 0.00451534,
+   "n": 1014102,
+   "clusters": 2094,
+   "mean": 0.11163
+  },
+  {
+   "era": "2004-2011",
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.182775,
+   "se": 0.015227,
+   "n": 1943603,
+   "clusters": 2164,
+   "mean": 0.276489
+  },
+  {
+   "era": "2004-2011",
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0696497,
+   "se": 0.014012,
+   "n": 1943603,
+   "clusters": 2164,
+   "mean": 0.276489
+  },
+  {
+   "era": "2004-2011",
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": -0.00178594,
+   "se": 0.0175816,
+   "n": 1943603,
+   "clusters": 2164,
+   "mean": 0.276489
+  },
+  {
+   "era": "2004-2011",
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.122955,
+   "se": 0.0108838,
+   "n": 1943603,
+   "clusters": 2164,
+   "mean": 0.276489
+  },
+  {
+   "era": "2004-2011",
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0709953,
+   "se": 0.00955317,
+   "n": 1943603,
+   "clusters": 2164,
+   "mean": 0.276489
+  },
+  {
+   "era": "2004-2011",
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0403204,
+   "se": 0.00818475,
+   "n": 1943603,
+   "clusters": 2164,
+   "mean": 0.276489
+  },
+  {
+   "era": "2004-2011",
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0513048,
+   "se": 0.00529982,
+   "n": 1942379,
+   "clusters": 2164,
+   "mean": 0.276541
+  },
+  {
+   "era": "2004-2011",
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0594579,
+   "se": 0.0073113,
+   "n": 1942379,
+   "clusters": 2164,
+   "mean": 0.276541
+  },
+  {
+   "era": "2004-2011",
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0425714,
+   "se": 0.00405644,
+   "n": 1942379,
+   "clusters": 2164,
+   "mean": 0.276541
+  },
+  {
+   "era": "2012-2017",
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0853988,
+   "se": 0.0112921,
+   "n": 628541,
+   "clusters": 1182,
+   "mean": 0.0981002
+  },
+  {
+   "era": "2012-2017",
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0532048,
+   "se": 0.00599905,
+   "n": 628541,
+   "clusters": 1182,
+   "mean": 0.0981002
+  },
+  {
+   "era": "2012-2017",
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0365115,
+   "se": 0.00615798,
+   "n": 628541,
+   "clusters": 1182,
+   "mean": 0.0981002
+  },
+  {
+   "era": "2012-2017",
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0743955,
+   "se": 0.00990097,
+   "n": 628539,
+   "clusters": 1182,
+   "mean": 0.0980989
+  },
+  {
+   "era": "2012-2017",
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0350892,
+   "se": 0.00482153,
+   "n": 628539,
+   "clusters": 1182,
+   "mean": 0.0980989
+  },
+  {
+   "era": "2012-2017",
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0426063,
+   "se": 0.00406778,
+   "n": 628539,
+   "clusters": 1182,
+   "mean": 0.0980989
+  },
+  {
+   "era": "2012-2017",
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0602157,
+   "se": 0.006305,
+   "n": 627763,
+   "clusters": 1182,
+   "mean": 0.0980402
+  },
+  {
+   "era": "2012-2017",
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0298864,
+   "se": 0.00355525,
+   "n": 627763,
+   "clusters": 1182,
+   "mean": 0.0980402
+  },
+  {
+   "era": "2012-2017",
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0268079,
+   "se": 0.00346772,
+   "n": 627763,
+   "clusters": 1182,
+   "mean": 0.0980402
+  },
+  {
+   "era": "2012-2017",
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.148338,
+   "se": 0.0182401,
+   "n": 950078,
+   "clusters": 1195,
+   "mean": 0.22483
+  },
+  {
+   "era": "2012-2017",
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0859791,
+   "se": 0.00948093,
+   "n": 950078,
+   "clusters": 1195,
+   "mean": 0.22483
+  },
+  {
+   "era": "2012-2017",
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0219143,
+   "se": 0.011599,
+   "n": 950078,
+   "clusters": 1195,
+   "mean": 0.22483
+  },
+  {
+   "era": "2012-2017",
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.101138,
+   "se": 0.00969746,
+   "n": 950078,
+   "clusters": 1195,
+   "mean": 0.22483
+  },
+  {
+   "era": "2012-2017",
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.068707,
+   "se": 0.00753028,
+   "n": 950078,
+   "clusters": 1195,
+   "mean": 0.22483
+  },
+  {
+   "era": "2012-2017",
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0342099,
+   "se": 0.008372,
+   "n": 950078,
+   "clusters": 1195,
+   "mean": 0.22483
+  },
+  {
+   "era": "2012-2017",
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0768174,
+   "se": 0.00715098,
+   "n": 949429,
+   "clusters": 1195,
+   "mean": 0.224821
+  },
+  {
+   "era": "2012-2017",
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0675155,
+   "se": 0.00594828,
+   "n": 949429,
+   "clusters": 1195,
+   "mean": 0.224821
+  },
+  {
+   "era": "2012-2017",
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0463699,
+   "se": 0.00514902,
+   "n": 949429,
+   "clusters": 1195,
+   "mean": 0.224821
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.0743613,
+   "se": 0.0082871,
+   "n": 953453,
+   "clusters": 1276,
+   "mean": 0.0695095
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0417963,
+   "se": 0.00404875,
+   "n": 953453,
+   "clusters": 1276,
+   "mean": 0.0695095
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "purchase",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.0292911,
+   "se": 0.00421509,
+   "n": 953453,
+   "clusters": 1276,
+   "mean": 0.0695095
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0610844,
+   "se": 0.00650538,
+   "n": 953443,
+   "clusters": 1276,
+   "mean": 0.0695049
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0276221,
+   "se": 0.00326251,
+   "n": 953443,
+   "clusters": 1276,
+   "mean": 0.0695049
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "purchase",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0309753,
+   "se": 0.00330448,
+   "n": 953443,
+   "clusters": 1276,
+   "mean": 0.0695049
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.0491399,
+   "se": 0.00431968,
+   "n": 952353,
+   "clusters": 1276,
+   "mean": 0.0694889
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0215449,
+   "se": 0.00260392,
+   "n": 952353,
+   "clusters": 1276,
+   "mean": 0.0694889
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "purchase",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0180865,
+   "se": 0.00232503,
+   "n": 952353,
+   "clusters": 1276,
+   "mean": 0.0694889
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Black",
+   "est": 0.0347964,
+   "se": 0.00269464,
+   "n": 952353,
+   "clusters": 1276,
+   "mean": 0.0694889
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Hispanic",
+   "est": 0.0164798,
+   "se": 0.00169928,
+   "n": 952353,
+   "clusters": 1276,
+   "mean": 0.0694889
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "purchase",
+   "spec": "full",
+   "group": "Asian",
+   "est": 0.0170312,
+   "se": 0.00215333,
+   "n": 952353,
+   "clusters": 1276,
+   "mean": 0.0694889
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Black",
+   "est": 0.1276,
+   "se": 0.0186824,
+   "n": 996736,
+   "clusters": 1160,
+   "mean": 0.171819
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Hispanic",
+   "est": 0.0747703,
+   "se": 0.0121631,
+   "n": 996736,
+   "clusters": 1160,
+   "mean": 0.171819
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "refinance",
+   "spec": "raw",
+   "group": "Asian",
+   "est": 0.00455168,
+   "se": 0.0106224,
+   "n": 996736,
+   "clusters": 1160,
+   "mean": 0.171819
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Black",
+   "est": 0.0743859,
+   "se": 0.010484,
+   "n": 996705,
+   "clusters": 1160,
+   "mean": 0.171811
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Hispanic",
+   "est": 0.0538311,
+   "se": 0.0102876,
+   "n": 996705,
+   "clusters": 1160,
+   "mean": 0.171811
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "refinance",
+   "spec": "common",
+   "group": "Asian",
+   "est": 0.0269181,
+   "se": 0.00770821,
+   "n": 996705,
+   "clusters": 1160,
+   "mean": 0.171811
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Black",
+   "est": 0.066082,
+   "se": 0.00877279,
+   "n": 995829,
+   "clusters": 1159,
+   "mean": 0.171822
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Hispanic",
+   "est": 0.0539568,
+   "se": 0.00819144,
+   "n": 995829,
+   "clusters": 1159,
+   "mean": 0.171822
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "refinance",
+   "spec": "lender",
+   "group": "Asian",
+   "est": 0.0243486,
+   "se": 0.00654805,
+   "n": 995829,
+   "clusters": 1159,
+   "mean": 0.171822
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Black",
+   "est": 0.0479055,
+   "se": 0.00556308,
+   "n": 995829,
+   "clusters": 1159,
+   "mean": 0.171822
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Hispanic",
+   "est": 0.0399233,
+   "se": 0.00459559,
+   "n": 995829,
+   "clusters": 1159,
+   "mean": 0.171822
+  },
+  {
+   "era": "2018-2025",
+   "purpose": "refinance",
+   "spec": "full",
+   "group": "Asian",
+   "est": 0.0232669,
+   "se": 0.00484708,
+   "n": 995829,
+   "clusters": 1159,
+   "mean": 0.171822
+  }
+ ],
+ "robustness": [
+  {
+   "label": "Main (lender spec)",
+   "spec": "lender",
+   "n": 952353,
+   "Black": {
+    "est": 0.0491399,
+    "se": 0.00431968
+   },
+   "Hispanic": {
+    "est": 0.0215449,
+    "se": 0.00260392
+   },
+   "Asian": {
+    "est": 0.0180865,
+    "se": 0.00232503
+   }
+  },
+  {
+   "label": "Full underwriting controls",
+   "spec": "full",
+   "n": 952353,
+   "Black": {
+    "est": 0.0347964,
+    "se": 0.00269464
+   },
+   "Hispanic": {
+    "est": 0.0164798,
+    "se": 0.00169928
+   },
+   "Asian": {
+    "est": 0.0170312,
+    "se": 0.00215333
+   }
+  },
+  {
+   "label": "Single applicants only",
+   "spec": "lender",
+   "n": 546730,
+   "Black": {
+    "est": 0.0493908,
+    "se": 0.00404022
+   },
+   "Hispanic": {
+    "est": 0.0211411,
+    "se": 0.00290259
+   },
+   "Asian": {
+    "est": 0.0145734,
+    "se": 0.00237161
+   }
+  },
+  {
+   "label": "Conventional loans only",
+   "spec": "lender",
+   "n": 564513,
+   "Black": {
+    "est": 0.0494413,
+    "se": 0.00650066
+   },
+   "Hispanic": {
+    "est": 0.0271924,
+    "se": 0.00348981
+   },
+   "Asian": {
+    "est": 0.019569,
+    "se": 0.0028213
+   }
+  },
+  {
+   "label": "FHA/VA/RHS loans only",
+   "spec": "lender",
+   "n": 387276,
+   "Black": {
+    "est": 0.0473308,
+    "se": 0.00341375
+   },
+   "Hispanic": {
+    "est": 0.0167228,
+    "se": 0.0023339
+   },
+   "Asian": {
+    "est": 0.0166106,
+    "se": 0.00311339
+   }
+  },
+  {
+   "label": "Only applications with a DTI value",
+   "spec": "full",
+   "n": 936655,
+   "Black": {
+    "est": 0.03391,
+    "se": 0.0027096
+   },
+   "Hispanic": {
+    "est": 0.016094,
+    "se": 0.00170148
+   },
+   "Asian": {
+    "est": 0.016538,
+    "se": 0.00216827
+   }
+  }
+ ],
+ "reasons": [
+  {
+   "era": "2004-2011",
+   "group": "Asian",
+   "denials": 26904,
+   "with_reason": 22152,
+   "Debt-to-income ratio": 0.248826,
+   "Employment history": 0.0280336,
+   "Credit history": 0.170459,
+   "Collateral": 0.211809,
+   "Insufficient cash": 0.0460004,
+   "Unverifiable information": 0.0975533,
+   "Application incomplete": 0.174521,
+   "Mortgage insurance denied": 0.00410798,
+   "Other": 0.239482
+  },
+  {
+   "era": "2004-2011",
+   "group": "Black",
+   "denials": 143363,
+   "with_reason": 85855,
+   "Debt-to-income ratio": 0.212673,
+   "Employment history": 0.0130569,
+   "Credit history": 0.416283,
+   "Collateral": 0.178452,
+   "Insufficient cash": 0.0327296,
+   "Unverifiable information": 0.0441908,
+   "Application incomplete": 0.104397,
+   "Mortgage insurance denied": 0.00194514,
+   "Other": 0.230237
+  },
+  {
+   "era": "2004-2011",
+   "group": "Hispanic",
+   "denials": 39499,
+   "with_reason": 29975,
+   "Debt-to-income ratio": 0.254679,
+   "Employment history": 0.0245872,
+   "Credit history": 0.253111,
+   "Collateral": 0.189158,
+   "Insufficient cash": 0.0430359,
+   "Unverifiable information": 0.113995,
+   "Application incomplete": 0.13975,
+   "Mortgage insurance denied": 0.00216847,
+   "Other": 0.242936
+  },
+  {
+   "era": "2004-2011",
+   "group": "White",
+   "denials": 306441,
+   "with_reason": 209181,
+   "Debt-to-income ratio": 0.206209,
+   "Employment history": 0.0186776,
+   "Credit history": 0.298091,
+   "Collateral": 0.244114,
+   "Insufficient cash": 0.0385456,
+   "Unverifiable information": 0.0509463,
+   "Application incomplete": 0.133889,
+   "Mortgage insurance denied": 0.00320297,
+   "Other": 0.208422
+  },
+  {
+   "era": "2012-2017",
+   "group": "Asian",
+   "denials": 17458,
+   "with_reason": 13166,
+   "Debt-to-income ratio": 0.360474,
+   "Employment history": 0.0396476,
+   "Credit history": 0.181528,
+   "Collateral": 0.140893,
+   "Insufficient cash": 0.0663072,
+   "Unverifiable information": 0.0963846,
+   "Application incomplete": 0.161097,
+   "Mortgage insurance denied": 0.00341789,
+   "Other": 0.15221
+  },
+  {
+   "era": "2012-2017",
+   "group": "Black",
+   "denials": 45685,
+   "with_reason": 30176,
+   "Debt-to-income ratio": 0.252817,
+   "Employment history": 0.0182595,
+   "Credit history": 0.38017,
+   "Collateral": 0.169141,
+   "Insufficient cash": 0.0710498,
+   "Unverifiable information": 0.0467922,
+   "Application incomplete": 0.138587,
+   "Mortgage insurance denied": 0.00188892,
+   "Other": 0.140874
+  },
+  {
+   "era": "2012-2017",
+   "group": "Hispanic",
+   "denials": 16430,
+   "with_reason": 12311,
+   "Debt-to-income ratio": 0.327674,
+   "Employment history": 0.0328162,
+   "Credit history": 0.269109,
+   "Collateral": 0.147104,
+   "Insufficient cash": 0.0667696,
+   "Unverifiable information": 0.077248,
+   "Application incomplete": 0.148729,
+   "Mortgage insurance denied": 0.00227439,
+   "Other": 0.146536
+  },
+  {
+   "era": "2012-2017",
+   "group": "White",
+   "denials": 144366,
+   "with_reason": 103025,
+   "Debt-to-income ratio": 0.233215,
+   "Employment history": 0.0243921,
+   "Credit history": 0.240699,
+   "Collateral": 0.237748,
+   "Insufficient cash": 0.0563455,
+   "Unverifiable information": 0.0600631,
+   "Application incomplete": 0.178704,
+   "Mortgage insurance denied": 0.00160155,
+   "Other": 0.135977
+  },
+  {
+   "era": "2018-2025",
+   "group": "Asian",
+   "denials": 15954,
+   "with_reason": 15882,
+   "Debt-to-income ratio": 0.38509,
+   "Employment history": 0.0502456,
+   "Credit history": 0.133107,
+   "Collateral": 0.0765647,
+   "Insufficient cash": 0.0746757,
+   "Unverifiable information": 0.0959577,
+   "Application incomplete": 0.235361,
+   "Mortgage insurance denied": 0.00163707,
+   "Other": 0.14274
+  },
+  {
+   "era": "2018-2025",
+   "group": "Black",
+   "denials": 45546,
+   "with_reason": 45343,
+   "Debt-to-income ratio": 0.288556,
+   "Employment history": 0.0259136,
+   "Credit history": 0.359195,
+   "Collateral": 0.109653,
+   "Insufficient cash": 0.0543634,
+   "Unverifiable information": 0.050923,
+   "Application incomplete": 0.156165,
+   "Mortgage insurance denied": 0.00141146,
+   "Other": 0.150167
+  },
+  {
+   "era": "2018-2025",
+   "group": "Hispanic",
+   "denials": 19267,
+   "with_reason": 19186,
+   "Debt-to-income ratio": 0.343115,
+   "Employment history": 0.0387783,
+   "Credit history": 0.237569,
+   "Collateral": 0.0998645,
+   "Insufficient cash": 0.0660899,
+   "Unverifiable information": 0.0755759,
+   "Application incomplete": 0.167935,
+   "Mortgage insurance denied": 0.00198061,
+   "Other": 0.170333
+  },
+  {
+   "era": "2018-2025",
+   "group": "White",
+   "denials": 103792,
+   "with_reason": 102381,
+   "Debt-to-income ratio": 0.256512,
+   "Employment history": 0.0281009,
+   "Credit history": 0.256229,
+   "Collateral": 0.141892,
+   "Insufficient cash": 0.0471084,
+   "Unverifiable information": 0.0566121,
+   "Application incomplete": 0.21588,
+   "Mortgage insurance denied": 0.00106465,
+   "Other": 0.149618
+  }
+ ],
+ "missing_underwriting": {
+  "2018": 0.0525097,
+  "2019": 0.110856,
+  "2020": 0.175459,
+  "2021": 0.13923,
+  "2022": 0.0315089,
+  "2023": 0.02852,
+  "2024": 0.0938474,
+  "2025": 0.119012
+ }
+}

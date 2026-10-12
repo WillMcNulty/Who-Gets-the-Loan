@@ -4,3 +4,5 @@ __pycache__/
 .pytest_cache/
 # never commit course material
 *solutions*
+data/raw/
+data/harmonized/
