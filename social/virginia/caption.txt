@@ -1,0 +1,6 @@
+Who gets the loan in Virginia? I joined 22 years of public mortgage records (13 million) into one dataset. Black applicants were denied more often than white applicants in every year from 2004 to 2025. Comparing similar applicants at the same lender, with the extra data lenders report since 2018, a 3.5-point gap remains. The data have no credit scores, so this shows where outcomes differ, not proof of discrimination.
+
+Full report and method: link in bio (willmcnulty.github.io/Who-Gets-the-Loan/virginia)
+Source: HMDA data from the CFPB and the Federal Reserve via the National Archives.
+
+#Virginia #Housing #Mortgages #FairLending #HMDA #DataAnalysis #RVA #NoVA #HamptonRoads

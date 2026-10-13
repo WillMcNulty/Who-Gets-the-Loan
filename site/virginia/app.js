@@ -204,6 +204,7 @@
       svg.append(sv("text", { x: x(t), y: H - m.b + 15, "text-anchor": "middle", "font-size": 10.5, fill: css("--muted") }, (opts.fmt || ((v) => minus(String(Math.round(v * 1000) / 10))))(t)));
     }
     if (opts.xLabel) svg.append(sv("text", { x: (m.l + W - m.r) / 2, y: H - 4, "text-anchor": "middle", "font-size": 11, fill: css("--ink-2") }, opts.xLabel));
+    if (opts.ref != null) svg.append(sv("line", { x1: x(opts.ref), x2: x(opts.ref), y1: m.t, y2: H - m.b, stroke: css("--ink-2"), "stroke-width": 1, "stroke-dasharray": "4 3" }));
     rows.forEach((r, i) => {
       const rt = m.t + i * rowH;
       const yc = rt + top + (rowH - top) / 2;
@@ -478,6 +479,47 @@
     table($("#table-map"), ["County or city", "Applications", "Denied", "White denied", "Black denied"], rows);
   }
 
+  // ---- lenders ---------------------------------------------------------------------------------------------
+  let eraL = ERAS[ERAS.length - 1], groupL = "Black";
+  function renderLenders() {
+    seg($("#pick-era-l"), ERAS.map((e) => [e, e.replace("-", "–")]), eraL, (k) => { eraL = k; renderLenders(); });
+    seg($("#pick-group-l"), GROUPS.map((g) => [g, g]), groupL, (k) => { groupL = k; renderLenders(); });
+    const L = R.lenders[eraL];
+    const full = eraL === "2018-2025";
+    $("#lenders-sub").textContent = `Home-purchase applications, ${eraL.replace("-", "–")}: ${num(L.apps)} applications to ${num(L.lenders)} lenders. The ${L.rows.length} largest handled ${pct(L.top_share, 0)} of them. Names are as each lender reported them to HMDA; a bank and its mortgage company can file separately.`;
+    const tiles = $("#lender-tiles");
+    tiles.replaceChildren();
+    const sw = L.sorting.White, sg = L.sorting[groupL];
+    stat(tiles, pct(sg), `Overall denial rate at ${groupL} applicants' lenders`, `The average, over ${groupL} applicants, of their lender's denial rate for all applicants`);
+    stat(tiles, pct(sw), "The same for white applicants", "Same measure, over white applicants");
+    stat(tiles, pp(sg - sw), "Gap in their lenders' overall denial rates", `${groupL} and white applicants applied to different lenders; this part of the statewide gap exists before any difference in how one lender decides`);
+    const statewide = eraGap(eraL, "purchase", "lender", groupL);
+    const statewideFull = full ? eraGap(eraL, "purchase", "full", groupL) : null;
+    legend($("#legend-lenders"), full
+      ? [{ label: "Common controls + county", color: "--muted", shape: "dot" }, { label: "+ 2018 underwriting fields", color: "--s2", shape: "dot" }]
+      : [{ label: "Common controls + county", color: "--s2", shape: "dot" }]);
+    $("#lender-chart-sub").textContent = `${groupL} minus white denial rate among each lender's own applicants, same county and year, in percentage points, with 95% intervals (standard errors clustered by county). Lenders with fewer than ${L.min_group} ${groupL} or white applicants show no estimate. The dashed line is the statewide within-lender gap (${pp((statewideFull || statewide).est)}).`;
+    const rows = L.rows.map((r) => {
+      const c = r.gap_common && r.gap_common[groupL], f = r.gap_full && r.gap_full[groupL];
+      const series = [];
+      const mk = (g, color, label) => g && g.est != null ? { name: label, color, est: g.est, lo: g.est - Z * g.se, hi: g.est + Z * g.se,
+        tip: [{ label, value: pp(g.est) }, { label: "95% interval", value: ci(g.est - Z * g.se, g.est + Z * g.se) }, { label: `${groupL} / white applicants`, value: `${num(r.groups[groupL].n)} / ${num(r.groups.White.n)}` }] } : { est: null };
+      if (full) { series.push(mk(c, "--muted", "Common controls")); series.push(mk(f, "--s2", "+ underwriting")); }
+      else series.push(mk(c, "--s2", "Common controls"));
+      return { label: r.name.length > 34 ? r.name.slice(0, 33) + "…" : r.name, sub: `${num(r.apps)} applications`, series };
+    });
+    const vals = rows.flatMap((r) => r.series.filter((x) => x.est != null).flatMap((x) => [x.lo, x.hi])).concat([0, (statewideFull || statewide).est]);
+    intervalChart($("#chart-lenders"), rows, { ticks: niceRange(Math.min(...vals), Math.max(...vals), 6), ref: (statewideFull || statewide).est, labelWidth: 250, xLabel: `${groupL} minus white, percentage points`, label: "Within-lender gaps" });
+    const gapCell = (g) => (g && g.est != null ? `${pp(g.est)} (${num(100 * g.se, 1)})` : "–");
+    table($("#table-lenders"), ["Lender", "Applications", "Share", "Denied, all", "White denied", `${groupL} denied`, `${groupL} applicants`, "Raw gap", "Within-lender gap", ...(full ? ["+ underwriting"] : [])],
+      L.rows.map((r) => {
+        const w = r.groups.White, g = r.groups[groupL];
+        return [r.name, num(r.apps), pct(r.share, 1), pct(r.denial), pct(w.rate), g.n >= 30 ? pct(g.rate) : "–", num(g.n), g.n >= 30 && w.rate != null ? pp(g.rate - w.rate) : "–",
+          gapCell(r.gap_common && r.gap_common[groupL]), ...(full ? [gapCell(r.gap_full && r.gap_full[groupL])] : [])];
+      }), { textCols: [], wrapCols: [0] });
+    $("#lenders-note").innerHTML = `Read these with care. A lender's gap compares its own applicants and can reflect differences HMDA doesn't record: credit scores, assets, and which loan programs applicants chose. With a few hundred or a few thousand applicants per group, one lender's estimate is far less certain than the statewide one, and some lenders' intervals include zero. Lenders are listed by size, not ranked by gap. Nothing here says that any lender discriminated.`;
+  }
+
   // ---- reasons ----------------------------------------------------------------------------------------------
   let eraR = ERAS[ERAS.length - 1], groupR = "Black";
   function renderReasons() {
@@ -559,8 +601,8 @@
   }
 
   // ---- tabs & boot ------------------------------------------------------------------------------------------
-  const VIEWS = ["overview", "trends", "eras", "map", "reasons", "data"];
-  const ANCHORS = { limits: "overview", trends: "trends", data: "data" };
+  const VIEWS = ["overview", "trends", "eras", "map", "lenders", "reasons", "data"];
+  const ANCHORS = { limits: "overview", trends: "trends", data: "data", lenders: "lenders" };
   const tabs = [...document.querySelectorAll('[role="tab"]')];
   function select(id, push) {
     for (const t of tabs) {
@@ -586,6 +628,7 @@
     if (!$("#view-trends").hidden) renderTrends();
     if (!$("#view-eras").hidden) renderEras();
     if (!$("#view-map").hidden) renderMap();
+    if (!$("#view-lenders").hidden) renderLenders();
     if (!$("#view-reasons").hidden) renderReasons();
   }
   function route(h, scroll) {

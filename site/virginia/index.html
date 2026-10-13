@@ -190,6 +190,7 @@
   ol.breaks b { color: var(--navy); font-family: var(--mono); }
   .pill { font: 600 11px var(--mono); background: var(--blue-tint); color: var(--navy); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
   td.wrap, th.wrap { white-space: normal; min-width: 180px; }
+  h3.minor { font: 600 17px var(--serif); color: var(--navy); margin: 18px 0 2px; }
 </style>
 </head>
 <body>
@@ -237,6 +238,7 @@
       <button role="tab" id="tab-trends" aria-controls="view-trends" aria-selected="false">Gaps over time</button>
       <button role="tab" id="tab-eras" aria-controls="view-eras" aria-selected="false">Eras</button>
       <button role="tab" id="tab-map" aria-controls="view-map" aria-selected="false">Map</button>
+      <button role="tab" id="tab-lenders" aria-controls="view-lenders" aria-selected="false">Lenders</button>
       <button role="tab" id="tab-reasons" aria-controls="view-reasons" aria-selected="false">Denial reasons</button>
       <button role="tab" id="tab-data" aria-controls="view-data" aria-selected="false">Data &amp; method</button>
     </div>
@@ -275,6 +277,7 @@
       <div class="card">
         <h2>What the audit found</h2>
         <div class="prose" id="findings"></div>
+        <p class="note">Short on time? <a href="https://github.com/WillMcNulty/Who-Gets-the-Loan/blob/main/docs/virginia-in-plain-words.md">Read the one-page summary in plain words.</a></p>
       </div>
     </section>
 
@@ -329,6 +332,24 @@
       </div>
     </section>
 
+    <section id="view-lenders" role="tabpanel" aria-labelledby="tab-lenders" hidden>
+      <div class="card first" id="lenders">
+        <h2>The largest lenders</h2>
+        <p class="sub" id="lenders-sub"></p>
+        <div class="controls">
+          <span class="lab">Era</span><div class="seg" role="group" aria-label="Era" id="pick-era-l"></div>
+          <span class="lab">Compare</span><div class="seg" role="group" aria-label="Group" id="pick-group-l"></div>
+        </div>
+        <div class="tiles" id="lender-tiles"></div>
+        <h3 class="minor">Each lender's own gap</h3>
+        <p class="sub" id="lender-chart-sub"></p>
+        <div class="legend" id="legend-lenders"></div>
+        <div id="chart-lenders"></div>
+        <details class="tableview" open><summary>Show as a table</summary><div class="tablewrap" id="table-lenders"></div></details>
+        <p class="callout note" id="lenders-note"></p>
+      </div>
+    </section>
+
     <section id="view-reasons" role="tabpanel" aria-labelledby="tab-reasons" hidden>
       <div class="card">
         <h2>Why applications were denied</h2>
@@ -375,8 +396,8 @@
     </div>
   </footer>
   <div id="tip" role="status" aria-live="polite"></div>
-  <script src="data.js?v=57ea0d39"></script>
-  <script src="geo.js?v=c905d58e"></script>
-  <script src="app.js?v=afbfdb8f"></script>
+  <script src="data.js?v=067dbd51"></script>
+  <script src="geo.js?v=8d3c9deb"></script>
+  <script src="app.js?v=0abfac1a"></script>
 </body>
 </html>
