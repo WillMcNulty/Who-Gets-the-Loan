@@ -6,3 +6,10 @@ __pycache__/
 *solutions*
 data/raw/
 data/harmonized/
+
+# Claude Code local settings: can hold approved commands that include secrets
+.claude/settings.local.json
+# Local environment files
+.env
+.env.*
+!.env*.example
